@@ -3,7 +3,7 @@
 접속을 완료하면, 다음의 화면을 만나게 됩니다. 여기에서 그림의 화살표가 가르키는
 '...'을 클릭하여 다음 단계로 진행합니다.
 
-![getting start](/images/forecast/steps/01-00.png)
+![getting start](../../images/forecast/steps/01-00.png)
 
 먼저 데이터-셋 그룹(Dataset Group)을 작성합니다.
 데이터-셋 그룹은 여러 데이터-셋(Datasets)의 묶음입니다.
@@ -17,7 +17,7 @@
 공식 [개발자 안내서](https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html)를 
 참조하길 바랍니다.
 
-![create Dataset Group](/images/forecast/steps/01-01-create-dataset-group.png)
+![create Dataset Group](../../images/forecast/steps/01-01-create-dataset-group.png)
 
 Dataset group name 항목에 임의의 데이터-셋 그룹의 이름을 기입합니다.
 이름을 짓는 것입니다. 이럴 때 자유로운 창작의식을 자극해야 합니다.
@@ -29,7 +29,7 @@ Dataset group name 항목에 임의의 데이터-셋 그룹의 이름을 기입�
 Forecasting domain은 지금 행하려는 작업의 성격을 규정하는 것입니다.
 2020년 5월 20일 기준, 아래와 같이 7가지 도메인에 대한 정의가 가능합니다.
 
-![Choose a forecasting domain](/images/forecast/steps/01-02-domains.png)
+![Choose a forecasting domain](../../images/forecast/steps/01-02-domains.png)
 
 도메인(영역)의 선택은 그 분야에서만 관찰되는 특별한 변위를 가하여 예측값을 보다 정교하게 만들어 줍니다.
 만약 어느 도메인에도 적합하지 않다고 판단되면 Custom을 선택할 수 있습니다.
@@ -53,7 +53,7 @@ Forecasting domain은 지금 행하려는 작업의 성격을 규정하는 것�
 위 설명은 개략적인 것이며, 사용자 스스로가 예측할 부분을 적당히[^2] 선택할 수 있습니다.  
 이번 실습에서는 '**Custom**'을 선택합니다.
 
-![create dataset group](/images/forecast/steps/01-03-create-dataset-group.png)
+![create dataset group](../../images/forecast/steps/01-03-create-dataset-group.png)
 
 그리고 `Next`{style='background-color:#ef6c00; color:white'}를 클릭합니다.
 

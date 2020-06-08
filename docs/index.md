@@ -1,7 +1,7 @@
 # Home
 
-![4](/images/dice-four-solid.svg){: style='width:20px; padding:2px; float:none; border-radius:8%'}
-![2](/images/dice-two-solid.svg){: style='width:35px; padding:2px; float:none; border-radius:8%'}
+![4](./images/dice-four-solid.svg){: style='width:20px; padding:2px; float:none; border-radius:8%'}
+![2](./images/dice-two-solid.svg){: style='width:35px; padding:2px; float:none; border-radius:8%'}
 
 ## 소개
 
@@ -9,7 +9,7 @@
 공식 웹 사이트에서 입수할 수 있는 정보를 '교과서'로 본다면, 여기는 '참고서'라고 할 수 있습니다.
 현재까지 본 사이트를 제작하면서 참고한 '교과서'는 다음과 같습니다.
 
-![AWS logo](/images/aws-brands.svg){: style='width:180px; padding:5px; float:right; border-radius:8%'}
+![AWS logo](./images/aws-brands.svg){: style='width:180px; padding:5px; float:right; border-radius:8%'}
 
 * [Amazon Web Services](https://aws.amazon.com/) 공식 홈 페이지
 * [Amazon Web Services Documentation](https://docs.aws.amazon.com/) 공식 설명서

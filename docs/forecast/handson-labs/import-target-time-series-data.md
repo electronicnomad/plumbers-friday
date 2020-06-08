@@ -46,18 +46,17 @@ Pull down 메뉴에서 'Create a new role'을 선택하여 아래의 화면으�
 
 ## 데이터-셋 입력 진행
 
-![data import started](/images/forecast/steps/04-01-data-import-started.png)
+![data import started](../../images/forecast/steps/04-01-data-import-started.png)
 
 이 과정이 끝나면, 화면은 다음과 같은 안내를 상단에 보여줍니다. 잘 되었다는 뜻입니다.
 물론, 어떤 문제가 있으면, 붉은 바탕에 적절한 안내문을 볼 수 있습니다.
 
-![data import success](/images/forecast/steps/04-02-successfully-imported.png)
+![data import success](../../images/forecast/steps/04-02-successfully-imported.png)
 
 그리고, 아랫쪽에 'Target time series data' 항목에 'Active'라고 적힌 녹색 안내를 볼 수 있습니다.
 또 그 아랫쪽에 두 가지의 데이터를 `import`할 수 있는 버튼이 보입니다.
 
-[데이터-셋 그룹 작성](/forecast/handson-labs/dataset-groups/) 단계에서
-설명하였습니다.
+[데이터-셋 그룹 작성](../dataset-groups/) 단계에서 설명하였습니다.
 그 세 가지 중에 가장 중요한 것이 이전 단계가지 S3에 업로드하고 데이터-셋 그룹에 입수(import)한
 '대상 시계열 데이터'이고, 나머지 두 가지에 해당 됩니다.
 
