@@ -1,0 +1,39 @@
+site_name: the hitchhicker's unofficial guide to the AWS
+theme:
+  name: material
+  palette:
+    primary: black 
+    accent: deep orange
+  font:
+    text: Noto Sans KR
+    code: Noto Sans Mono
+  logo: images/logo_black.jpg
+  favicon: images/favicon.ico
+plugins:
+  - search
+  - awesome-pages
+  - git-revision-date-localized:
+      type: iso_datetime
+  - git-authors
+markdown_extensions:
+  - attr_list
+  - footnotes
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+#nav:
+    #- Home: index.md
+    #- About: about.md
+repo_name: hoonjhin/aws-pub
+repo_url: https://github.com/hoonjhin/aws-pub
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/hoonjhin
+    - icon: fontawesome/brands/blogger
+      link: https://www.jhin.com
+# Google Analytics
+google_analytics:
+  - UA-113185952-1
+  - auto
