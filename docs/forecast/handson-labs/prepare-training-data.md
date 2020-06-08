@@ -40,14 +40,14 @@ S3는 [console.aws.amazon.com/s3](https://console.aws.amazon.com/s3)로 접속�
 된다는 것 즈음은 모두가 알고 있을 것입니다. 접속해서, 사용할 버킷을 생성합니다. 버킷 이름을 정하는 것
 이외에는 모두 기본값으로 두어도 무관합니다.
 
-![create S3 bucket](/images/forecast/steps/00-01-create-s3-bucket.png)
+![create S3 bucket](../../images/forecast/steps/00-01-create-s3-bucket.png)
 
 ### 훈련 데이터 업로드
 
 앞서 압축을 해제해서 얻은 파일, electricityusagedata.csv 을 해당 버킷에 업로드합니다.
 폴더를 만들어서 그곳에 올려도 그냥 올려도 상관없습니다.
 
-![upload training data on S3 bucket](/images/forecast/steps/00-02-upload-training-data.png)
+![upload training data on S3 bucket](../../images/forecast/steps/00-02-upload-training-data.png)
 
 ### IAM Role 작성
 

@@ -6,13 +6,13 @@
 `Start`{style='background-color:#ef6c00; color:white'}를
 클릭해서 예측 훈련을 시작합니다.
 
-![data import success](/images/forecast/steps/04-02-successfully-imported.png)
+![data import success](../../images/forecast/steps/04-02-successfully-imported.png)
 
 화면이 아래와 같이 전환되고, 몇 가지 입력을 기다리고 있습니다. 어쩌면 전체 과정에서
 가장 중요한 부분일 수도 있겠습니다. 여러가지 선택적 결정을 하기 때문입니다. 여러분께서는 지금
 아래의 화면을 보고 계실 것입니다.
 
-![train a predictor](/images/forecast/steps/05-01-train-predictor.png)
+![train a predictor](../../images/forecast/steps/05-01-train-predictor.png)
 
 ## 입력값 설명
 
@@ -51,7 +51,7 @@ Automatic은 상당한 시간이 요구되지만, 자신의 데이터가 어떤 
 만약, 자신이 어떤 알고리즘을 사용할지 확정할 수 있다면, Manual을 선택하고 바로 아래에 
 나타나는 Algorithm의 pull down 메뉴에서 선택하면 됩니다.
 
-![algorithms](/images/forecast/steps/05-02-algorithms.png)
+![algorithms](../../images/forecast/steps/05-02-algorithms.png)
 
 알고리즘 선택의 고민에 대해서는 공식 개발자 안내서의 [Amazon Forecast 알고리즘 선택](https://docs.aws.amazon.com/ko_kr/forecast/latest/dg/aws-forecast-choosing-recipes.html)에서
 친절한 설명을 하고 있습니다. AutoML을 넘어서는 정보를 스스로 갖추어야 겠다고 판단되시면

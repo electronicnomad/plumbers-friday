@@ -70,7 +70,7 @@
       }
 ```
 
-![Data schema](/images/forecast/steps/02-01-data-schema.png)
+![Data schema](../../images/forecast/steps/02-01-data-schema.png)
 
 그리고, Frequency of your data의 Your data entries have a time interval of는
 '**1 hour**'로 맞춥니다. 앞서 언급했지만, 우리가 준비한 훈련 데이터가 그렇게 만들어져 있습니다.
