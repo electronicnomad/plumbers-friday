@@ -1,17 +1,16 @@
 # Home
 
-![4](./images/dice-four-solid.svg){: style='width:20px; padding:2px; float:none; border-radius:8%'}
-![2](./images/dice-two-solid.svg){: style='width:35px; padding:2px; float:none; border-radius:8%'}
+![4](./images/dice-four-solid.svg){: style='width:24px; padding:0px; float:none; border-radius:0%'}
+![2](./images/dice-two-solid.svg){: style='width:42px; padding:0px; float:none; border-radius:0%'}
 
 ## 소개
 
-여기는 비공식입니다. 어떤 정보가 수록되든 그것은 공식적이지 않습니다.  
+여기는 비공식입니다. 어떤 정보가 수록되든 그것은 공식적이지 않습니다.
 공식 웹 사이트에서 입수할 수 있는 정보를 '교과서'로 본다면, 여기는 '참고서'라고 할 수 있습니다.
 현재까지 본 사이트를 제작하면서 참고한 '교과서'는 다음과 같습니다.
+![AWS logo](./images/aws-brands.svg){: style='width:150px; padding:20px; float:right; border-radius:8%'}
 
-![AWS logo](./images/aws-brands.svg){: style='width:180px; padding:5px; float:right; border-radius:8%'}
-
-* [Amazon Web Services](https://aws.amazon.com/) 공식 홈 페이지
+* [Amazon Web Services](https://aws.amazon.com/) 공식 홈 페이지 
 * [Amazon Web Services Documentation](https://docs.aws.amazon.com/) 공식 설명서
 * [Amazon Web Services Samples](https://github.com/aws-samples/) GitHub 리포지토리
 
@@ -63,12 +62,8 @@ AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면
 
 본 사이트는 GitHub에 있습니다. 어떤 누구도 본 사이트에 기여할 수 있습니다.
 제작에 참여한 분들을 아래의 명단으로 모시고 있습니다.
+[github.com/hoonjhin/aws-pub/graphs/contributors](https://github.com/hoonjhin/aws-pub/graphs/contributors)
 
-### 기여자 명단
+### 감사합니다
 
-{{ git_site_authors }} 
-그리고 Douglas Adams으로부터 받은 많은 영감이 제작을 이끌었습니다.
-
-### And another thing...
-
-우리는 이 [연작 소설](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy)과 그 소설을 바탕으로 한 [영화](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(film))를 사랑합니다.
+그리고 [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams)으로부터 받은 많은 영감이 제작을 이끌었습니다, 항상 [타월](https://en.wikipedia.org/wiki/Towel_Day)을 잊지 않겠습니다.
