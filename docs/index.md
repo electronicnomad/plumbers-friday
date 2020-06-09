@@ -66,9 +66,8 @@ AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면
 
 ### 기여자 명단
 
-{{ git_site_authors }} , 그리고 Douglas Adams으로부터 받은 많은 영감이 제작을 이끌었습니다.
-
-{{ git_page_authors }}
+{{ git_site_authors }} 
+그리고 Douglas Adams으로부터 받은 많은 영감이 제작을 이끌었습니다.
 
 ### And another thing...
 
