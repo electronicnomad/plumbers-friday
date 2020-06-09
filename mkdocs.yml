@@ -13,7 +13,7 @@ plugins:
   - search
   - awesome-pages
   - git-revision-date-localized:
-      type: iso_datetime
+      type: timeago
   - minify:
       minify_html: true
 markdown_extensions:
