@@ -14,7 +14,8 @@ plugins:
   - awesome-pages
   - git-revision-date-localized:
       type: iso_datetime
-  - git-authors
+  - minify:
+      minify_html: true
 markdown_extensions:
   - attr_list
   - footnotes
