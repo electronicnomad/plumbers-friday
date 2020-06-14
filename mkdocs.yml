@@ -21,11 +21,9 @@ markdown_extensions:
   - footnotes
   - admonition
   - codehilite
+  - pymdownx.mark
   - toc:
       permalink: true
-#nav:
-    #- Home: index.md
-    #- About: about.md
 repo_name: hoonjhin/aws-pub
 repo_url: https://github.com/hoonjhin/aws-pub
 extra:
