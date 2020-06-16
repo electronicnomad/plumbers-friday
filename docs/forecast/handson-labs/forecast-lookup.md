@@ -29,7 +29,7 @@
 
 해당 화면에 출력되는 설명글은 이렇게 되어 있습니다.
 
-> The date must be before the historical demand end date and 
+> The date must be before the historical demand end date and
     should be no earlier than the demand end date minus the forecast horizon.
 
 윗글을 구글 번역기에 넣어 봤더니 아래와 같이 출력되었습니다.
@@ -42,7 +42,10 @@
 예측을 검색하기 위해서는 시작 일시(Start date/time)는 입력한 훈련 데이터 즉,
 대상 시계열 데이터-셋의 시간 범위 밖에 있을 수 없고,
 종료 일시(End date/time)는 앞서 예측기(predictor)를 훈련할 때 입력한
-Forecast horizon * Forecast frequency 값을 초과할 수 없습니다.
+'Forecast horizon X Forecast frequency' 값을 초과할 수 없습니다.
+시작 일시를 최대한 뒤로 미룬다면, '예측'한 부분에 추가로 지난 시계열 정보를 읽어 들일 수가 있는데,
+그 최대 후퇴 값은 'Forecast horizon X Forecast frequency' 값입니다. 이를 [출력한 예를
+아래](./#_4)에서 다루고 있습니다.
 
 본 실습에서 사용한 학습 데이터가 가지는 마지막 시각정보는 `2015-01-01 00:00:00`
 이며, 우리는 36 시간을 내다 보는 설정을 예측기 훈련 때 선언했습니다.
@@ -52,7 +55,7 @@ Forecast horizon * Forecast frequency 값을 초과할 수 없습니다.
 ```bash
 $ cat ./electricityusagedata.csv | cut -d ',' -f1 | sort | tail -1
 2015-01-01 00:00:00
-$ 
+$
 ```
 
 위의 예제와 같이 해당 데이터를 직접 봐[^1]도 되고, 훈련된 예측기(predictor)의 상세 정보에서
@@ -92,6 +95,14 @@ $ awk -F, '!seen[$3]++ {print $3}' ./electricityusagedata.csv
 
 만약, 단일 item_id에 종속된 그래프 이외의 다른 것: 수치로 이루어진 결과(output) 그리고
 다른 item_id들을 함께 조회하고 싶다면 다음의 방법을 사용하시면 됩니다.
+
+### 과거 기록과 대조
+
+만약 과거 일정 기간과 대조하여 간단히 화면 출력을 원하다면, 최대 값으로 미래를 예측한
+그 시간 단위 만큼 과거의 기록을 불러들일 수 있습니다. 본 예제에서는 36시간 단위 만큼 앞으로 예측할 수 있고,
+같은 시간 단위 만큼 뒤의 기록을 출력할 수 있습니다. 아래의 그림은 그 예입니다.
+
+![forecast lookup with past](../../images/forecast/steps/07-04-forecast-lookup-client-42-w-past.png)
 
 ### Create forecast export
 
