@@ -6,13 +6,13 @@
 `Start`{style='background-color:#ef6c00; color:white'}를
 클릭해서 예측 훈련을 시작합니다.
 
-![data import success](../../images/forecast/steps/04-02-successfully-imported.png)
+[![data import success](../../images/forecast/steps/04-02-successfully-imported.png)](../../images/forecast/steps/04-02-successfully-imported.png)
 
 화면이 아래와 같이 전환되고, 몇 가지 입력을 기다리고 있습니다. 어쩌면 전체 과정에서
 가장 중요한 부분일 수도 있겠습니다. 여러가지 선택적 결정을 하기 때문입니다. 여러분께서는 지금
 아래의 화면을 보고 계실 것입니다.
 
-![train a predictor](../../images/forecast/steps/05-01-train-predictor.png)
+[![train a predictor](../../images/forecast/steps/05-01-train-predictor.png)](../../images/forecast/steps/05-01-train-predictor.png)
 
 ## 입력값 설명
 
