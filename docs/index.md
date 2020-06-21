@@ -1,8 +1,5 @@
 # Home
 
-![4](./images/dice-four-solid.svg){: style='width:24px; padding:0px; float:none; border-radius:0%'}
-![2](./images/dice-two-solid.svg){: style='width:42px; padding:0px; float:none; border-radius:0%'}
-
 ## 소개
 
 여기는 비공식입니다. 어떤 정보가 수록되든 그것은 공식적이지 않습니다.
@@ -10,7 +7,7 @@
 현재까지 본 사이트를 제작하면서 참고한 '교과서'는 다음과 같습니다.
 ![AWS logo](./images/aws-brands.svg){: style='width:150px; padding:20px; float:right; border-radius:8%'}
 
-* [Amazon Web Services](https://aws.amazon.com/) 공식 홈 페이지 
+* [Amazon Web Services](https://aws.amazon.com/) 공식 홈 페이지
 * [Amazon Web Services Documentation](https://docs.aws.amazon.com/) 공식 설명서
 * [Amazon Web Services Samples](https://github.com/aws-samples/) GitHub 리포지토리
 
@@ -43,11 +40,13 @@ CLI가 되었든 Web Console을 통하든 한땀한땀 수공업자의 심정으
 
 ### 목적
 
+![4](./images/dice-four-solid.svg){: style='width:42px; padding:5px; float:left; border-radius:0%'}
 본 사이트는 클라우드 컴퓨팅 전반에 대한 참고서가 되고자 하는 작은 목표가 있습니다.
 AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면 기대보다 높은 수준의
 지식을 확보할 수 있습니다. 하지만, 모든 사용자들의 눈높이를 맞출 수 없는
 근본적인 문제로 인해 간혹 이해하기 어렵거나 축약된 부분이 아쉬울 때가 있습니다.
 
+![2](./images/dice-two-solid.svg){: style='width:42px; padding:5px; float:left; border-radius:0%'}
 무엇보다 새로운 서비스나 기술을 학습해 가면서 '키보드'와 '마우스'부터 쓰고 싶은 분들께는
 어렵거나 지루한 설명이 있을 수도 있습니다. 이런 어려움은 아무래도 '지금' 가고 싶은
 손가락의 방향과 공식 문서와 호흡이 다르고 설명하는 절차가 생소하기 때문이라고 생각합니다.
