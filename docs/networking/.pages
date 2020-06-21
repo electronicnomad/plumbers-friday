@@ -2,6 +2,7 @@ title: Networking
 arrange:
   - index.md
   - objectives.md
+  - preparations.md
   - privatelink
   - vpc-peering
   - transit-gateway

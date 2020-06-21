@@ -14,15 +14,18 @@ plugins:
   - awesome-pages
   - git-revision-date-localized:
       type: timeago
-  - minify:
-      minify_html: true
 markdown_extensions:
   - attr_list
   - footnotes
   - admonition
   - codehilite
+  - pymdownx.magiclink
   - pymdownx.mark
+  - pymdownx.smartsymbols
   - pymdownx.tilde
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed
   - toc:
       permalink: true
 repo_name: hoonjhin/aws-pub
