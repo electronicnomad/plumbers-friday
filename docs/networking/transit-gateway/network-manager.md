@@ -92,3 +92,5 @@ transit gateway에 영향을 줘서 transit gateway 자체가 왔다 갔다 하�
 경로 분석의 결과 하나를 아래에 남깁니다.
 
 ![network manager - route analyzer](../../images/networking/transit-gateway/network-manager/route-analyzer.png)
+
+完
