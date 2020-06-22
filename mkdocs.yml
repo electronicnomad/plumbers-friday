@@ -7,7 +7,7 @@ theme:
   font:
     text: Noto Sans KR
     code: Noto Sans Mono
-  logo: images/cloud-circle-white.svg
+  logo: images/cloud-circle-white.png
   favicon: images/favicon-cloud-black.ico
 plugins:
   - search
