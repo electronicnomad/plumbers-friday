@@ -97,7 +97,7 @@ Systems Manager는 리전에 종속됩니다. 우리는 두 개의 리전에 리
 
 Systems Manager 설정은 필요한 EC2 instances를 모두 생성한 후에 진행하시는 것을 추천드립니다.
 만약, 그 순서가 바르지 않는다면 - Systems Manager '빠른 시작'으로 구성 완료 후에 EC2 instance 생성 -
-Systems Manager의 빠른 시작으로 다시 들어가서, 'Edit All'이라고 안내하는 영롱한 오렌지色의 버튼을
+Systems Manager의 빠른 시작으로 다시 들어가서, `Edit All`{style='background-color:#e47911; color:white'}이라고 안내하는 영롱한 오렌지色의 버튼을
 누른 뒤, 'Reset'을 누르시면 됩니다. 그러면, 다시 작업을 시작합니다.
 참, 그리고 후에 생성한 EC2 instance가 IAM role로, `AmazonSSMRoleForInstancesQuickSetup`
 혹은 그와 유사한 것이 할당 되었는지 반드시 확인해 보시기 바랍니다. (없으면 Session Manager로
@@ -107,6 +107,8 @@ Systems Manager의 빠른 시작으로 다시 들어가서, 'Edit All'이라고 
 
 ### VPC endpoint 작성
 
+이 과정은 반복적이어서 인내가 조금 필요합니다.
+
 Systems Manager의 session manager를 통하여 EC2 instance에 접근하기 위하여
 VPC에 endpoint를 작성합니다.
 session manager로 EC2 instance에 접근하는 일반 방식은 대상이 되는 EC2 instance가
@@ -114,9 +116,15 @@ public subnet에 배치되어 있어야 합니다.
 하지만, 본 실습의 구성에서는 그런 행운같은 설정은 존재하지 않기에, 우리는 VPC endpoint에
 Systems Manager가 접근할 수 있도록 설정을 해 놓아야 합니다.
 
-다음의 문서가 그 방법을 안내합니다.  
+다음의 문서가 그 방법을 안내합니다.
+
 [How do I create VPC endpoints so that I can use Systems Manager to manage private EC2 instances without internet access?](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/)
 
+![VPC endpoint for Systems Manager](../images/networking/vpc-endpoint-ssm.png)
+
+EC2 instances가 배치된 모든 VPC에 적용해야 합니다. 이번 과정의 경우에는
+아일랜드 리전의 VPC 1/subnet 1-1과 VPC 3/subnet 3-1
+그리고 서울 리전의 VPC 2/subnet 2-1과 VPC 4/subnet 4-1이 해당됩니다.
 앞선 단계를 차례로 따라 오셨다면, 위 링크에 있는 문서에서 안내하는 1부터 3번까지 단계를 생략하셔도 됩니다.
 
 ### Network Load Balancer 생성
@@ -137,7 +145,8 @@ VPC 2에 해당 설정을 합니다.
 
 ### 라우팅 테이블
 
-지금은 따로 설정하지 않습니다.
+지금은 따로 설정하지 않습니다.  
+다만, NAT gateway와 Internet Gateway를 위한 설정은 아래와 같이 진행합니다.
 
 #### Public Subnet, Subnet 2-2
 
