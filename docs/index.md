@@ -71,11 +71,14 @@ https://dashboard.eventengine.run/login
 
 ### 기여
 
-본 사이트는 GitHub에 있습니다. 어떤 누구도 본 사이트에 기여할 수 있습니다.
+본 사이트는 GitHub에 있습니다. 어떤 누구든 본 사이트에 기여할 수 있습니다.
 제작에 참여한 분들을 아래의 명단으로 모시고 있습니다.
 [github.com/hoonjhin/aws-pub/graphs/contributors](https://github.com/hoonjhin/aws-pub/graphs/contributors)
 
 #### 감사합니다
+
+![4](./images/dice-four-solid.svg){: style='width:42px; padding:4px; float:left; border-radius:0%'}
+![2](./images/dice-two-solid.svg){: style='width:42px; padding:4px; float:left; border-radius:0%'}
 
 그리고 [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams)으로부터 받은 많은 영감이 제작을 이끌었습니다, 항상 [타월](https://en.wikipedia.org/wiki/Towel_Day)을 잊지 않겠습니다.
 

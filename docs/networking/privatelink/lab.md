@@ -58,7 +58,8 @@ Systems Manager의 접속을 위해 만들어 둔 엔드포인트들입니다.
 엔드포인트 서비스와 연결된 NLB가 보이고, 그 아래, '엔드포인트 연결' 탭을 열어 보면
 이전 단계에서 생성한 VPC 2의 엔드포인트가 '대기 중' 상태로 연결을 기다리는 것을 확인할 수 있습니다.
 
-![service connections](../../images/networking/privatelink/endpoint-service-connections.png)
+<!--
+![service connections](../../images/networking/privatelink/endpoint-service-connections.png) -->
 
 '엔드포인트 연결'이 있는 탭 바로 아래 왼쪽을 살펴보면 '작업'이라는 버튼이 있습니다.
 그 버튼을 눌러 '엔드포인트 연결 요청 수락'을 선택합니다. 물론, 지금 마음이 달라져
@@ -71,7 +72,8 @@ Systems Manager의 접속을 위해 만들어 둔 엔드포인트들입니다.
 
 ![service connections actions accept request](../../images/networking/privatelink/endpoint-service-connections-accept-request.png)
 
-이제 상대편 엔드포인트의 상태가 '사용 가능'이라는 녹색 글씨로 화면에 나타나게 됩니다.
+잠깐의 시간이 흐른 뒤에 아래와 같이 '상태'가 '**사용 가능**'으로 변경되는 것을 확인할 수 있습니다.
+사용자도 할 일을 끝내고, 시스템도 할 일을 모두 끝낸 시점입니다.
 
 ![service connections available](../../images/networking/privatelink/endpoint-service-connections-available.png)
 
@@ -155,7 +157,7 @@ ubuntu@ip-10-20-1-10:~$ curl vpce-0b10227a244aa9730-dybhspou.vpce-svc-036f46495a
 </html>
 ubuntu@ip-10-20-1-10:~$ 
 ```
-instance 4-1에 띄워 놓은 python 웹 데몬에서 아래와 같이 접속이 이루어졌음을 확인할 수 있습니다.
+instance 4-1에 작동시켜 놓은 python 웹 데몬에서 아래와 같이 접속이 이루어졌음을 확인할 수 있습니다.
 
 ```bash
 $ sudo su - ubuntu
@@ -175,4 +177,4 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 10.40.1.80 - - [20/Jun/2020 11:31:53] "GET / HTTP/1.1" 200 -
 ```
 
-完
+![done](../../images/done.svg)
