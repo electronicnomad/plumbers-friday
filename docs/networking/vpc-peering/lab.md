@@ -136,6 +136,7 @@ PING 10.30.1.10 (10.30.1.10) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.430/0.482/0.514/0.037 ms
 ubuntu@ip-10-10-1-10:~$
 ```
+
 VPC 3의 subnet 3-1에 있는 instance 3-1에서 수행한 결과입니다.
 
 ```bash
