@@ -53,7 +53,7 @@ AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면
 그리고 부가 설명이 필요하다면, 필수적인 것은 실습 단계 내에 설명하고
 그렇지 않다고 판단되는 건 따로 부쳐 심화된 학습을 선택할 수 있게 합니다.
 
-### AWS sponsored event
+### AWS 후원행사 
 
 만약 AWS에서 후원하고 있는 어떤 교육 행사에서 본 사이트를 사용하고,
 AWS에서 제공하는 12자리 코드가 있으나 어디에서 어떻게 등록해서 사용하는지
@@ -77,11 +77,8 @@ https://dashboard.eventengine.run/login
 
 #### 감사합니다
 
-![4](./images/dice-four-solid.svg){: style='width:42px; padding:4px; float:left; border-radius:0%'}
-![2](./images/dice-two-solid.svg){: style='width:42px; padding:4px; float:left; border-radius:0%'}
-
 그리고 [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams)으로부터 받은 많은 영감이 제작을 이끌었습니다, 항상 [타월](https://en.wikipedia.org/wiki/Towel_Day)을 잊지 않겠습니다.
 
 ![4](./images/dice-four-solid.svg){: style='width:42px; padding:5px; float:left; border-radius:0%'}
-
 ![2](./images/dice-two-solid.svg){: style='width:42px; padding:5px; float:none; border-radius:0%'}
+
