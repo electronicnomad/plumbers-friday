@@ -40,13 +40,11 @@ CLI가 되었든 Web Console을 통하든 한땀한땀 수공업자의 심정으
 
 ### 목적
 
-![4](./images/dice-four-solid.svg){: style='width:42px; padding:5px; float:left; border-radius:0%'}
 본 사이트는 클라우드 컴퓨팅 전반에 대한 참고서가 되고자 하는 작은 목표가 있습니다.
 AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면 기대보다 높은 수준의
 지식을 확보할 수 있습니다. 하지만, 모든 사용자들의 눈높이를 맞출 수 없는
 근본적인 문제로 인해 간혹 이해하기 어렵거나 축약된 부분이 아쉬울 때가 있습니다.
 
-![2](./images/dice-two-solid.svg){: style='width:42px; padding:5px; float:left; border-radius:0%'}
 무엇보다 새로운 서비스나 기술을 학습해 가면서 '키보드'와 '마우스'부터 쓰고 싶은 분들께는
 어렵거나 지루한 설명이 있을 수도 있습니다. 이런 어려움은 아무래도 '지금' 가고 싶은
 손가락의 방향과 공식 문서와 호흡이 다르고 설명하는 절차가 생소하기 때문이라고 생각합니다.
@@ -65,10 +63,13 @@ AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면
 
 ## 기여
 
-본 사이트는 GitHub에 있습니다. 어떤 누구도 본 사이트에 기여할 수 있습니다.
+본 사이트는 GitHub에 있습니다. 어떤 누구든 본 사이트에 기여할 수 있습니다.
 제작에 참여한 분들을 아래의 명단으로 모시고 있습니다.
 [github.com/hoonjhin/aws-pub/graphs/contributors](https://github.com/hoonjhin/aws-pub/graphs/contributors)
 
 ### 감사합니다
+
+![4](./images/dice-four-solid.svg){: style='width:42px; padding:4px; float:left; border-radius:0%'}
+![2](./images/dice-two-solid.svg){: style='width:42px; padding:4px; float:left; border-radius:0%'}
 
 그리고 [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams)으로부터 받은 많은 영감이 제작을 이끌었습니다, 항상 [타월](https://en.wikipedia.org/wiki/Towel_Day)을 잊지 않겠습니다.

@@ -59,7 +59,7 @@ Value를 물어보는 것이 상단 입력란 '이름'입니다.
 ![edit global network](../../images/networking/transit-gateway/network-manager/edit-global-network.png)
 
 이 번 단계에서는 '이름'을 태그를 입력하는 것과 같은 마음 가짐으로 입력하며,
-'설명'란에는 영문으로만 작성하고 `글로벌 네트워크 생성`{style='background-color:darkorange; color:white'}을 클릭합시다.
+'설명'란에는 영문으로만 작성하고 `글로벌 네트워크 생성`{style='background-color:#e47911; color:white'}을 클릭합시다.
 
 서비스는 사용자의 애정을 바탕으로 시간을 먹으며 성장해 나아갑니다.
 우리가 즐겨 찾는 '치킨'들처럼 완전한 성인이 되기도 전에 용도를 끝내는
@@ -77,7 +77,7 @@ Value를 물어보는 것이 상단 입력란 '이름'입니다.
 ![register tgw](../../images/networking/transit-gateway/network-manager/register-tgw.png)
 
 친절하게 사용자가 소유한 모든 transit gateway를 다 보여는 주는 것 같습니다. 모두 선택하고
-우측 하단을 보시면, 회색이었던 `전송 게이트웨이 등록`이 주황색 `전송 게이트웨이 등록`{style='background-color:darkorange; color:white'}으로 변한 것을 알 수 있습니다.
+우측 하단을 보시면, 회색이었던 `전송 게이트웨이 등록`이 주황색 `전송 게이트웨이 등록`{style='background-color:#e47911; color:white'}으로 변한 것을 알 수 있습니다.
 그렇습니다. 자신을 눌러 달라는 호소입니다. 눌러 주도록 하십시다.
 
 그럼 transit gateways의 상태가 pending을 거쳐, available 녹색 글자로 나타나게 됩니다.
