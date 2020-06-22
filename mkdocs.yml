@@ -7,8 +7,8 @@ theme:
   font:
     text: Noto Sans KR
     code: Noto Sans Mono
-  logo: images/logo_black.jpg
-  favicon: images/favicon.ico
+  logo: images/logo-cloud-white.svg
+  favicon: images/favicon-cloud.ico
 plugins:
   - search
   - awesome-pages
