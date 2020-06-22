@@ -34,16 +34,16 @@ VPC를 이해하고 이를 기반으로 AWS 전반의 네트워크를 설계하�
 - Internet gateway (VPC가 AWS Cloud 밖, 그러니까 쉽게 말해서 인터넷으로 연결하기 위한 게이트웨이입니다)
 - VPC endpoint (이제부터 알아가 보십시다)
 
-지금 준비하고 있는 주제는 다음과 같습니다.
+지금 준비된 주제는 다음과 같습니다.
 
 - PrivateLink (VPC Endpoint Services)
 - VPC Peering
 - Transit Gateway
-- Traffic Mirroring
 
 ## 다음에 대해서는 다루지 않습니다
 
 - IPv6
+- 네트워크 보안
 - 타 AWS 계정과 VPC 연결
 - On-premises와 연결하는 하이브리드 네트워크 구성
 - 타 클라우드 서비스 제공자와 연결하는 멀티 클라우드 연결
