@@ -6,5 +6,4 @@ arrange:
   - privatelink
   - vpc-peering
   - transit-gateway
-  - traffic-mirroring
   - cleanup.md
