@@ -24,6 +24,11 @@
 TerraForm 같은 도구를 활용하여 그 과정을 생략하거나 블랙박스로 처리하는 행위를 수용하지 않습니다.
 CLI가 되었든 Web Console을 통하든 한땀한땀 수공업자의 심정으로 학습과정을 꾸려갑니다.
 
+#### Always Beta
+
+소수의 사람들이 자발적으로 참여하는 일이기에 쏟는 정성과는 별개로
+완성도가 패키지 소프트웨어나 출판된 간행물에 비해 낮을 수 밖에 없습니다.
+하지만, 항상 지켜보고 검증하고 수행해 보면서 수정해 나아가고 있습니다.
 
 ## 진행
 
@@ -32,21 +37,13 @@ CLI가 되었든 Web Console을 통하든 한땀한땀 수공업자의 심정으
 각 문서의 진행은 hands-on labs 형식을 취합니다. 하나씩 따라하다 보면 알게된다! 라는
 무언가 입시 안내서 같은 느낌일 수도 있습니다.
 
-### Always Beta
-
-소수의 사람들이 자발적으로 참여하는 일이기에 쏟는 정성과는 별개로
-완성도가 패키지 소프트웨어나 출판된 간행물에 비해 낮을 수 밖에 없습니다.
-하지만, 항상 지켜보고 검증하고 수행해 보면서 수정해 나아가고 있습니다.
-
 ### 목적
 
-![4](./images/dice-four-solid.svg){: style='width:42px; padding:5px; float:left; border-radius:0%'}
 본 사이트는 클라우드 컴퓨팅 전반에 대한 참고서가 되고자 하는 작은 목표가 있습니다.
 AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면 기대보다 높은 수준의
 지식을 확보할 수 있습니다. 하지만, 모든 사용자들의 눈높이를 맞출 수 없는
 근본적인 문제로 인해 간혹 이해하기 어렵거나 축약된 부분이 아쉬울 때가 있습니다.
 
-![2](./images/dice-two-solid.svg){: style='width:42px; padding:5px; float:left; border-radius:0%'}
 무엇보다 새로운 서비스나 기술을 학습해 가면서 '키보드'와 '마우스'부터 쓰고 싶은 분들께는
 어렵거나 지루한 설명이 있을 수도 있습니다. 이런 어려움은 아무래도 '지금' 가고 싶은
 손가락의 방향과 공식 문서와 호흡이 다르고 설명하는 절차가 생소하기 때문이라고 생각합니다.
@@ -56,19 +53,32 @@ AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면
 그리고 부가 설명이 필요하다면, 필수적인 것은 실습 단계 내에 설명하고
 그렇지 않다고 판단되는 건 따로 부쳐 심화된 학습을 선택할 수 있게 합니다.
 
+### AWS sponsored event
+
+만약 AWS에서 후원하고 있는 어떤 교육 행사에서 본 사이트를 사용하고,
+AWS에서 제공하는 12자리 코드가 있으나 어디에서 어떻게 등록해서 사용하는지
+막막하다면, 다음의 웹 주소에서 받은 코드를 등록하시면서 교육 행사에 참여하시면 됩니다.
+https://dashboard.eventengine.run/login
+
+## 기타
+
 ### 주요 갱신 내역
 
 손으로 일일이 입력합니다. 그래서 정확도를 말할 수 없습니다.
 
-* 2020-06-22: AWS Networking이 추가 되었습니다.
-* 2020-05-30: Amazon Forecast가 추가 되었습니다.
+* 2020-06-22: [AWS Networking](/networking)이 추가 되었습니다.
+* 2020-05-30: [Amazon Forecast](/forecast)가 추가 되었습니다.
 
-## 기여
+### 기여
 
 본 사이트는 GitHub에 있습니다. 어떤 누구도 본 사이트에 기여할 수 있습니다.
 제작에 참여한 분들을 아래의 명단으로 모시고 있습니다.
 [github.com/hoonjhin/aws-pub/graphs/contributors](https://github.com/hoonjhin/aws-pub/graphs/contributors)
 
-### 감사합니다
+#### 감사합니다
 
 그리고 [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams)으로부터 받은 많은 영감이 제작을 이끌었습니다, 항상 [타월](https://en.wikipedia.org/wiki/Towel_Day)을 잊지 않겠습니다.
+
+![4](./images/dice-four-solid.svg){: style='width:42px; padding:5px; float:left; border-radius:0%'}
+
+![2](./images/dice-two-solid.svg){: style='width:42px; padding:5px; float:none; border-radius:0%'}

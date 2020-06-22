@@ -3,6 +3,36 @@
 
 ## instance 3-1과 instance 4-1
 
+아일랜드 리전에 있는 instance 4-1에서
+서울 리전에 있는 instance 3-1로 각 종속 리전에 배포되어 있는
+transit gateway 두 개를 거쳐 통신하는
+연결 시험 예시입니다.
+
+instance를 생성할 때 혹은, 그 이전에 미리 만들어 두었을
+private key를 해당 테스트할 instance에 올려 두어야 합니다.
+
+현재 통신이 안 되는 instance에 어떻게 올릴 것인가? 에 대한 답은
+지금 여러분께서는 session manager를 사용하고 계시고,
+key는 그리 길지 않다는 것입니다.
+
+먼저 instances를 만들 때 만들었거나 미리 만들어 놓은 private key를
+text editor 등으로 열어서 클립보드에 복사를 합니다.
+Windows 같은 경우에는, Notepad.exe로 해당 파일을 열고 
+`Ctrl + a`와 `Ctrl + c` 키 조합으로 연이어 키보드를 누르시면 됩니다.
+
+instance 3-1에 session manager로 접속합니다.
+`sudo su - ubuntu`로 user switch를 합니다.
+`mkdir ./.ssh; cd ./.ssh` 디렉토리는 만들고 만든 디렉토리로 갑니다.
+`cat << EOF > mykey` 명령을 내립니다. 'mykey'는 하나의 예시일 뿐입니다.
+스스로가 파일 이름을 적절히 선택합니다.
+그리고 `Ctrl + v`이든, `CMD + v`이든, `Shift + Insert`이든
+여러분의 컴퓨터 클립보드의 내용을 터미널로 붙혀 넣습니다.
+그리고 `EOF`로 타이핑하거나, `Ctrl + d`(이건 운영체제 공통입니다)를 합니다.
+파일이 생성되고, 명령 프롬프트로 돌아왔을 것입니다.
+키가 원격 지점에 생성되었습니다.
+
+마지막으로 `chmod 400 ./mykey`로 해서 권한 설정 문제로 원격접속이 거부되는 일을 방지합니다.
+
 ```bash
 buntu@ip-10-40-1-10:~$ ping 10.30.1.10 -c 3
 PING 10.30.1.10 (10.30.1.10) 56(84) bytes of data.
@@ -107,7 +137,7 @@ See "man sudo_root" for details.
 ubuntu@ip-10-40-1-10:~$
 ```
 
-#### Instance 3-1에서 인터넷 접근
+## Instance 3-1에서 인터넷 접근
 
 ```bash
 ubuntu@ip-10-30-1-10:~$ sudo apt update
@@ -147,27 +177,7 @@ Reading state information... Done
 ubuntu@ip-10-30-1-10:~$
 ```
 
-```azurepowershell
-ubuntu@ip-10-30-1-10:~$ wget export.jhin.net/a.pptx
---2020-06-21 11:09:47--  http://export.jhin.net/a.pptx
-Resolving export.jhin.net (export.jhin.net)... 13.224.67.110, 13.224.67.80, 13.224.67.49, ...
-Connecting to export.jhin.net (export.jhin.net)|13.224.67.110|:80... connected.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://export.jhin.net/a.pptx [following]
---2020-06-21 11:09:48--  https://export.jhin.net/a.pptx
-Connecting to export.jhin.net (export.jhin.net)|13.224.67.110|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 30446086 (29M) [application/vnd.openxmlformats-officedocument.presentationml.presentation]
-Saving to: 'a.pptx'
-
-a.pptx                               100%[======================================================================>]  29.04M  3.11MB/s    in 12s
-
-2020-06-21 11:10:03 (2.49 MB/s) - 'a.pptx' saved [30446086/30446086]
-
-ubuntu@ip-10-30-1-10:~$
-```
-
-```azurecli
+```bash
 ubuntu@ip-10-30-1-10:~$ sudo apt install traceroute
 Reading package lists... Done
 Building dependency tree
@@ -203,3 +213,5 @@ traceroute to export.jhin.net (13.224.67.15), 30 hops max, 60 byte packets
  6  100.66.10.100 (100.66.10.100)  238.173 ms 100.66.10.66 (100.66.10.66)  241.730 ms 100.66.11.96 (100.66.11.96)  234.367 ms
 ...
 ```
+
+完
