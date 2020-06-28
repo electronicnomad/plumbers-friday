@@ -28,7 +28,7 @@ AWS networking이 찾이하는 그 모든 부분에 대해서 다루는 것은 �
 VPC를 이해하고 이를 기반으로 AWS 전반의 네트워크를 설계하고 운영하는데 기본이 되는
 핵심은 다음의 다섯가지라고 할 수 있겠습니다.
 
-- [VPC](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/what-is-amazon-vpc.html) (위에서 소개한 공식 문서를 재차 링크 걸어 두었습나다)
+- [VPC](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/what-is-amazon-vpc.html) (위에서 소개한 공식 문서를 재차 링크 걸어 두었습니다)
 - Subnet (여러분께서 익히 알고 있는 그 subnet과 같습니다)
 - Routing table (여러분께서 익히 알고 있는 그 routing table과 같습니다)
 - Internet gateway (VPC가 AWS Cloud 밖, 그러니까 쉽게 말해서 인터넷으로 연결하기 위한 게이트웨이입니다)
