@@ -135,6 +135,14 @@ ubuntu@ip-10-40-1-10:~/web$ sudo python3 -m http.server 80
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 ```
 
+만약 여러분께서 선택하신 AMI가 Python3를 가지고 있지 않다면,
+Python2 정도는 기본으로 설치되어 있기를 바랍니다. Python2의 경우
+명령은 다음과 같습니다.
+
+```bash
+$ python -m SimpleHTTPServer 80
+```
+
 이제 세션 메니저로 VPC 2에 배포해 둔, instance 2-1에 접속합니다.
 그리고 VPC 2에 만들어 놓은 (그리고 VPC 4의 NLB를 품고 있는 VPC 엔드포인트 서비스와
 연결되어 있는) VPC 엔드포인트의 주소로 `curl` 명령을 내려 모든 것이 제대로 동작하는지

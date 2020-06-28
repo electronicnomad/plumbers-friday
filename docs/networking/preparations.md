@@ -76,7 +76,9 @@ Systems Manager의 요구사항입니다.
 ### EC2 instances 생성
 
 그리고, 필요한 EC2 instance들을 생성합니다. 본 예제에서는 Ubuntu 18.04 LTS로 일부 특징적인
-예제가 있긴 하지만, 다른 Linux AMI를 선택하셔도 되고, Windows를 선택하셔도 무방합니다.
+예제가 있어, 이것을 추천합니다. 만약 다른 AMI를 선택하신다면, Python이 별도의 설치 없이 동작하는지
+확인하시기 바랍니다. 앞으로 진행될 실습에서 Python3 명령 한 줄이 나옵니다.
+간이 웹 데몬을 실행하기 위함입니다. (물론, Python2에서도 가능합니다)
 
 필요한 최소 instance의 수(數)는 총 넷입니다.  
 만약 충분한 시간이 지금 있다면, VPC 4의 Subnet 4-1에 배포할 Instance 4-1, 단일 instance 대신
