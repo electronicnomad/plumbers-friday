@@ -5,8 +5,8 @@ theme:
     primary: black 
     accent: deep orange
   font:
-    text: Noto Sans KR
-    code: Noto Sans Mono
+    text: Nanum Gothic
+    code: Nanum Gothic Coding
   logo: images/cloud-circle-white.png
   favicon: images/favicon-cloud-black.ico
 plugins:

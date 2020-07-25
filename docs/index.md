@@ -66,6 +66,7 @@ https://dashboard.eventengine.run/login
 
 손으로 일일이 입력합니다. 그래서 정확도를 말할 수 없습니다.
 
+* 2020-07-25: 저해상도 화면 환경에서의 가독성을 높이기 위하여 기존의 Noto Sans KR에서 Nanum Gothic으로 기본 서체를 변경하였습니다.
 * 2020-06-22: [AWS Networking](/networking)이 추가 되었습니다.
 * 2020-05-30: [Amazon Forecast](/forecast)가 추가 되었습니다.
 
@@ -78,7 +79,3 @@ https://dashboard.eventengine.run/login
 #### 감사합니다
 
 그리고 [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams)으로부터 받은 많은 영감이 제작을 이끌었습니다, 항상 [타월](https://en.wikipedia.org/wiki/Towel_Day)을 잊지 않겠습니다.
-
-![4](./images/dice-four-solid.svg){: style='width:42px; padding:5px; float:left; border-radius:0%'}
-![2](./images/dice-two-solid.svg){: style='width:42px; padding:5px; float:none; border-radius:0%'}
-
