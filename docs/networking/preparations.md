@@ -25,10 +25,10 @@ AWS에서 제공하는 Cloud9을 사용하는 것을 추천합니다.
 ### IP (대역) 할당
 
 VPC과 Subnet을 다음의 같이 미리 만들어 놓습니다.
-서로 다른 리전에 VPC를 배치하며 각 VPC는 하나 혹은 두 개의 Subnet을 보유하게 됩니다.
-각 리전에서 가용영역(Availability Zone)은 일관성 있게 하나만 선택합니다.  
-서울 리전의 경우, `ap-northeast-2a (apne2-az1)`을
-아일랜드 리전의 경우, `eu-west-1b (euw1-az2)`을 선택합니다.
+서로 다른 region에 VPC를 배치하며 각 VPC는 하나 혹은 두 개의 Subnet을 보유하게 됩니다.
+각 region에서 가용영역(Availability Zone)은 일관성 있게 하나만 선택합니다.  
+본 실습의 예제에서는 서울 region의 경우, `ap-northeast-2a (apne2-az1)`을
+아일랜드 region의 경우, `eu-west-1b (euw1-az2)`을 선택했습니다.
 
 다음의 표는 각 구성이 가져가는 IP 관련된 정보입니다.  
 목적은 각 VPC와 Subnet이 가지는 CIDR 영역이 겹치지 않게 하기 위함입니다.
@@ -45,12 +45,12 @@ VPC과 Subnet을 다음의 같이 미리 만들어 놓습니다.
 | Region B           | VPC 4        | Subnet 4-1   | Instance 4-1 | |
 |                    | 10.40.0.0/16 | 10.40.1.0/24 | 10.40.1.10   | |
 
-위 정보를 기초로, 두 리전에 VPC들과 Subnet 그리고 EC2 Instances를 생성합니다.
+위 정보를 기초로, 두 region에 VPC들과 Subnet 그리고 EC2 Instances를 생성합니다.
 생성이 완료되었다면, 이제 준비가 끝났습니다.
 
 ### VPC 및 Subnet 생성
 
-위의 IP 할당표를 참조하여 각 리전에 VPC와 Subnet을 생성합니다.  
+위의 IP 할당표를 참조하여 각 region에 VPC와 Subnet을 생성합니다.  
 여러분께 VPC는 어떻게 만들고 Subnet은 왜 묵시적 라우팅이 가능한지 등에 대한 이야기를
 다시 하는 건 매우 지루한 일이 될 것입니다.
 다만, VPC를 생성하고 나서 하나의 옵션을 켜야 합니다.
@@ -72,9 +72,10 @@ Systems Manager의 요구사항입니다.
 본 실습에서 이 부분은 다루지 않습니다. 하지만, 만약 이에 대한 관심이 있으시다면
 위의 웹 링크로 안내하는, 공식 문서를 읽어보시는 것을 추천합니다.
 
-### VPC endpoint 작성
+### VPC endpoint 생성
 
-이 과정은 반복적이어서 인내가 조금 필요합니다.
+이 과정은 반복적이어서 인내가 조금 필요합니다.  
+일단 'VPC endpoint 생성'만큼은 끝까지 읽고 시작합시다.
 
 Systems manager의 session manager를 통하여 EC2 instance에 접근하기 위하여
 VPC에 endpoints를 생성합니다, 3가지나 됩니다.
@@ -95,8 +96,8 @@ Endpoint를 생성은, web console에서 'VPC' 서비스를 선택하고 나타�
 이렇게 3가지입니다.
 
 위 VPC endpoints는 EC2 instances가 배치된 모든 VPCs와 subnets에 적용해야 합니다.
-본 과정의 경우에는 아일랜드 리전의 VPC 1/subnet 1-1과 VPC 3/subnet 3-1
-그리고 서울 리전의 VPC 2/subnet 2-1과 VPC 4/subnet 4-1이 해당됩니다.
+본 과정의 경우에는 아일랜드 region의 VPC 1/subnet 1-1과 VPC 3/subnet 3-1
+그리고 서울 region의 VPC 2/subnet 2-1과 VPC 4/subnet 4-1이 해당됩니다.
 
 ![VPC endpoint for Systems Manager](../images/networking/vpc-endpoint-ssm.png)
 
@@ -105,6 +106,22 @@ Endpoint를 생성은, web console에서 'VPC' 서비스를 선택하고 나타�
 !!! note "참조"
     [Systems Manager를 사용하여 인터넷 액세스 없이 프라이빗 EC2 인스턴스를 관리할 수 있도록 VPC 엔드포인트를 생성하려면 어떻게 해야 합니까?](https://aws.amazon.com/ko/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/)  
     [How do I create VPC endpoints so that I can use Systems Manager to manage private EC2 instances without internet access?](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/)
+
+하지만, 이 반복적이고 非생산적일 것만 같은 이 작업을 직접 한 땀 한 땀 만들어 내는 것은
+매우 숭고한 일입니다. (다시) 하지만, 자신의 시간은 너무도 소중하고 이 과정이 전반적인
+학습행위에 크게 도움이 되지 않는다고 판단이 든다면, 아래의 CloudFormation을 가지고 배포하는 것을
+고려해 볼 수 있습니다.
+
+Region A:
+[VPC1 CF Template](../../samples/networking/cf-networking-vpc1.yaml),
+[VPC3 CF Template](../samples/networking/cf-networking-vpc3.yaml).  
+Region B:
+[VPC2 CF Template](../samples/networking/cf-networking-vpc2.yaml),
+[VPC4 CF Template](../samples/networking/cf-networking-vpc4.yaml).
+
+각 template은 region에 대한 정의는 수록되어 있지 않습니다. 각각 적합한 region에 배포하기 기대합니다.
+[console.aws.amazon.com/cloudformation](https://console.aws.amazon.com/cloudformation/)에
+접속하여 다른 모든 서비스가 그렇듯 region을 전환하며 배포하시면 되겠습니다.
 
 ### IAM 생성
 
@@ -157,6 +174,11 @@ Systems manager의 설정은 따로 필요하지 않습니다. 생성한 IAM rol
 
 ![Session Manager Target Instances](../images/networking/session-manager-target-instances.png)
 
+혹은, 아래의 화면화 같이 'Connect to your instance'에서 'Session Manager'를
+선택했을 때 경고 혹은 오류 화면이 등장하지 않고 `Connect`{style='background-color:dodgerblue; color:white'} 버튼이 활성화 되면 됩니다.
+
+![EC2 Instances - Connect - Session Manager](../images/networking/ec2-instances-connet-session-manager.png)
+
 ### Network Load Balancer 생성
 
 VPC 4에 Network Load Balancer를 배치합니다. 해당 NLB는 비록 단 하나의 EC2 instance에
@@ -167,16 +189,19 @@ VPC 4에 Network Load Balancer를 배치합니다. 해당 NLB는 비록 단 하�
 
 ### NAT Gateway 생성
 
-VPC 2의 Subnet 2-2에 해당 설정을 합니다.
+VPC 2의 Subnet 2-2에 해당 설정을 합니다.  
+CloudFormation template을 사용했다면 이미 배포되어 있습니다.
 
 ### Internet Gateway 생성
 
-VPC 2에 해당 설정을 합니다.
+VPC 2에 해당 설정을 합니다.  
+CloudFormation template을 사용했다면 이미 배포되어 있습니다.
 
 ### 라우팅 테이블
 
 지금은 따로 설정하지 않습니다.  
-다만, NAT gateway와 Internet Gateway를 위한 설정은 아래와 같이 진행합니다.
+다만, NAT gateway와 Internet Gateway를 위한 설정은 아래와 같이 진행합니다.  
+CloudFormation template을 사용했다면 이미 설정되어 있습니다.
 
 #### Public Subnet, Subnet 2-2
 
