@@ -55,38 +55,6 @@ VPC과 Subnet을 다음의 같이 미리 만들어 놓습니다.
 다시 하는 건 매우 지루한 일이 될 것입니다.
 다만, VPC를 생성하고 나서 하나의 옵션을 켜야 합니다.
 
-### VPC endpoint 작성
-
-이 과정은 반복적이어서 인내가 조금 필요합니다.
-
-Systems Manager의 session manager를 통하여 EC2 instance에 접근하기 위하여
-VPC에 endpoint를 작성합니다.
-session manager로 EC2 instance에 접근하는 일반적인 방식은 대상이 되는 EC2 instance가
-public subnet에 배치되어 있어야 합니다.
-하지만, 본 실습의 구성에서는 그런 행운같은 설정은 존재하지 않기에, 우리는 VPC endpoint에
-Systems Manager가 접근할 수 있도록 설정을 해 놓아야 합니다. 그렇습니다, private subnet이
-있고, 그 안에 EC2 instance가 있는 조건에서 필요한 조치입니다.
-
-Endpoint를 작성하려면, web console에서 VPC 서비스를 선택하고 왼쪽 메뉴에서 'Endpoints'를
-선택한 다음, `Create Endpoint`{style='background-color:dodgerblue; color:white'}
-버튼을 클릭하여 시작할 수 있습니다.
-
-아래의 참조문서에서는 3가지 endpoints를 작성하는 것을 설명하고 있습니다. 이는 Systems Manager가 필요한
-모든 것이지만, 우리는 Session Manager만 사용하면 되기 때문에, 그 중에서 (아래의 그림과 같이)
-`com.amazonaws.$REGION.ssmmessages`만 설정하고 나머지 2개는 설정하지 않습니다.
-
-만약 시간이 충분하고 반복 작업에 대하여 거부감이 없으며, 이번 기회에 Session Manager 뿐만 아니라
-Systems Manager에 대한 학습도 스스로 하고 싶다면 나머지 설정을 모두 할 수 있겠습니다.
-
-!!! note "참조문서"
-    [How do I create VPC endpoints so that I can use Systems Manager to manage private EC2 instances without internet access?](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/)
-
-![VPC endpoint for Systems Manager](../images/networking/vpc-endpoint-ssm.png)
-
-EC2 instances가 배치된 모든 VPC에 적용해야 합니다. 이번 과정의 경우에는
-아일랜드 리전의 VPC 1/subnet 1-1과 VPC 3/subnet 3-1
-그리고 서울 리전의 VPC 2/subnet 2-1과 VPC 4/subnet 4-1이 해당됩니다.
-
 ### DNS 호스트 이름
 
 생성한 VPC를 선택하고, '작업' 메뉴에서 'DNS 호스트 이름 편집'을 선택해서
@@ -104,9 +72,43 @@ Systems Manager의 요구사항입니다.
 본 실습에서 이 부분은 다루지 않습니다. 하지만, 만약 이에 대한 관심이 있으시다면
 위의 웹 링크로 안내하는, 공식 문서를 읽어보시는 것을 추천합니다.
 
+### VPC endpoint 작성
+
+이 과정은 반복적이어서 인내가 조금 필요합니다.
+
+Systems manager의 session manager를 통하여 EC2 instance에 접근하기 위하여
+VPC에 endpoints를 생성합니다, 3가지나 됩니다.
+session manager로 EC2 instance에 접근하는 일반적인 방식은 대상이 되는 EC2 instance가
+public subnet에 배치되어 있어야 합니다, 그리고 pubic IP를 지니고 있어야 겠죠.
+하지만, 본 실습의 구성에서는 그런 행운같은 설정은 존재하지 않기에, 우리는 VPC endpoint에
+Systems Manager가 접근할 수 있도록 설정을 해 놓아야 합니다. 그렇습니다, private subnet이
+있고, 그 안에 EC2 instance가 있는 조건에서 필요한 조치입니다.
+
+Endpoint를 생성은, web console에서 'VPC' 서비스를 선택하고 나타나는 왼쪽 메뉴에서 'Endpoints'를
+선택한 다음, `Create Endpoint`{style='background-color:dodgerblue; color:white'}
+버튼을 클릭하여 시작할 수 있습니다.
+
+만들어야 하다는 endpoints는
+`com.amazonaws.$REGION.ssm`,
+`com.amazonaws.$REGION.ssmmessages`,
+`com.amazonaws.$REGION.ec2messages`
+이렇게 3가지입니다.
+
+위 VPC endpoints는 EC2 instances가 배치된 모든 VPCs와 subnets에 적용해야 합니다.
+본 과정의 경우에는 아일랜드 리전의 VPC 1/subnet 1-1과 VPC 3/subnet 3-1
+그리고 서울 리전의 VPC 2/subnet 2-1과 VPC 4/subnet 4-1이 해당됩니다.
+
+![VPC endpoint for Systems Manager](../images/networking/vpc-endpoint-ssm.png)
+
+아래의 참조문서에서는 3가지 endpoints를 작성하는 것을 설명하고 있습니다.
+
+!!! note "참조"
+    [Systems Manager를 사용하여 인터넷 액세스 없이 프라이빗 EC2 인스턴스를 관리할 수 있도록 VPC 엔드포인트를 생성하려면 어떻게 해야 합니까?](https://aws.amazon.com/ko/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/)  
+    [How do I create VPC endpoints so that I can use Systems Manager to manage private EC2 instances without internet access?](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/)
+
 ### IAM 생성
 
-Session Manager가 EC2 instance에 권한을 가지고 접근할 수 있도록 조치합니다.
+Session manager가 EC2 instance에 권한을 가지고 접근할 수 있도록 조치합니다.
 생성하는 IAM은 EC2 하위 Policy, `AmazonSSMManagedInstanceCore`를 포함하면 됩니다.
 여기에서 생성한 IAM role은 EC2 instance를 생성할 때 지정해야 합니다.
 
@@ -128,6 +130,15 @@ Policy를 선택할 때, `AmazonEC2RoleforSSM`을 지정하셔도 정상 동작�
 예제가 있어, 이것을 추천합니다. 만약 다른 AMI를 선택하신다면, Python이 별도의 설치 없이 동작하는지
 확인하시기 바랍니다. 앞으로 진행될 실습에서 Python3 명령 한 줄이 나옵니다.
 간이 웹 데몬을 실행하기 위함입니다. (물론, Python2에서도 가능합니다)
+
+그리고 Session Manager를 위한 Systems Manager Agent가 미리 설치된
+AMI를 선택하는 것이 상당히 유리합니다. 그 목록은 다음과 같습니다(Linux 한정, Windows 제외).
+
+* Amazon Linux
+* Amazon Linux 2
+* Ubuntu Server 16.04
+* Ubuntu Server 18.04
+* Amazon ECS-Optimized
 
 필요한 최소 instance의 수(數)는 총 넷입니다.  
 만약 충분한 시간이 지금 있다면, VPC 4의 Subnet 4-1에 배포할 Instance 4-1, 단일 instance 대신
@@ -187,5 +198,9 @@ VPC 2에 라우팅 테이블을 만들어 줍니다. 이 라우팅 테이블은,
 
 `Custom 사용자 지정` 대신 `Anywhere 위치 무관`을 선택할 수도 있습니다.  
 본 실습의 목표는 보안에 관한 조정이 포함되어 있지 않습니다.
+
+위 설정은 본 실습을 위한 설정입니다. 만약 정교한 설정을 한다면 생각할 것이 많겠지만,
+대부분 그 생각은 일반적일 것입니다. 제가 알리고 싶은 것은 Session Manager를 위한
+security group의 설정입니다. [AWS Systems Manager > User Guide > Step 6: (Optional) Create a Virtual Private Cloud endpoint](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html)를 참조할 수 있습니다.
 
 完

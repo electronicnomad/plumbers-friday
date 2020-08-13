@@ -1,6 +1,5 @@
 # 개요
 
-![PrivateLink ICON](../../images/networking/privatelink/privatelink-icon.png){: style='width:120px; padding:5px; float:right; border-radius:8%'}
 PrivateLink은 VPC endpoint를 활용한 것입니다.
 그리고 VPC endpoint services라고도 부릅니다.
 VPC endpoints는 기술적으로 두 가지가 있는데,
