@@ -1,6 +1,5 @@
 # 개요
 
-![VPC peering ICON](../../images/networking/vpc-peering/vpc-peering-icon.png){: style='width:120px; padding:5px; float:right; border-radius:8%'}
 VPC peering은 두 개의 VPC를 상호 연결하는 것입니다. 이 두 VPC는 하나의 리전에서도
 서로 다른 리전에 존재하여도 문제가 되지 않습니다, 지역적 위치에 대한 제약은 없습니다.
 하지만, 단 하나 설계할 때 염두해 두어야 하는 것이 있는데,
