@@ -1,13 +1,12 @@
 # 준비
 
-실습을 위한 기초 환경을 만들어 놓습니다.  
-짧지 않습니다. Buckle up!
+실습을 위한 기초 환경을 만들어 놓습니다. 짧지 않습니다. Buckle up!
 
 ## 사용자 환경
 
 ### 웹 브라우저
 
-웹 브라우저만 잘 갇추었다면 만족할 수 있습니다.
+웹 브라우저만 잘 갖추었다면 만족할 수 있습니다.
 Microsoft Edge, Firefox, Google Chrome이 적합하다고 할 수 있습니다.
 다시 말하면, Gecko 엔진과 Chromium 엔진을 사용하는 웹 브라우저라면 좋습니다.
 
@@ -56,7 +55,39 @@ VPC과 Subnet을 다음의 같이 미리 만들어 놓습니다.
 다시 하는 건 매우 지루한 일이 될 것입니다.
 다만, VPC를 생성하고 나서 하나의 옵션을 켜야 합니다.
 
-#### DNS 호스트 이름
+### VPC endpoint 작성
+
+이 과정은 반복적이어서 인내가 조금 필요합니다.
+
+Systems Manager의 session manager를 통하여 EC2 instance에 접근하기 위하여
+VPC에 endpoint를 작성합니다.
+session manager로 EC2 instance에 접근하는 일반적인 방식은 대상이 되는 EC2 instance가
+public subnet에 배치되어 있어야 합니다.
+하지만, 본 실습의 구성에서는 그런 행운같은 설정은 존재하지 않기에, 우리는 VPC endpoint에
+Systems Manager가 접근할 수 있도록 설정을 해 놓아야 합니다. 그렇습니다, private subnet이
+있고, 그 안에 EC2 instance가 있는 조건에서 필요한 조치입니다.
+
+Endpoint를 작성하려면, web console에서 VPC 서비스를 선택하고 왼쪽 메뉴에서 'Endpoints'를
+선택한 다음, `Create Endpoint`{style='background-color:dodgerblue; color:white'}
+버튼을 클릭하여 시작할 수 있습니다.
+
+아래의 참조문서에서는 3가지 endpoints를 작성하는 것을 설명하고 있습니다. 이는 Systems Manager가 필요한
+모든 것이지만, 우리는 Session Manager만 사용하면 되기 때문에, 그 중에서 (아래의 그림과 같이)
+`com.amazonaws.$REGION.ssmmessages`만 설정하고 나머지 2개는 설정하지 않습니다.
+
+만약 시간이 충분하고 반복 작업에 대하여 거부감이 없으며, 이번 기회에 Session Manager 뿐만 아니라
+Systems Manager에 대한 학습도 스스로 하고 싶다면 나머지 설정을 모두 할 수 있겠습니다.
+
+!!! note "참조문서"
+    [How do I create VPC endpoints so that I can use Systems Manager to manage private EC2 instances without internet access?](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/)
+
+![VPC endpoint for Systems Manager](../images/networking/vpc-endpoint-ssm.png)
+
+EC2 instances가 배치된 모든 VPC에 적용해야 합니다. 이번 과정의 경우에는
+아일랜드 리전의 VPC 1/subnet 1-1과 VPC 3/subnet 3-1
+그리고 서울 리전의 VPC 2/subnet 2-1과 VPC 4/subnet 4-1이 해당됩니다.
+
+### DNS 호스트 이름
 
 생성한 VPC를 선택하고, '작업' 메뉴에서 'DNS 호스트 이름 편집'을 선택해서
 'DNS 호스트 이름'을 활성화 해야 합니다. 이는 Session Manager로 EC2 instance에 접속하기 위한
@@ -66,12 +97,30 @@ Systems Manager의 요구사항입니다.
 
 ![DNS hostname enable](../images/networking/vpc-edit-dns-hostname-enable.png)
 
-### Private DNS 생성 (optional)
+#### Private DNS 생성 (optional)
 
 [엔드포인트 서비스의 프라이빗 DNS 이름](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/verify-domains.html)
 
 본 실습에서 이 부분은 다루지 않습니다. 하지만, 만약 이에 대한 관심이 있으시다면
 위의 웹 링크로 안내하는, 공식 문서를 읽어보시는 것을 추천합니다.
+
+### IAM 생성
+
+Session Manager가 EC2 instance에 권한을 가지고 접근할 수 있도록 조치합니다.
+생성하는 IAM은 EC2 하위 Policy, `AmazonSSMManagedInstanceCore`를 포함하면 됩니다.
+여기에서 생성한 IAM role은 EC2 instance를 생성할 때 지정해야 합니다.
+
+![create IAM for Session Manager](../images/networking/create-iam-for-ssm-1.png)
+
+![create IAM for Session Manager](../images/networking/create-iam-for-ssm-2.png)
+당연히 그렇겠지만, EC2를 선택합니다. 'use case'도 EC2를 선택합니다.
+
+![create IAM for Session Manager](../images/networking/create-iam-for-ssm-3.png)
+Policy를 선택할 때, `AmazonEC2RoleforSSM`을 지정하셔도 정상 동작합니다. 하지만, 이 IAM Role은
+곧 사라지게 됩니다. `AmazonSSMManagedInstanceCore`로 지정하고 기억 속에도 그렇게 남깁시다.
+
+![create IAM for Session Manager](../images/networking/create-iam-for-ssm-4.png)
+원하는 이름으로 Role name을 지정하고 생성하면 이 단계는 완료됩니다.
 
 ### EC2 instances 생성
 
@@ -89,47 +138,13 @@ EC2 instance를 만들면서 요구되는 Key를 미리 만들어 두든, instan
 
 ### Systems Manager 설정
 
-각 EC2 instance에 접근하기 위하여 다른 구성을 하지 않습니다.
-다만, Systems Manager에서 제공하는 Session manager를 통하여 EC2 instance에 접근하고
-여러 시도를 할 것입니다.
+Systems manager의 설정은 따로 필요하지 않습니다. 생성한 IAM role이 EC2 instance에
+잘 적용되어 있다면, Systems Manager 아래, 왼쪽 아래 메뉴,
+'Instances & Nodes'에서 'Session Manager'를 선택, 전환되는 화면에서
+`Start Session`{style='background-color:#e47911; color:white'}을
+선택하고 나타는 화면에서 생성한 EC2 instances가 'Target Instances'에 나타나면 준비가 완료된 것입니다.
 
-Systems Manager에서 '빠른 시작' 링크를 따라 들어가는 것만으로 보통의 세팅은 모두 끝나게 됩니다.
-수 분에서 십 수 분 정도의 시간이 필요합니다.
-
-Systems Manager는 리전에 종속됩니다. 우리는 두 개의 리전에 리소스를 배포하기 때문에
-각 리전에서 공히 같은 작업을 해 주어야 합니다.
-
-Systems Manager 설정은 필요한 EC2 instances를 모두 생성한 후에 진행하시는 것을 추천드립니다.
-만약, 그 순서가 바르지 않는다면 - Systems Manager '빠른 시작'으로 구성 완료 후에 EC2 instance 생성 -
-Systems Manager의 빠른 시작으로 다시 들어가서, `Edit All`{style='background-color:#e47911; color:white'}이라고 안내하는 영롱한 오렌지色의 버튼을
-누른 뒤, 'Reset'을 누르시면 됩니다. 그러면, 다시 작업을 시작합니다.
-참, 그리고 후에 생성한 EC2 instance가 IAM role로, `AmazonSSMRoleForInstancesQuickSetup`
-혹은 그와 유사한 것이 할당 되었는지 반드시 확인해 보시기 바랍니다. (없으면 Session Manager로
-접속할 수 없어요)
-
-![EC2 instance IAM role for systems manager](../images/networking/ec2-instance-iam-role.png)
-
-### VPC endpoint 작성
-
-이 과정은 반복적이어서 인내가 조금 필요합니다.
-
-Systems Manager의 session manager를 통하여 EC2 instance에 접근하기 위하여
-VPC에 endpoint를 작성합니다.
-session manager로 EC2 instance에 접근하는 일반 방식은 대상이 되는 EC2 instance가
-public subnet에 배치되어 있어야 합니다.
-하지만, 본 실습의 구성에서는 그런 행운같은 설정은 존재하지 않기에, 우리는 VPC endpoint에
-Systems Manager가 접근할 수 있도록 설정을 해 놓아야 합니다.
-
-다음의 문서가 그 방법을 안내합니다.
-
-[How do I create VPC endpoints so that I can use Systems Manager to manage private EC2 instances without internet access?](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/)
-
-![VPC endpoint for Systems Manager](../images/networking/vpc-endpoint-ssm.png)
-
-EC2 instances가 배치된 모든 VPC에 적용해야 합니다. 이번 과정의 경우에는
-아일랜드 리전의 VPC 1/subnet 1-1과 VPC 3/subnet 3-1
-그리고 서울 리전의 VPC 2/subnet 2-1과 VPC 4/subnet 4-1이 해당됩니다.
-앞선 단계를 차례로 따라 오셨다면, 위 링크에 있는 문서에서 안내하는 1부터 3번까지 단계를 생략하셔도 됩니다.
+![Session Manager Target Instances](../images/networking/session-manager-target-instances.png)
 
 ### Network Load Balancer 생성
 
