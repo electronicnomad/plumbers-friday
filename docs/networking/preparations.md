@@ -113,7 +113,7 @@ Endpoint를 생성은, web console에서 'VPC' 서비스를 선택하고 나타�
 고려해 볼 수 있습니다.
 
 Region A:
-[VPC1 CF Template](../../samples/networking/cf-networking-vpc1.yaml),
+[VPC1 CF Template](../samples/networking/cf-networking-vpc1.yaml),
 [VPC3 CF Template](../samples/networking/cf-networking-vpc3.yaml).  
 Region B:
 [VPC2 CF Template](../samples/networking/cf-networking-vpc2.yaml),
