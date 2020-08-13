@@ -5,13 +5,12 @@
 여기는 비공식입니다. 어떤 정보가 수록되든 그것은 공식적이지 않습니다.
 공식 웹 사이트에서 입수할 수 있는 정보를 '교과서'로 본다면, 여기는 '참고서'라고 할 수 있습니다.
 현재까지 본 사이트를 제작하면서 참고한 '교과서'는 다음과 같습니다.
-![AWS logo](./images/aws-brands.svg){: style='width:150px; padding:20px; float:right; border-radius:8%'}
 
 * [Amazon Web Services](https://aws.amazon.com/) 공식 홈 페이지
 * [Amazon Web Services Documentation](https://docs.aws.amazon.com/) 공식 설명서
 * [Amazon Web Services Samples](https://github.com/aws-samples/) GitHub 리포지토리
 
-참, 세상의 모든 참고서가 교과서를 뛰어넘는 존재가 되기 위해 노력하는 건 아닙니다.
+세상의 모든 참고서가 교과서를 뛰어넘는 존재가 되기 위해 노력하는 건 아닙니다.
 언제나 예외는 존재하고 그래서 세상이 재미나는 것입니다.
 
 ### 중요하지 않은 제작 원칙
@@ -53,7 +52,7 @@ AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면
 그리고 부가 설명이 필요하다면, 필수적인 것은 실습 단계 내에 설명하고
 그렇지 않다고 판단되는 건 따로 부쳐 심화된 학습을 선택할 수 있게 합니다.
 
-### AWS 후원행사 
+### AWS 후원행사
 
 만약 AWS에서 후원하고 있는 어떤 교육 행사에서 본 사이트를 사용하고,
 AWS에서 제공하는 12자리 코드가 있으나 어디에서 어떻게 등록해서 사용하는지
@@ -66,7 +65,7 @@ https://dashboard.eventengine.run/login
 
 손으로 일일이 입력합니다. 그래서 정확도를 말할 수 없습니다.
 
-* 2020-07-25: 저해상도 화면 환경에서의 가독성을 높이기 위하여 기존의 Noto Sans KR에서 Nanum Gothic으로 기본 서체를 변경하였습니다.
+* 2020-08-13: [AWS Networking](/networking)에 일부 변경 사항이 적용되었습니다.  
 * 2020-06-22: [AWS Networking](/networking)이 추가 되었습니다.
 * 2020-05-30: [Amazon Forecast](/forecast)가 추가 되었습니다.
 
