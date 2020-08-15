@@ -11,13 +11,13 @@ Transit Gateway는 서로 다른 네트워크를 하나로 연결해 줍니다.
 흔희 Transit Gateway의 유용성을 설명할 때 대칭에 놓는 것은 VPC peering입니다.
 일단, 아래의 그림을 보겠습니다.
 
-![VPC peering connections](/images/networking/transit-gateway/overview-peering.svg)
+![VPC peering connections](../../images/networking/transit-gateway/overview-peering.svg)
 
 VPC peering으로 VPC 7개를 연결했습니다. Full-mesh 연결입니다. 복잡합니다.
 네, 조금 더 복잡하게 보이라고 제가 마우스를 이리저리 돌린 경향이 없지않아 있습니다.
 하지만, 연결 선의 개수를 정확합니다. 그럼, 다음의 그림을 보겠습니다.
 
-![Transit Gateway connections](/images/networking/transit-gateway/overview-tgw.svg)
+![Transit Gateway connections](../../images/networking/transit-gateway/overview-tgw.svg)
 
 복잡해 보였던 VPC peering 연결을 위 그림처럼 transit gateway로 단순화 시킬 수 있습니다.
 이 그림은 어떤 의도를 결부시키더라도 더 복잡하게 보이게 하거나 더 단순하게 보이게 하기가 어렵습니다.
@@ -35,7 +35,7 @@ VPC peering으로 full-mesh 형태의 연결을 구상할 때 총 필요한 연�
 
 Transit gateway로 VPC를 연결할 때 다른 region간의 연결도 아래의 그림처럼 가능합니다.
 
-![Transit Gateway connections](/images/networking/transit-gateway/overview-tgw-inter-region.svg)
+![Transit Gateway connections](../../images/networking/transit-gateway/overview-tgw-inter-region.svg)
 
 위 그림에서 짐작할 수 있듯이 transit gateway는 region에 종속됩니다.
 따라서 다른 region과의 연결은 각 region에 transit gateway를 두고
