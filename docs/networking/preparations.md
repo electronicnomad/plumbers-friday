@@ -187,6 +187,55 @@ VPC 4에 Network Load Balancer를 배치합니다. 해당 NLB는 비록 단 하�
 (우리는 지금의 환경에서 제대로된 웹 데몬을 항상 띄우지는 못 합니다)
 포트가 아닌, 기본으로 오픈되어 있는 TCP 22번으로 설정하는 것이 필요합니다.
 
+NLB 설정에 대한 자세한 방법은 아래에 단계별로 설명하겠습니다.
+
+#### 시작하기
+
+AWS 서비스 중에서, EC2 아래에 Load balancing이라는 메뉴가 있습니다.
+하위, Load balancer를
+클릭하고 들어가면, `Create Load Balancer`{style='background-color:dodgerblue; color:white'}
+를 클릭하면서 생성을 시작할 수 있습니다.
+
+![Create Load Balancer](../images/networking/nlb-start.png)
+
+#### ALB / NLB/ CLB
+
+우리는 반드시 NBL, Network load balancer를 선택해야 합니다.
+나중에 알게 되겠지만, 이 load balancer를 PrivateLink를 위해 사용될 예정인데,
+PrivateLink의 구성에서는 반드시 NLB가 필요하기 때문입니다.
+
+![Select Load Balancer](../images/networking/nlb-select.png)
+
+#### NLB 기본 설정
+
+이 단계에서 신경을 써야 할 부분은, 'Scheme'를 'Internal'로 선택해 주는 것입니다.
+기본값은 'internet-facing'입니다.
+
+![Configure Load Balancer](../images/networking/nlb-configure-basic.png)
+
+Listeners는 Load Balancer Protocol: TCP, Load Balancer Port: 80 으로 유지하고,
+Availability Zones는 선택할 수 있는 것이 하나 뿐이기 때문에 따로 신경써야 할 부분은 없을 듯 합니다.
+VPC 4와 subnet 4-1을 선택합니다.
+
+#### Configure Routing
+
+새로운 target group을 만들어야 합니다. Target type을, 어떤 것을 해도 무관하겠지만,
+마음 편하게 Instance를 선택하는 길을 아래의 예제에서 보여 주고 있습니다. 그리고 
+Protocol: TCP, Port: 80을 선택했습니다.
+
+Health checks의 'Advanced health check setting' 부분은 중요한데,
+우리의 target group은 instance 생성 직후 외부와의 통신이 불가능하기 때문에
+어떤 소프트웨어도 설치할 수 없습니다. 그래서, target group으로 forward하는 TCP 포트로는
+health check를 성공할 수 없습니다. 따라서, 기본값 'Port: traffic port'이 아닌
+'override'를 선택해서 모든 Linux instances에서 대체로 열려있는 22 번 포트를 지정합니다.
+
+나머지는 주어진 값을 사용해도 무관합니다.
+
+![Configure Routing - Load Balancer](../images/networking/nlb-configure-routing.png)
+
+여기까지 입력하고 다음으로 넘어갔을 때 별다른 문제를 발견하지 못 했다면, Load balancer에 관한
+설정을 잘 끝내신 것입니다.
+
 ### NAT Gateway 생성
 
 VPC 2의 Subnet 2-2에 해당 설정을 합니다.  
