@@ -1,4 +1,4 @@
-site_name: the hitchhicker's unofficial guide to the AWS
+site_name: Plumber's Friday
 theme:
   name: material
   palette:
@@ -28,8 +28,8 @@ markdown_extensions:
   - pymdownx.tabbed
   - toc:
       permalink: true
-repo_name: hoonjhin/aws-pub
-repo_url: https://github.com/hoonjhin/aws-pub
+repo_name: hoonjhin/techfriday
+repo_url: https://github.com/hoonjhin/techfriday
 extra:
   social:
     - icon: fontawesome/brands/github-alt
