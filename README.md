@@ -1,3 +1,3 @@
-# aws-pub
+# Tech Friday
 
-the document repository of aws.jhin.net.
+the document repository of jhin.net.
