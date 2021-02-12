@@ -28,8 +28,8 @@ markdown_extensions:
   - pymdownx.tabbed
   - toc:
       permalink: true
-repo_name: hoonjhin/techfriday
-repo_url: https://github.com/hoonjhin/techfriday
+repo_name: hoonjhin/plumbers-friday
+repo_url: https://github.com/hoonjhin/plumbers-friday
 extra:
   social:
     - icon: fontawesome/brands/github-alt
