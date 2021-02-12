@@ -73,7 +73,7 @@ https://dashboard.eventengine.run/login
 
 본 사이트는 GitHub에 있습니다. 어떤 누구든 본 사이트에 기여할 수 있습니다.
 제작에 참여한 분들을 아래의 명단으로 모시고 있습니다.
-[github.com/hoonjhin/aws-pub/graphs/contributors](https://github.com/hoonjhin/aws-pub/graphs/contributors)
+[github.com/hoonjhin/plumbers-friday/graphs/contributors](https://github.com/hoonjhin/plumbers-friday/graphs/contributors)
 
 #### 감사합니다
 
