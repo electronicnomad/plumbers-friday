@@ -1,4 +1,4 @@
-site_name: Plumbers' Friday
+site_name: a hitchhiker's unofficial guide to the AWS
 theme:
   name: material
   palette:
@@ -28,8 +28,8 @@ markdown_extensions:
   - pymdownx.tabbed
   - toc:
       permalink: true
-repo_name: hoonjhin/plumbers-friday
-repo_url: https://github.com/hoonjhin/plumbers-friday
+repo_name: hoonjhin/huga
+repo_url: https://github.com/hoonjhin/huga
 extra:
   social:
     - icon: fontawesome/brands/github-alt
