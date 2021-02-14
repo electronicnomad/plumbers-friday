@@ -1,0 +1,1308 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../../images/favicon-cloud-black.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>실습 - a hitchhiker's unofficial guide to the AWS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700%7CNoto+Sans+Mono&display=fallback">
+        <style>body,input{font-family:"Noto Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Noto Sans Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-113185952-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="deep-orange">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="a hitchhiker&#39;s unofficial guide to the AWS" class="md-header-nav__button md-logo" aria-label="a hitchhiker's unofficial guide to the AWS">
+      
+  <img src="../../../images/cloud-circle-white.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            a hitchhiker's unofficial guide to the AWS
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              실습
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/hoonjhin/huga/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hoonjhin/huga
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="a hitchhiker&#39;s unofficial guide to the AWS" class="md-nav__button md-logo" aria-label="a hitchhiker's unofficial guide to the AWS">
+      
+  <img src="../../../images/cloud-circle-white.png" alt="logo">
+
+    </a>
+    a hitchhiker's unofficial guide to the AWS
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/hoonjhin/huga/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hoonjhin/huga
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+      
+      <label class="md-nav__link" for="nav-3">
+        Forecast
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Forecast" data-md-level="1">
+        <label class="md-nav__title" for="nav-3">
+          <span class="md-nav__icon md-icon"></span>
+          Forecast
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/" class="md-nav__link">
+        Amazon Forecast
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2" >
+      
+      <label class="md-nav__link" for="nav-3-2">
+        Hands-on Labs
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Hands-on Labs" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-2">
+          <span class="md-nav__icon md-icon"></span>
+          Hands-on Labs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/handson-labs/preparation/" class="md-nav__link">
+        준비
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/handson-labs/prepare-training-data/" class="md-nav__link">
+        훈련 데이터 준비
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/handson-labs/dataset-groups/" class="md-nav__link">
+        데이터-셋 그룹 작성
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/handson-labs/create-target-time-series-dataset/" class="md-nav__link">
+        대상 시계열 데이터-셋 생성
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/handson-labs/import-target-time-series-data/" class="md-nav__link">
+        대상 시계열 데이터 입수
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/handson-labs/train-a-predictor/" class="md-nav__link">
+        예측기 훈련
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/handson-labs/generate-forecast/" class="md-nav__link">
+        예측 생성
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/handson-labs/forecast-lookup/" class="md-nav__link">
+        예측 검색하기
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/assessment/" class="md-nav__link">
+        평가
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../forecast/references/" class="md-nav__link">
+        참조
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      
+      <label class="md-nav__link" for="nav-4">
+        Networking
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Networking" data-md-level="1">
+        <label class="md-nav__title" for="nav-4">
+          <span class="md-nav__icon md-icon"></span>
+          Networking
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        시작
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../objectives/" class="md-nav__link">
+        목표
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparations/" class="md-nav__link">
+        준비
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4" >
+      
+      <label class="md-nav__link" for="nav-4-4">
+        PrivateLink
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="PrivateLink" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-4">
+          <span class="md-nav__icon md-icon"></span>
+          PrivateLink
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privatelink/" class="md-nav__link">
+        개요
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privatelink/lab/" class="md-nav__link">
+        실습
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5" >
+      
+      <label class="md-nav__link" for="nav-4-5">
+        VPC Peering
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="VPC Peering" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-5">
+          <span class="md-nav__icon md-icon"></span>
+          VPC Peering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vpc-peering/" class="md-nav__link">
+        개요
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vpc-peering/lab/" class="md-nav__link">
+        실습
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" checked>
+      
+      <label class="md-nav__link" for="nav-4-6">
+        Transit Gateway
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Transit Gateway" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-6">
+          <span class="md-nav__icon md-icon"></span>
+          Transit Gateway
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        개요
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../objectives/" class="md-nav__link">
+        목표
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          실습
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        실습
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#transit-gateway" class="md-nav__link">
+    Transit Gateway 생성 (서울)
+  </a>
+  
+    <nav class="md-nav" aria-label="Transit Gateway 생성 (서울)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vpc" class="md-nav__link">
+    VPC와 연결
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc_1" class="md-nav__link">
+    VPC 사이의 연결 시험
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transit-gateway_1" class="md-nav__link">
+    Transit Gateway 생성 (아일랜드)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transit-gateway-peering" class="md-nav__link">
+    Transit Gateway Peering
+  </a>
+  
+    <nav class="md-nav" aria-label="Transit Gateway Peering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    연결
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    라우팅 테이블
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    목표
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    라우팅 테이블 설정
+  </a>
+  
+    <nav class="md-nav" aria-label="라우팅 테이블 설정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vpc-3" class="md-nav__link">
+    VPC 3의 경우
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgw-irl" class="md-nav__link">
+    TGW-IRL의 경우
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgw-sel" class="md-nav__link">
+    TGW-SEL의 경우
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-2" class="md-nav__link">
+    VPC 2의 경우
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-4" class="md-nav__link">
+    VPC 4의 경우
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        시험
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network-manager/" class="md-nav__link">
+        Network Manager
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleanup/" class="md-nav__link">
+        정리
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#transit-gateway" class="md-nav__link">
+    Transit Gateway 생성 (서울)
+  </a>
+  
+    <nav class="md-nav" aria-label="Transit Gateway 생성 (서울)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vpc" class="md-nav__link">
+    VPC와 연결
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc_1" class="md-nav__link">
+    VPC 사이의 연결 시험
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transit-gateway_1" class="md-nav__link">
+    Transit Gateway 생성 (아일랜드)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transit-gateway-peering" class="md-nav__link">
+    Transit Gateway Peering
+  </a>
+  
+    <nav class="md-nav" aria-label="Transit Gateway Peering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    연결
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    라우팅 테이블
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    목표
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    라우팅 테이블 설정
+  </a>
+  
+    <nav class="md-nav" aria-label="라우팅 테이블 설정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vpc-3" class="md-nav__link">
+    VPC 3의 경우
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgw-irl" class="md-nav__link">
+    TGW-IRL의 경우
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgw-sel" class="md-nav__link">
+    TGW-SEL의 경우
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-2" class="md-nav__link">
+    VPC 2의 경우
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpc-4" class="md-nav__link">
+    VPC 4의 경우
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/hoonjhin/huga/edit/master/docs/networking/transit-gateway/lab.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="_1">실습<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>시작은 예상하는 것과 같이 console &gt; VPC &gt; Transit Gateway - Transit Gateway 메뉴를 선택하는 것입니다.
+<code style="background-color:dodgerblue; color:white">Create Transit Gateway</code> 버튼을 눌러 시작합시다.</p>
+<h2 id="transit-gateway">Transit Gateway 생성 (서울)<a class="headerlink" href="#transit-gateway" title="Permanent link">&para;</a></h2>
+<p><img alt="create tgw" src="../../../images/networking/transit-gateway/create-tgw.png" /></p>
+<p>이름을 입력하고, ASN은 기본값을 가져 갑니다. 만약 다른 TGW나 BGP(Border Gateway Protocol)을 사용하는
+그래서, ASN을 가지게 되는 다른 서비스와 충돌이 예상되면 이 값을 변경합니다.
+ASN은 하나의 네트워크 안에서 고유한 번호를 서비스가 가지면 됩니다. </p>
+<p>ASN 값의 범위는 다음과 같습니다.</p>
+<div class="codehilite"><pre><span></span><code><span class="err">16비트 ASN의 경우 값의 범위: 64512 - 65534</span>
+<span class="err">32비트 ASN의 경우 값의 범위: 4200000000 - 4294967294</span>
+</code></pre></div>
+
+<p>나머지에 대해서 추가 설정할 부분은 지금은 없습니다.</p>
+<p><img alt="create tgw succeeded" src="../../../images/networking/transit-gateway/create-tgw-succeeded.png" /></p>
+<p>생성 완료되었다는 화면 출력을 맞이하고 <code style="background-color:dodgerblue; color:white">Close</code>
+버튼을 눌러 고개를 끄덕이는 행위를 대신하면 다음의 화면을 만날 수 있습니다.</p>
+<p><img alt="create tgw status pending" src="../../../images/networking/transit-gateway/create-tgw-status-pending.png" /></p>
+<p>몇 분 정도 기다리면 - 서비스 생성에 문제를 발견하지 못 했다면 - Status가 아래와 같이 변경되어 출력됩니다.
+자동으로 화면이 갱신되지는 않습니다. 우측 상단에 서로의 꼬리를 향해 돌진하는 화살표 두개가 그려내는 원형의 아이콘을 클릭해야 합니다 :-)</p>
+<p><img alt="create tgw status available" src="../../../images/networking/transit-gateway/create-tgw-status-available.png" /></p>
+<h3 id="vpc">VPC와 연결<a class="headerlink" href="#vpc" title="Permanent link">&para;</a></h3>
+<p>VPC 서비스 내 좌측 메뉴, Transit Gateway 하위 <code>Transit Gateway 연결</code>을 눌러 VPC 연결 설정에 들어갑니다.</p>
+<p><img alt="create tgw attachment" src="../../../images/networking/transit-gateway/create-tgw-attachment.png" /></p>
+<p>준비 단계에서부터 생성해 두었던 VPC 중에 서울 리전에 있는 VPC 2와 VPC 4를 하나씩 연결합니다.
+현재 각 VPC에는 단일 subnet이 존재합니다. 그래서 자동으로 해당 subnet이 선택되는데,
+복수개의 subnet이 있으면 연결 대상을 선택할 수 있습니다.
+우선, 가용영역(Availability Zone - 以下 AZ)으로 나뉘며 같은 AZ내 여러 subnet이 있으면 pull down 메뉴로 다시 
+선택 가능합니다.</p>
+<p><img alt="create tgw attachment" src="../../../images/networking/transit-gateway/create-tgw-attachment-vpc2.png" /></p>
+<p>우리는 아래와 같은 화면을 만나는 것이 즐겁습니다, 때론 작은 안도를 느끼기도 하죠.</p>
+<p><img alt="create tgw attachment succeeded" src="../../../images/networking/transit-gateway/create-tgw-attachment-vpc2-succeeded.png" /></p>
+<p>같은 방식으로 Transit Gateway에 VPC 4도 연결합니다.<br />
+두 VPC가 모두 잘 연결이 되었다면, 아래와 같은 화면을 만나게 됩니다.</p>
+<p><img alt="create tgw final" src="../../../images/networking/transit-gateway/create-tgw-seoul-final.png" /></p>
+<h3 id="vpc_1">VPC 사이의 연결 시험<a class="headerlink" href="#vpc_1" title="Permanent link">&para;</a></h3>
+<p>우리는 이 설정으로 VPC 2와 VPC 4에 각각 배치되어 있는 instance 2-1과 instance 4-1을 직접
+연결할 수 있을 것이라는 기대를 할 수 있습니다. Session manager로 연결하여 상호 교신을 확인합니다.</p>
+<div class="codehilite"><pre><span></span><code>ubuntu@ip-10-20-1-10:~$ ping <span class="m">10</span>.40.1.10 -c <span class="m">3</span>
+PING <span class="m">10</span>.40.1.10 <span class="o">(</span><span class="m">10</span>.40.1.10<span class="o">)</span> <span class="m">56</span><span class="o">(</span><span class="m">84</span><span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from <span class="m">10</span>.40.1.10: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">63</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.714 ms
+<span class="m">64</span> bytes from <span class="m">10</span>.40.1.10: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">63</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.610 ms
+<span class="m">64</span> bytes from <span class="m">10</span>.40.1.10: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">3</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">63</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.502 ms
+
+--- <span class="m">10</span>.40.1.10 ping statistics ---
+<span class="m">3</span> packets transmitted, <span class="m">3</span> received, <span class="m">0</span>% packet loss, <span class="nb">time</span> 2026ms
+rtt min/avg/max/mdev <span class="o">=</span> <span class="m">0</span>.502/0.608/0.714/0.091 ms
+ubuntu@ip-10-20-1-10:~$
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>ubuntu@ip-10-40-1-10:~$ ping <span class="m">10</span>.20.1.10 -c <span class="m">3</span>
+PING <span class="m">10</span>.20.1.10 <span class="o">(</span><span class="m">10</span>.20.1.10<span class="o">)</span> <span class="m">56</span><span class="o">(</span><span class="m">84</span><span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from <span class="m">10</span>.20.1.10: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">63</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.736 ms
+<span class="m">64</span> bytes from <span class="m">10</span>.20.1.10: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">63</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.620 ms
+<span class="m">64</span> bytes from <span class="m">10</span>.20.1.10: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">3</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">63</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.646 ms
+
+--- <span class="m">10</span>.20.1.10 ping statistics ---
+<span class="m">3</span> packets transmitted, <span class="m">3</span> received, <span class="m">0</span>% packet loss, <span class="nb">time</span> 2037ms
+rtt min/avg/max/mdev <span class="o">=</span> <span class="m">0</span>.620/0.667/0.736/0.054 ms
+ubuntu@ip-10-40-1-10:~$
+</code></pre></div>
+
+<p>이제 서울 리전에서의 Transit Gateway 설정은 끝났습니다.
+같은 방식으로 아일랜드에서도 Transit Gateway를 생성하고 구성합니다.</p>
+<h2 id="transit-gateway_1">Transit Gateway 생성 (아일랜드)<a class="headerlink" href="#transit-gateway_1" title="Permanent link">&para;</a></h2>
+<p>몇 가지 변수만 생각한다면 반복되는 것이라 크게 다른 점이 없습니다.
+다만, <code>Amazon side ASN</code> 값이 항상 <code>64512</code>를 가지고 있다는 점입니다.
+우리는 아일랜드에서 만들 때는 1을 더해서 <code>64513</code>으로 하십시다.</p>
+<p>항상 아일랜드에서 만드는 서비스/리소스들이 먼저 수를 시작하는데,
+아쉽습니다. 하지만, 아일랜드에는 홀수를 서울에는 짝수를 배치한 것을 생각하면
+순서는 아쉽지만 나머지 규칙은 맞아 떨어지는 것 같아 뭐, 괜찮다고 봅니다 ;-)</p>
+<p>생성에 관한 스크린샷은 큰 의미가 없다고 봅니다. 그래서 작업의 순서만 아래에 적어 보겠습니다.</p>
+<ol>
+<li><code style="background-color:dodgerblue; color:white">Create Transit Gateway</code><br />
+    Amazon side ASN 값을 기본값이 아닌 값, 서울 리전에 만들어 둔 그것과는 다른 값을 입력</li>
+<li><code style="background-color:dodgerblue; color:white">Create Transit Gateway Attachment</code><br />
+    같은 리전에 있는 VPC 3를 등록</li>
+</ol>
+<h2 id="transit-gateway-peering">Transit Gateway Peering<a class="headerlink" href="#transit-gateway-peering" title="Permanent link">&para;</a></h2>
+<p>이제 서울과 아일랜드 리전에 만들어 둔 두 Transit Gateway를 서로 엮습니다.</p>
+<p>서울 아일랜드 어느 쪽 Transit Gateway에서 시작해도 무관합니다.
+아래의 예제는 현재 console 창이 아일랜드일 확률이 높기 때문에 그곳에서 시작합니다.</p>
+<h3 id="_2">연결<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>VPC &gt; Transit Gateway - Transit Gateway 연결, 로 갑니다.
+<code style="background-color:dodgerblue; color:white">Create Transit Gateway Attachment</code>를
+눌러 시작합니다. 아래의 그림은 바로 다음 단계에서 만나게 되는 화면입니다.
+이전의 '연결'과 다른 점은 눈에 띄일 것입니다. 이제 VPC를 선택하지 않고, Peering을 선택해서 진행합니다.</p>
+<p><img alt="create TGW attachment - peering" src="../../../images/networking/transit-gateway/create-tgw-attachment-peering.png" /></p>
+<p>'Peering Connection Attachment' 하위, 사용자가 입력할 수 있는 창의 마지막을 보시면,
+'Transit gateway (accepter)*'가 보입니다. 그곳에 입력할 값은 peering을 맺을
+상대편 transit gateway의 ID입니다. 창(혹은 탭)을 하나 더 열어 서울 리전에 만들어 놓은
+transit gateway의 ID를 알아내어(복사하여) 이 입력창에 (붙혀) 넣습니다.
+아쉽지만 자동으로 찾아내어 주지는 않아요 :-/</p>
+<p><img alt="create tgw attachment peering" src="../../../images/networking/transit-gateway/create-tgw-attachment-peering-initial-request.png" /></p>
+<p>이렇게 생성하고 나면, 위 그림에서 보이는 것과 같이 새로 생성된 attachment가 있고,
+State이 <code>initial request</code>로 나타납니다. 이 즈음되면 본능적으로
+서울 리전에 있는 상대편 transit gateway를 보고 싶어질 것입니다.</p>
+<p>아래의 그림은 서울 리전의 transit gateway의 '연결 Attachments' 화면입니다.
+뭔가 사용자에게 해 달라고하는 듯 한 압박이 느껴지는 오렌지色 글자가 보입니다.
+<code>pending acceptance</code></p>
+<p><img alt="create tgw attachment peering" src="../../../images/networking/transit-gateway/create-tgw-attachment-peering-pending-acceptance.png" /></p>
+<p>상단 '작업' 버튼을 눌러, 'Accept'을 선택합니다. 번역의 빈곳이 많군요.
+참, 물론 스스로 한 요청이고 스스로가 해야할 수락이지만, 이 순간 마음에 들지 않는다면
+'Reject' 거절을 선택하실 수도 있습니다.</p>
+<p><img alt="create tgw attachment peering" src="../../../images/networking/transit-gateway/create-tgw-attachment-peering-pending-acceptance-accept.png" /></p>
+<p>정말 수락하는 것이 맞는지, 사용자의 행동에 대해 console은 의문을 제기하지만
+우리는 이 의문을 간단히 해소시킬 수 있습니다. 오랫동안 훈련한 것과 같이
+<code style="background-color:dodgerblue; color:white">Accept</code>를 눌러 주십시다.</p>
+<p><img alt="create tgw attachment peering" src="../../../images/networking/transit-gateway/create-tgw-attachment-peering-pending-acceptance-accept-ok.png" /></p>
+<p>그럼, 커피를 내려서 가져올 수도 있고 담배를 한 대 피워 볼 수 있는 시간이 흐른 뒤에 State은
+아래와 같이 달라집니다 - 아무런 문제가 없다면 말이죠. 이제 거의 모든 준비는 끝났습니다.<br />
+바로 아래의 화면은 '서울'의 그것이고</p>
+<p><img alt="create tgw attachment peering" src="../../../images/networking/transit-gateway/create-tgw-attachment-peering-state-available-seoul.png" /></p>
+<p>이 아래의 화면은 '아일랜드'의 그것입니다. 모두 녹색의 Available이라고 나오면 됩니다.</p>
+<p><img alt="create tgw attachment peering" src="../../../images/networking/transit-gateway/create-tgw-attachment-peering-state-available-ireland.png" /></p>
+<h3 id="_3">라우팅 테이블<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Transit gateway가 있음으로써 복잡하게 생각해야 할 라우팅 테이블은 기본적으로
+위의 과정을 거치면서 자동 설정이 됩니다. 그럼에도 불구하고 스스로 차근차근 길을
+떠나보고 싶다면, 다음의 공식 문서를 참조하는 것이 좋겠습니다.</p>
+<p>본 실습에서는 사용자가 직접 수행해야 하는 부분, 즉 VPC에 종속된 라우팅 테이블의
+설정을 다루겠습니다. 이 즈음에서 '준비' 과정에서 봤던 그림을 한 번 더 보겠습니다.</p>
+<p><a href="../../../images/networking/objective-flow.svg"><img alt="target architecture" src="../../../images/networking/objective-flow.svg" /></a></p>
+<h3 id="_4">목표<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>instance 4-1이 instance 3-1과 상호 통신이 되어야 합니다.<br />
+<code>ping</code>과 <code>ssh</code>를 해 보십시다.</li>
+<li>Instance 3-1은 VPC 2의 Subnet 2-2에 배포되어 있는 NAT gateway를 통하여 외부와 통신되어야 합니다.<br />
+  Instance를 생성하는 데에, Debian 계열(Ubuntu) 배포판을 사용했다면, <code>sudo apt update</code>와 <code>sudo apt upgrade</code>를 통해서 운영체제를 갱신해 봅시다.
+  혹시 다른 계열이라면, 아마도 <code>dnf</code>나 <code>yum</code> 명령이 유효할 것입니다.</li>
+</ul>
+<h3 id="_5">라우팅 테이블 설정<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>Instance 3-1의 행로를 따라가면, 다음의 route tables를 설정해야 하는 것을 알 수 있습니다.</p>
+<ol>
+<li>Subnet 3-1이 연계되어 있는 route table</li>
+<li>VPC 3와 연결되어 있는 Transit Gateway (Ireland; 이하 tgw-irl)의 route table</li>
+<li>tgw-irl과 peering되어 있는 Transit Gateway (Seoul; 이하 tgw-sel)의 route table</li>
+<li>tgw-sel과 연결되어 있는 VPC 2의 subnet 2-1의 route table</li>
+<li>tgw-sel과 연결되어 있는 VPC 4의 subnet 4-1의 route table</li>
+</ol>
+<h4 id="vpc-3">VPC 3의 경우<a class="headerlink" href="#vpc-3" title="Permanent link">&para;</a></h4>
+<p>Instance 3-1이 속해 있는 subnet 3-1과 연동되어 있는 route table을 다음과 같이 설정합니다.</p>
+<p><img alt="route table vpc3" src="../../../images/networking/transit-gateway/rt-vpc3.png" /></p>
+<p>이전 VPC 1과의 peering 구성으로 마지막 행에 보이는 값이 등록되어 있었습니다.
+여기에 <code>0.0.0.0/0</code>를 기입하고 tgw-irl로 향하게 추가 값을 넣었습니다.</p>
+<h4 id="tgw-irl">TGW-IRL의 경우<a class="headerlink" href="#tgw-irl" title="Permanent link">&para;</a></h4>
+<p>Transit gateway를 위한 route table은 기존의 route table과는 다른 곳에 마련되어 있습니다.
+VPC &gt; Transit Gateway - Transit Gateway 라우팅 테이블, 에 있습니다.</p>
+<p><img alt="route table tgw-irl" src="../../../images/networking/transit-gateway/rt-tgw-irl.png" /></p>
+<p>VPC 3의 연결 구성은 이미 존재하고 있을 것입니다. Transit gateway에 VPC를 연결하면
+해당 열을 자동으로 생성됩니다.
+그림에서 마지막 열의 Resource Type, Peering으로 된 항목을 지금 기입하셔야 합니다.
+해당 transit gateway, tgw-irl로 들어오는 요청에 대해 어디로 그 신호를 보낼 것인지 결정하는 것입니다.</p>
+<ul>
+<li><code>0.0.0.0/0</code>을 tgw-sel로 보내고,</li>
+<li>서울 리전에 있을, VPC 2로 향하는 신호를 위하여 10.20.0.0/16을 peering 맺어져 있는 tgw-sel로 보내고,</li>
+<li>역시 서울에 있을, VPC 4로 향하는 신호를 위하여 10.40.0.0/16을 peering 맺어져 있는 tgw-sel로 보냅니다.</li>
+</ul>
+<p>그런 의미의 값들입니다.</p>
+<h4 id="tgw-sel">TGW-SEL의 경우<a class="headerlink" href="#tgw-sel" title="Permanent link">&para;</a></h4>
+<p><img alt="route table tgw-irl" src="../../../images/networking/transit-gateway/rt-tgw-sel.png" /></p>
+<ul>
+<li>(tgw-irl로부터 왔을) <code>0.0.0.0/0</code>으로 향하는, 그러니까 인터넷의 바다로 향하는 신호는
+VPC 2로 보내고,</li>
+<li>10.20.0.0/16을 찾는 분들을 VPC 2로 안내하고,</li>
+<li>10.30.0.0/16을 찾는 친구들은 바다를 건너 대륙을 지나 tgw-irl로 안녕하고,</li>
+<li>10.40.0.0/16을 찾는 신호들은 VPC 4로 연결하는 구성입니다.</li>
+</ul>
+<h4 id="vpc-2">VPC 2의 경우<a class="headerlink" href="#vpc-2" title="Permanent link">&para;</a></h4>
+<p>VPC 2의 경우 두 개의 성격이 다른 subnets을 위해서 route table이 두 개 존재합니다.</p>
+<p><img alt="route table vpc2 private" src="../../../images/networking/transit-gateway/rt-vpc2-private.png" /></p>
+<p>Private subnet, subnet 2-1을 위한 구성입니다. subnet 2-1은 subnet 2-2와 달리 tgw-sel에 연결됩니다.</p>
+<ul>
+<li>첫 행은 기본값입니다.</li>
+<li>인터넷으로 <code>0.0.0.0/0</code> 향하는 패킷들을 NAT gateway로 인도합니다.</li>
+<li><code>10.30.0.0/16</code> VPC 3로 가는 신호들을 tgw-sel로 보냅니다.</li>
+<li><code>10.40.0.0/16</code> VPC 4로 가는 신호들을 tgw-sel로 보냅니다.</li>
+</ul>
+<p><img alt="route table vpc2 public" src="../../../images/networking/transit-gateway/rt-vpc2-public.png" /></p>
+<p>Public subnet, subnet 2-2의 route table 구성입니다.</p>
+<ul>
+<li>첫 행은 생존을 위한 기본값입니다.</li>
+<li><code>0.0.0.0/0</code> 인터넷으로 향하는 패킷들은 Internet Gateway로 연결시켜 줍니다.</li>
+<li><code>10.30.0.0/16</code>을 찾는 패킷들은 tgw-sel로 우선 안내합니다.</li>
+</ul>
+<h4 id="vpc-4">VPC 4의 경우<a class="headerlink" href="#vpc-4" title="Permanent link">&para;</a></h4>
+<p><img alt="route table vpc4" src="../../../images/networking/transit-gateway/rt-vpc4.png" /></p>
+<p>VPC 4는 특별할 것 없이, VPC 2와 VPC 3와의 연결 유지를 위하여 두 열을 추가하였습니다.
+모두 tgw-sel로 향하게 길을 안내합니다.</p>
+<p>完</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2020-06-22T12:14:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2020-06-22</span>
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../objectives/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                목표
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../testing/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                시험
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/hoonjhin" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.jhin.com" target="_blank" rel="noopener" title="www.jhin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M162.4 196c4.8-4.9 6.2-5.1 36.4-5.1 27.2 0 28.1.1 32.1 2.1 5.8 2.9 8.3 7 8.3 13.6 0 5.9-2.4 10-7.6 13.4-2.8 1.8-4.5 1.9-31.1 2.1-16.4.1-29.5-.2-31.5-.8-10.3-2.9-14.1-17.7-6.6-25.3zm61.4 94.5c-53.9 0-55.8.2-60.2 4.1-3.5 3.1-5.7 9.4-5.1 13.9.7 4.7 4.8 10.1 9.2 12 2.2 1 14.1 1.7 56.3 1.2l47.9-.6 9.2-1.5c9-5.1 10.5-17.4 3.1-24.4-5.3-4.7-5-4.7-60.4-4.7zm223.4 130.1c-3.5 28.4-23 50.4-51.1 57.5-7.2 1.8-9.7 1.9-172.9 1.8-157.8 0-165.9-.1-172-1.8-8.4-2.2-15.6-5.5-22.3-10-5.6-3.8-13.9-11.8-17-16.4-3.8-5.6-8.2-15.3-10-22C.1 423 0 420.3 0 256.3 0 93.2 0 89.7 1.8 82.6 8.1 57.9 27.7 39 53 33.4c7.3-1.6 332.1-1.9 340-.3 21.2 4.3 37.9 17.1 47.6 36.4 7.7 15.3 7-1.5 7.3 180.6.2 115.8 0 164.5-.7 170.5zm-85.4-185.2c-1.1-5-4.2-9.6-7.7-11.5-1.1-.6-8-1.3-15.5-1.7-12.4-.6-13.8-.8-17.8-3.1-6.2-3.6-7.9-7.6-8-18.3 0-20.4-8.5-39.4-25.3-56.5-12-12.2-25.3-20.5-40.6-25.1-3.6-1.1-11.8-1.5-39.2-1.8-42.9-.5-52.5.4-67.1 6.2-27 10.7-46.3 33.4-53.4 62.4-1.3 5.4-1.6 14.2-1.9 64.3-.4 62.8 0 72.1 4 84.5 9.7 30.7 37.1 53.4 64.6 58.4 9.2 1.7 122.2 2.1 133.7.5 20.1-2.7 35.9-10.8 50.7-25.9 10.7-10.9 17.4-22.8 21.8-38.5 3.2-10.9 2.9-88.4 1.7-93.9z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  </body>
+</html>

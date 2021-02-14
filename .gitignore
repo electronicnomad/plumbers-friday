@@ -1,6 +1,4 @@
-.DS_Store
-.vscode
-.git
-.example.md
-.*.*
-site/
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata

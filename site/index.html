@@ -1,0 +1,1128 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="images/favicon-cloud-black.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>a hitchhiker's unofficial guide to the AWS</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700%7CNoto+Sans+Mono&display=fallback">
+        <style>body,input{font-family:"Noto Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Noto Sans Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/timeago.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-113185952-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="deep-orange">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#home" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="." title="a hitchhiker&#39;s unofficial guide to the AWS" class="md-header-nav__button md-logo" aria-label="a hitchhiker's unofficial guide to the AWS">
+      
+  <img src="images/cloud-circle-white.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            a hitchhiker's unofficial guide to the AWS
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/hoonjhin/huga/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hoonjhin/huga
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="a hitchhiker&#39;s unofficial guide to the AWS" class="md-nav__button md-logo" aria-label="a hitchhiker's unofficial guide to the AWS">
+      
+  <img src="images/cloud-circle-white.png" alt="logo">
+
+    </a>
+    a hitchhiker's unofficial guide to the AWS
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/hoonjhin/huga/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hoonjhin/huga
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    소개
+  </a>
+  
+    <nav class="md-nav" aria-label="소개">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    중요하지 않은 제작 원칙
+  </a>
+  
+    <nav class="md-nav" aria-label="중요하지 않은 제작 원칙">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#always-beta" class="md-nav__link">
+    Always Beta
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    진행
+  </a>
+  
+    <nav class="md-nav" aria-label="진행">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    목적
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aws" class="md-nav__link">
+    AWS 후원행사
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    기타
+  </a>
+  
+    <nav class="md-nav" aria-label="기타">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    주요 갱신 내역
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    기여
+  </a>
+  
+    <nav class="md-nav" aria-label="기여">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    감사합니다
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+      
+      <label class="md-nav__link" for="nav-3">
+        Forecast
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Forecast" data-md-level="1">
+        <label class="md-nav__title" for="nav-3">
+          <span class="md-nav__icon md-icon"></span>
+          Forecast
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/" class="md-nav__link">
+        Amazon Forecast
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2" >
+      
+      <label class="md-nav__link" for="nav-3-2">
+        Hands-on Labs
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Hands-on Labs" data-md-level="2">
+        <label class="md-nav__title" for="nav-3-2">
+          <span class="md-nav__icon md-icon"></span>
+          Hands-on Labs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/handson-labs/preparation/" class="md-nav__link">
+        준비
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/handson-labs/prepare-training-data/" class="md-nav__link">
+        훈련 데이터 준비
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/handson-labs/dataset-groups/" class="md-nav__link">
+        데이터-셋 그룹 작성
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/handson-labs/create-target-time-series-dataset/" class="md-nav__link">
+        대상 시계열 데이터-셋 생성
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/handson-labs/import-target-time-series-data/" class="md-nav__link">
+        대상 시계열 데이터 입수
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/handson-labs/train-a-predictor/" class="md-nav__link">
+        예측기 훈련
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/handson-labs/generate-forecast/" class="md-nav__link">
+        예측 생성
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/handson-labs/forecast-lookup/" class="md-nav__link">
+        예측 검색하기
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/assessment/" class="md-nav__link">
+        평가
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/references/" class="md-nav__link">
+        참조
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+      
+      <label class="md-nav__link" for="nav-4">
+        Networking
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Networking" data-md-level="1">
+        <label class="md-nav__title" for="nav-4">
+          <span class="md-nav__icon md-icon"></span>
+          Networking
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/" class="md-nav__link">
+        시작
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/objectives/" class="md-nav__link">
+        목표
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/preparations/" class="md-nav__link">
+        준비
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4" >
+      
+      <label class="md-nav__link" for="nav-4-4">
+        PrivateLink
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="PrivateLink" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-4">
+          <span class="md-nav__icon md-icon"></span>
+          PrivateLink
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/privatelink/" class="md-nav__link">
+        개요
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/privatelink/lab/" class="md-nav__link">
+        실습
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5" >
+      
+      <label class="md-nav__link" for="nav-4-5">
+        VPC Peering
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="VPC Peering" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-5">
+          <span class="md-nav__icon md-icon"></span>
+          VPC Peering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/vpc-peering/" class="md-nav__link">
+        개요
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/vpc-peering/lab/" class="md-nav__link">
+        실습
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" >
+      
+      <label class="md-nav__link" for="nav-4-6">
+        Transit Gateway
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Transit Gateway" data-md-level="2">
+        <label class="md-nav__title" for="nav-4-6">
+          <span class="md-nav__icon md-icon"></span>
+          Transit Gateway
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/transit-gateway/" class="md-nav__link">
+        개요
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/transit-gateway/objectives/" class="md-nav__link">
+        목표
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/transit-gateway/lab/" class="md-nav__link">
+        실습
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/transit-gateway/testing/" class="md-nav__link">
+        시험
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/transit-gateway/network-manager/" class="md-nav__link">
+        Network Manager
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networking/cleanup/" class="md-nav__link">
+        정리
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    소개
+  </a>
+  
+    <nav class="md-nav" aria-label="소개">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    중요하지 않은 제작 원칙
+  </a>
+  
+    <nav class="md-nav" aria-label="중요하지 않은 제작 원칙">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#always-beta" class="md-nav__link">
+    Always Beta
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    진행
+  </a>
+  
+    <nav class="md-nav" aria-label="진행">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    목적
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aws" class="md-nav__link">
+    AWS 후원행사
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    기타
+  </a>
+  
+    <nav class="md-nav" aria-label="기타">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    주요 갱신 내역
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    기여
+  </a>
+  
+    <nav class="md-nav" aria-label="기여">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    감사합니다
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/hoonjhin/huga/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="home">Home<a class="headerlink" href="#home" title="Permanent link">&para;</a></h1>
+<h2 id="_1">소개<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>여기는 비공식입니다. 어떤 정보가 수록되든 그것은 공식적이지 않습니다.
+공식 웹 사이트에서 입수할 수 있는 정보를 '교과서'로 본다면, 여기는 '참고서'라고 할 수 있습니다.
+현재까지 본 사이트를 제작하면서 참고한 '교과서'는 다음과 같습니다.</p>
+<ul>
+<li><a href="https://aws.amazon.com/">Amazon Web Services</a> 공식 홈 페이지</li>
+<li><a href="https://docs.aws.amazon.com/">Amazon Web Services Documentation</a> 공식 설명서</li>
+<li><a href="https://github.com/aws-samples/">Amazon Web Services Samples</a> GitHub 리포지토리</li>
+</ul>
+<p>세상의 모든 참고서가 교과서를 뛰어넘는 존재가 되기 위해 노력하는 건 아닙니다.
+언제나 예외는 존재하고 그래서 세상이 재미나는 것입니다.</p>
+<h3 id="_2">중요하지 않은 제작 원칙<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>고유명사는 굳이 한국어로 번역하지 않습니다. 외례어·외국어로 널리 사용되는 용어가 있더라도
+내용을 전달하는 데에 어려움이 있을 수도 있겠다 판단되면, 원어를 병기할 수 있도록 노력하겠습니다.
+이러한 고민은 AWS 국문 공식 설명서와 다른 번역을 선택할 수도 있습니다.</p>
+<p>또한 본 사이트에서 설명하는 여러 가지들은 기본적으로 CloudFormation, CDK, 그리고
+TerraForm 같은 도구를 활용하여 그 과정을 생략하거나 블랙박스로 처리하는 행위를 수용하지 않습니다.
+CLI가 되었든 Web Console을 통하든 한땀한땀 수공업자의 심정으로 학습과정을 꾸려갑니다.</p>
+<h4 id="always-beta">Always Beta<a class="headerlink" href="#always-beta" title="Permanent link">&para;</a></h4>
+<p>소수의 사람들이 자발적으로 참여하는 일이기에 쏟는 정성과는 별개로
+완성도가 패키지 소프트웨어나 출판된 간행물에 비해 낮을 수 밖에 없습니다.
+하지만, 항상 지켜보고 검증하고 수행해 보면서 수정해 나아가고 있습니다.</p>
+<h2 id="_3">진행<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>페이지의 추가와 갱신은 매우 비정기적일 것이며, 이 변화를 알릴 만한 방법이 없습니다.
+정기적으로 방문하여 변경된 부분을 직접 찾아보는 노력 이외의 적당한 추천이 떠오르지 않습니다.
+각 문서의 진행은 hands-on labs 형식을 취합니다. 하나씩 따라하다 보면 알게된다! 라는
+무언가 입시 안내서 같은 느낌일 수도 있습니다.</p>
+<h3 id="_4">목적<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>본 사이트는 클라우드 컴퓨팅 전반에 대한 참고서가 되고자 하는 작은 목표가 있습니다.
+AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면 기대보다 높은 수준의
+지식을 확보할 수 있습니다. 하지만, 모든 사용자들의 눈높이를 맞출 수 없는
+근본적인 문제로 인해 간혹 이해하기 어렵거나 축약된 부분이 아쉬울 때가 있습니다.</p>
+<p>무엇보다 새로운 서비스나 기술을 학습해 가면서 '키보드'와 '마우스'부터 쓰고 싶은 분들께는
+어렵거나 지루한 설명이 있을 수도 있습니다. 이런 어려움은 아무래도 '지금' 가고 싶은
+손가락의 방향과 공식 문서와 호흡이 다르고 설명하는 절차가 생소하기 때문이라고 생각합니다.</p>
+<p>본 사이트는 실습(Hands-on labs)를 중심으로 배우고자 하는 대상을 설명하려 합니다.
+하나의 서비스 혹은 서비스-셋을 온전히 만들어 내는데에 집중합니다.
+그리고 부가 설명이 필요하다면, 필수적인 것은 실습 단계 내에 설명하고
+그렇지 않다고 판단되는 건 따로 부쳐 심화된 학습을 선택할 수 있게 합니다.</p>
+<h3 id="aws">AWS 후원행사<a class="headerlink" href="#aws" title="Permanent link">&para;</a></h3>
+<p>만약 AWS에서 후원하고 있는 어떤 교육 행사에서 본 사이트를 사용하고,
+AWS에서 제공하는 12자리 코드가 있으나 어디에서 어떻게 등록해서 사용하는지
+막막하다면, 다음의 웹 주소에서 받은 코드를 등록하시면서 교육 행사에 참여하시면 됩니다.
+<a href="https://dashboard.eventengine.run/login">https://dashboard.eventengine.run/login</a></p>
+<h2 id="_5">기타<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">주요 갱신 내역<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>손으로 일일이 입력합니다. 그래서 정확도를 말할 수 없습니다.</p>
+<ul>
+<li>2020-08-13: <a href="/networking">AWS Networking</a>에 일부 변경 사항이 적용되었습니다.  </li>
+<li>2020-06-22: <a href="/networking">AWS Networking</a>이 추가 되었습니다.</li>
+<li>2020-05-30: <a href="/forecast">Amazon Forecast</a>가 추가 되었습니다.</li>
+</ul>
+<h3 id="_7">기여<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>본 사이트는 GitHub에 있습니다. 어떤 누구든 본 사이트에 기여할 수 있습니다.
+제작에 참여한 분들을 아래의 명단으로 모시고 있습니다.
+<a href="https://github.com/hoonjhin/plumbers-friday/graphs/contributors">github.com/hoonjhin/plumbers-friday/graphs/contributors</a></p>
+<h4 id="_8">감사합니다<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>그리고 <a href="https://en.wikipedia.org/wiki/Douglas_Adams">Douglas Adams</a>으로부터 받은 많은 영감이 제작을 이끌었습니다, 항상 <a href="https://en.wikipedia.org/wiki/Towel_Day">타월</a>을 잊지 않겠습니다.</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-02-12T14:01:43+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-02-12</span>
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+        
+          <a href="tools/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Tools
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/hoonjhin" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.jhin.com" target="_blank" rel="noopener" title="www.jhin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M162.4 196c4.8-4.9 6.2-5.1 36.4-5.1 27.2 0 28.1.1 32.1 2.1 5.8 2.9 8.3 7 8.3 13.6 0 5.9-2.4 10-7.6 13.4-2.8 1.8-4.5 1.9-31.1 2.1-16.4.1-29.5-.2-31.5-.8-10.3-2.9-14.1-17.7-6.6-25.3zm61.4 94.5c-53.9 0-55.8.2-60.2 4.1-3.5 3.1-5.7 9.4-5.1 13.9.7 4.7 4.8 10.1 9.2 12 2.2 1 14.1 1.7 56.3 1.2l47.9-.6 9.2-1.5c9-5.1 10.5-17.4 3.1-24.4-5.3-4.7-5-4.7-60.4-4.7zm223.4 130.1c-3.5 28.4-23 50.4-51.1 57.5-7.2 1.8-9.7 1.9-172.9 1.8-157.8 0-165.9-.1-172-1.8-8.4-2.2-15.6-5.5-22.3-10-5.6-3.8-13.9-11.8-17-16.4-3.8-5.6-8.2-15.3-10-22C.1 423 0 420.3 0 256.3 0 93.2 0 89.7 1.8 82.6 8.1 57.9 27.7 39 53 33.4c7.3-1.6 332.1-1.9 340-.3 21.2 4.3 37.9 17.1 47.6 36.4 7.7 15.3 7-1.5 7.3 180.6.2 115.8 0 164.5-.7 170.5zm-85.4-185.2c-1.1-5-4.2-9.6-7.7-11.5-1.1-.6-8-1.3-15.5-1.7-12.4-.6-13.8-.8-17.8-3.1-6.2-3.6-7.9-7.6-8-18.3 0-20.4-8.5-39.4-25.3-56.5-12-12.2-25.3-20.5-40.6-25.1-3.6-1.1-11.8-1.5-39.2-1.8-42.9-.5-52.5.4-67.1 6.2-27 10.7-46.3 33.4-53.4 62.4-1.3 5.4-1.6 14.2-1.9 64.3-.4 62.8 0 72.1 4 84.5 9.7 30.7 37.1 53.4 64.6 58.4 9.2 1.7 122.2 2.1 133.7.5 20.1-2.7 35.9-10.8 50.7-25.9 10.7-10.9 17.4-22.8 21.8-38.5 3.2-10.9 2.9-88.4 1.7-93.9z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/timeago.min.js"></script>
+      
+        <script src="js/timeago_mkdocs_material.js"></script>
+      
+    
+  </body>
+</html>
