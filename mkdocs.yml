@@ -5,8 +5,9 @@ theme:
     primary: black
     accent: deep orange
   font:
-    text: Noto Sans
-    code: Noto Sans Mono
+    #text: Noto Sans
+    text: Noto Sans KR
+    code: Noto Mono
   logo: images/cloud-circle-white.png
   favicon: images/favicon-cloud-black.ico
 plugins:
