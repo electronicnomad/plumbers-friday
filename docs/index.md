@@ -52,29 +52,13 @@ AWS 공식 문서는 상당히 훌륭합니다. 그 문서들만 정독한다면
 그리고 부가 설명이 필요하다면, 필수적인 것은 실습 단계 내에 설명하고
 그렇지 않다고 판단되는 건 따로 부쳐 심화된 학습을 선택할 수 있게 합니다.
 
-### AWS 후원행사
-
-만약 AWS에서 후원하고 있는 어떤 교육 행사에서 본 사이트를 사용하고,
-AWS에서 제공하는 12자리 코드가 있으나 어디에서 어떻게 등록해서 사용하는지
-막막하다면, 다음의 웹 주소에서 받은 코드를 등록하시면서 교육 행사에 참여하시면 됩니다.
-https://dashboard.eventengine.run/login
-
 ## 기타
 
 ### 주요 갱신 내역
 
 손으로 일일이 입력합니다. 그래서 정확도를 말할 수 없습니다.
 
+* 2021-02-14: 리포지토리의 소유자가 변경되었습니다.
 * 2020-08-13: [AWS Networking](/networking)에 일부 변경 사항이 적용되었습니다.  
 * 2020-06-22: [AWS Networking](/networking)이 추가 되었습니다.
 * 2020-05-30: [Amazon Forecast](/forecast)가 추가 되었습니다.
-
-### 기여
-
-본 사이트는 GitHub에 있습니다. 어떤 누구든 본 사이트에 기여할 수 있습니다.
-제작에 참여한 분들을 아래의 명단으로 모시고 있습니다.
-[github.com/hoonjhin/plumbers-friday/graphs/contributors](https://github.com/hoonjhin/plumbers-friday/graphs/contributors)
-
-#### 감사합니다
-
-그리고 [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams)으로부터 받은 많은 영감이 제작을 이끌었습니다, 항상 [타월](https://en.wikipedia.org/wiki/Towel_Day)을 잊지 않겠습니다.

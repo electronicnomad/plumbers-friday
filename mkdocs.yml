@@ -28,12 +28,12 @@ markdown_extensions:
   - pymdownx.tabbed
   - toc:
       permalink: true
-repo_name: hoonjhin/huga
-repo_url: https://github.com/hoonjhin/huga
+repo_name: electronicnomad/plumbers-friday
+repo_url: https://github.com/electronicnomad/plumbers-friday
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/hoonjhin
+      link: https://github.com/electronicnomad
     - icon: fontawesome/brands/blogger
       link: https://www.jhin.com
 # Google Analytics
