@@ -1,0 +1,7 @@
+title: Learning Linux
+arrange:
+    - index.md
+    - things-you-should-know-first.md
+    - shell.md
+    - directories.md
+    - file-and-permissions.md

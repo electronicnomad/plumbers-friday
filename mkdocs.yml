@@ -1,15 +1,15 @@
-site_name: a hitchhiker's unofficial guide to the AWS
+site_name: Plumbers' Friday
 theme:
   name: material
   palette:
     primary: black
-    accent: deep orange
+    accent: blue
   font:
     #text: Noto Sans
     text: Noto Sans KR
     code: Noto Mono
-  logo: images/cloud-circle-white.png
-  favicon: images/favicon-cloud-black.ico
+  logo: images/logo-plumping-white.png
+  favicon: images/favicon-plumping-black.ico
 plugins:
   - search
   - awesome-pages
