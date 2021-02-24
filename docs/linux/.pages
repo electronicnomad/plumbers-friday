@@ -2,6 +2,8 @@ title: Learning Linux
 arrange:
     - index.md
     - things-you-should-know-first.md
+    - login-and-logout.md
     - shell.md
     - directories.md
+    - users-and-groups.md
     - file-and-permissions.md
