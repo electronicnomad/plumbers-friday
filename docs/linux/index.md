@@ -29,8 +29,8 @@ Ubuntu를 언급할 수도 있고, Debian을 언급할 수도 있고, Raspberry 
 * directory 디렉토리
 * file and permissions 파일과 권한
 * users and groups 사용자와 그룹
-    * password and shadow 암호와 샤도우
-    * super user or root user 수퍼 유저 혹은 루트 유저
+  * password and shadow
+  * root user 관리자 계정
 * /var/log 로그 파일들
 * daemon and services 데몬과 서비스
 * hardware information 하드웨어 정보 조회
