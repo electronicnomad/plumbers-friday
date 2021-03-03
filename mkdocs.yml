@@ -5,7 +5,6 @@ theme:
     primary: black
     accent: blue
   font:
-    #text: Noto Sans
     text: Noto Sans KR
     code: Noto Mono
   logo: images/logo-plumping-white.png

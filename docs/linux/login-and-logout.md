@@ -24,7 +24,7 @@ login 로그인이라고 합니다. 그 반대의 작업이 즉, 접속을 종�
 logout 로그아웃이라고 합니다. 대략 아래와 같은 화면을 만날 수 있습니다.
 
 ```bash
-host0 login: pi
+host0 login: user1
 password:
 Linux bastion 5.10.11-v7+ #1399 SMP Thu Jan 28 12:06:05 GMT 2021 armv7l
 
@@ -35,7 +35,7 @@ individual files in /usr/share/doc/*/copyright.
 Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
 permitted by applicable law.
 Last login: Mon Feb 22 13:22:31 2021 from 192.168.1.91
-pi@node0:~$
+user1@node0:~$
 ```
 
 Windows 윈도 계열에서 logon 로그온 그리고 logoff 로그오프라고 표현하는

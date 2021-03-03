@@ -3,7 +3,7 @@
 부끄럽게도 리눅스를 배웁시다 - 라는 문서를 작성하고
 공개하려는 결심을 하였습니다.  
 현재까지 (2021-02-22) 미완성이며, 기초공사에 해당되는 작업을 하고 있습니다.
-언제까지 하겠다는 - 식의 약속은 하지 못 할 듯 합니다. :no_mouth:
+언제까지 하겠다는 - 식의 약속은 하지 못 할 듯 합니다. :material-emoticon-neutral-outline:
 
 ## 대상
 
@@ -22,7 +22,7 @@ Ubuntu를 언급할 수도 있고, Debian을 언급할 수도 있고, Raspberry 
 
 ## 구성
 
-아래의 목차는 구성안(構成案)입니다. 그저 案이어서 언제든 변경될 수 있습니다. :octocat:
+아래의 목차는 구성안(構成案)입니다. 그저 案이어서 언제든 변경될 수 있습니다.
 :fontawesome-solid-cat:
 
 * login and logout 로그인과 로그아웃
@@ -47,6 +47,7 @@ Ubuntu를 언급할 수도 있고, Debian을 언급할 수도 있고, Raspberry 
 
 ### 잡소리
 
+:material-sign-caution:
 전 SunOS/Solaris에 대한 심각한 팬이었고,
 그것으로 밥벌이도 했습니다. Linux는 Solaris의 아름다움에 취한 저로서는
 한낱 장난감 정도로 밖에 보이지 않았습니다.
@@ -76,11 +77,13 @@ Linux가 어린 아이들의 정난감을 벗어나 서버의 OS로서 조명받
 지연시킬 수 있다고 말입니다. 하지만, 시간이 지날수록 Linux가 잠식하는 시장은
 UNIX 쪽이었습니다. Windows는 건재하고, UNIX는 역사 속으로 사라질 처지에
 이르렀습니다.
+:material-alert-decagram-outline:
 
 ## 읽기를 권하는 문서들
 
 다음의 문서들은 리눅스를 배우고자 하는 사람들에게 좋은 참고 자료가 됩니다.
+:octicons-cross-reference-16:
 
-* [Linux FAQ](https://tldp.org/FAQ/Linux-FAQ/general.html)
-* [Learn Linux, 101: Boot the system](https://developer.ibm.com/tutorials/l-lpic1-101-2/)
-* [BEGINNER’S GUIDE FOR LINUX – Start Learning Linux in Minutes](https://www.tecmint.com/free-online-linux-learning-guide-for-beginners/)
+* [Linux FAQ](https://tldp.org/FAQ/Linux-FAQ/general.html) :material-link:
+* [Learn Linux, 101: Boot the system](https://developer.ibm.com/tutorials/l-lpic1-101-2/) :material-link:
+* [BEGINNER’S GUIDE FOR LINUX – Start Learning Linux in Minutes](https://www.tecmint.com/free-online-linux-learning-guide-for-beginners/) :material-link:
