@@ -7,11 +7,10 @@
 
 ## 소개
 
-여기는 비공식 메뉴얼을 만드는 데 목적이 있습니다. :material-file-document-multiple-outline:
+여기는 비공식 메뉴얼을 만드는 데 목적이 있습니다.
 메뉴얼의 본질은 제대로 이해하는 것이라고 생각하고
 제대로 이해하는 것에 가장 중요한 방법 중 하나인
 '직접 해 보기' 즉, 실습(實習, hands-on labs)을 중요하게 여기는 구성입니다.
-:material-beaker-question-outline:
 
 ## 참여
 

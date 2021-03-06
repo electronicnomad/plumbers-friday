@@ -47,7 +47,6 @@ Ubuntu를 언급할 수도 있고, Debian을 언급할 수도 있고, Raspberry 
 
 ### 잡소리
 
-:material-sign-caution:
 전 SunOS/Solaris에 대한 심각한 팬이었고,
 그것으로 밥벌이도 했습니다. Linux는 Solaris의 아름다움에 취한 저로서는
 한낱 장난감 정도로 밖에 보이지 않았습니다.
@@ -58,7 +57,7 @@ Ubuntu를 언급할 수도 있고, Debian을 언급할 수도 있고, Raspberry 
 그 이전에도 (Sun이 라이센스에 대한 그리고 지원 플랫폼에 대한 선언을
 개삽질로 도배하기 직전까지는) Solaris x86을 염가에 구매할 수 있었기 때문에
 x86 플랫폼에서 서버 OS로는 Windows Server, Solaris x86, FreeBSD가
-일단 손에 꼽히고, SCO Unix가 다음으로 검토될 수 있었을 겁니다.
+일단 손에 꼽히고, SCO Unix가 다음으로 검토될 수 있었을 겁니다. :material-sign-caution:
 
 Linux가 이렇게 각광받는 그리고 이제 인류의 삶의 중심으로 편입되는
 결정적 계기가 무엇이었는지 따져보아도 &#8212; 수많은 사람들의 각기 다른 주장이
