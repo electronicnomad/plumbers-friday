@@ -26,6 +26,11 @@
 :material-message-alert-outline:
 의견을 전달해 주시는 것도 환영합니다.
 
+### 기여자 명단
+
+본 프로젝트(라고 하기엔 뭔가 어색하지만)에 기여해 주신 분들(contributors)은 다음의 링크를 통하여
+알아볼 수 있습니다. <https://github.com/electronicnomad/plumbers-friday/graphs/contributors>
+
 ## 기타
 
 ### 주요 갱신 내역
