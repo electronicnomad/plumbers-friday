@@ -39,7 +39,6 @@ extra:
       link: https://github.com/electronicnomad
     - icon: fontawesome/brands/blogger
       link: https://www.jhin.com
-# Google Analytics
 google_analytics:
   - UA-113185952-3
   - auto
