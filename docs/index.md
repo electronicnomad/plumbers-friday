@@ -1,9 +1,8 @@
 # 배관공들의 금요일
 
 살면서 일하면서 알게 된 것들을 얼기 설기 엮어 문서로 만드는 곳입니다.
-:material-pipe-disconnected: :material-pipe-leak: :material-pipe-wrench: :material-pipe:
 여기의 입력된 무언가가 누군가에게 어떤 도움이 될 수 있다면,
-밥 먹을 때마다 잠 들 때에도 안심할 수 있겠습니다. :fontawesome-solid-pray:
+밥 먹을 때마다 잠 들 때에도 안심할 수 있겠습니다.
 
 ## 소개
 
@@ -17,7 +16,7 @@
 이 글을 읽는 여러분들의 참여를 적극적으로 바랍니다.
 여기의 모든 데이터는
 <https://github.com/electronicnomad/plumbers-friday/>
-리포지토리에 오롯이 있습니다. :material-source-repository:
+:material-source-repository: 리포지토리에 오롯이 있습니다.
 
 만약, pull request까지 하고 싶은 마음이 없다면,
 <https://github.com/electronicnomad/plumbers-friday/discussions> 혹은
@@ -44,7 +43,7 @@
   [electronicnomad.net/pf](https://electronicnomad.net/pf)으로 변경하였습니다.
 * 2021-02-14: 사이트名 변경. :material-human-baby-changing-table:  
   *a Hitchihicker's unofficial guide to the AWS*는 더이상 사용하지 않고,
-  **배관공들의 금요일 - Plumbers' Friday**로 재명명했습니다.
+  **Plumbers' Friday 배관공들의 금요일**로 재명명했습니다.
   당초 계획이었던, 'AWS 비공식 안내서 작성'이라는 목표는 폐기되었습니다.
 * 2021-02-14: 리포지토리의 이름이 변경되었습니다. :material-rename-box:
 * 2021-02-14: 리포지토리의 소유자가 변경되었습니다. :material-human-baby-changing-table:

@@ -2,13 +2,13 @@
 
 부끄럽게도 리눅스를 배웁시다 - 라는 문서를 작성하고
 공개하려는 결심을 하였습니다.  
-현재까지 (2021-02-22) 미완성이며, 기초공사에 해당되는 작업을 하고 있습니다.
-언제까지 하겠다는 - 식의 약속은 하지 못 할 듯 합니다. :material-emoticon-neutral-outline:
+현재까지 (2021-02-22) 미완성이며, :material-emoticon-neutral-outline:
+기초공사에 해당되는 작업을 하고 있습니다.
 
 ## 대상
 
 지금 계획하며 작성하는 문서는 굳이 따져보자면 '운영자'용입니다.
-'개발자'를 위한 정보는 정말 드물거나 아예 존재하지 않을 것 같은 &middot;&middot;&middot; (말을 줄임)
+'개발자'를 위한 정보는 정말 드물거나 아예 존재하지 않을 것 같은 &middot;&middot;&middot;
 
 ## 기준
 
@@ -22,8 +22,8 @@ Debian을 언급할 수도 있고, Raspberry Pi OS를
 
 ## 구성
 
-아래의 목차는 구성안(構成案)입니다. 그저 案이어서 언제든 변경될 수 있습니다.
 :fontawesome-solid-cat:
+아래의 목차는 구성안(構成案)입니다. 그저 案이어서 언제든 변경될 수 있습니다.
 
 * login and logout 로그인과 로그아웃
 * shell 쉘
@@ -46,7 +46,6 @@ Debian을 언급할 수도 있고, Raspberry Pi OS를
 ## 읽기를 권하는 문서들
 
 다음의 문서들은 리눅스를 배우고자 하는 사람들에게 좋은 참고 자료가 됩니다.
-:octicons-cross-reference-16:
 
 * [Linux FAQ](https://tldp.org/FAQ/Linux-FAQ/general.html) :material-link:
 * [Learn Linux, 101: Boot the system](https://developer.ibm.com/tutorials/l-lpic1-101-2/) :material-link:
