@@ -124,7 +124,8 @@ Canonical/Ubuntu에서는 이것을 'dynamic MOTD generation'이라고 설명하
 `# cat /dev/null > /etc/issue`라는 명령을 root 루트 사용자가 입력함으로써,
 0 byte 바이트 파일로 만들기도 했습니다.
 
-요즈음처럼, ssh/sshd를 이용하여 host 호스트에 접근하는 경우 로그인 프롬프트를
+요즈음처럼, rlogind와 telnetd가 배제되고 ssh/sshd를 이용하여
+원격 host 호스트에 접근하는 경우 로그인 프롬프트를
 볼 기회조차 없어서 거의 용도가 폐기 상태에 가깝다 할 수 있습니다.
 
 #### /etc/issue.net
