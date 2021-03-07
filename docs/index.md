@@ -36,7 +36,7 @@
 
 손으로 일일이 입력합니다. 그래서 정확도를 말할 수 없습니다.
 
-* 2021-02-22: [Learning Linux](/linux) 추가. :material-new-box:  
+* 2021-02-22: [Learning Linux](/pf/linux) 추가. :material-new-box:  
   완성의 길은 멀고도 멉니다. 일단 시작을 했다는 의미라 하겠습니다.
 * 2021-02-21: 주소 변경. :material-human-baby-changing-table:  
   [aws.jhin.net](https://aws.jhin.net/)에서,
