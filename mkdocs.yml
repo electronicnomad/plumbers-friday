@@ -1,4 +1,11 @@
 site_name: Plumbers' Friday
+site_url: https://electronicnomad.net/pf/
+site_author: Kwanghoon Jhin
+site_description: unofficial manual and/or commentary on IT technologies.
+#
+repo_name: electronicnomad/plumbers-friday
+repo_url: https://github.com/electronicnomad/plumbers-friday
+#
 theme:
   name: material
   palette:
@@ -9,6 +16,7 @@ theme:
     code: Noto Mono
   logo: images/logo-plumping-white.png
   favicon: images/favicon-plumping-black.ico
+#
 plugins:
   - search
   - awesome-pages
@@ -31,14 +39,14 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
-repo_name: electronicnomad/plumbers-friday
-repo_url: https://github.com/electronicnomad/plumbers-friday
+#
 extra:
   social:
     - icon: fontawesome/brands/github-alt
       link: https://github.com/electronicnomad
     - icon: fontawesome/brands/blogger
       link: https://www.jhin.com
+#
 google_analytics:
   - UA-113185952-3
   - auto
