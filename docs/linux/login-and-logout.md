@@ -196,21 +196,129 @@ OS의 버전이나 패치 레벨을 알리는 것에 머물기도 했습니다.
 
 ### 전역 설정 파일 System wide initialization files
 
-시스템 기본값은 다음의 파일들이 정의를 가지고 있습니다.
-`/etc/profile`, 
-`/etc/bashrc`
-입니다.
-
 system wide 전역(全域)이라는 단어 그대로 여기에 수록된 정의는
 시스템에 접근하는 모든 `bash` 쉘이 기본인 사용자에게 적용됩니다.
 system administrator 시스템 관리자가 강제할 수 있는 조건들을
-손쉽게 적용할 수 있습니다.
+손쉽게 적용할 수 있습니다. 아래의 설명은 `bash`, `ksh`, 그리고 `ash`에 공통됩니다.
+다른 쉘일 경우에는 다른 파일에 정의가 있습니다.
+이를 알기 위해서는 각 쉘의 맨 페이지를 참조하는 것도 방법일 수 있습니다.
+
+시스템 기본값은 다음의 파일들이 정의를 가지고 있습니다.
+`/etc/profile`
+그리고 이 파일의 내용을 보면, 무엇을 더 읽어 들이는지 알 수 있습니다.
+
+```bash
+:/etc $ cat ./profile
+# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+
+if [ "`id -u`" -eq 0 ]; then
+  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+else
+  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games"
+fi
+export PATH
+
+if [ "${PS1-}" ]; then
+  if [ "${BASH-}" ] && [ "$BASH" != "/bin/sh" ]; then
+    # The file bash.bashrc already sets the default PS1.
+    # PS1='\h:\w\$ '
+    if [ -f /etc/bash.bashrc ]; then
+      . /etc/bash.bashrc
+    fi
+  else
+    if [ "`id -u`" -eq 0 ]; then
+      PS1='# '
+    else
+      PS1='$ '
+    fi
+  fi
+fi
+
+if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+  unset i
+fi
+:/etc $ 
+```
+
+다음에 설명할 기회가 있을지 모르겠지만, 위 예시에서 처음 등장하는 구문은,
+`/etc` 디렉토리에서 현재 디렉토리에 있는 `profile` 이라는 파일의 내용을 보자(`cat`)!라는 명령입니다.
+앞서 '미리 알면 좋을 것들'에서 설명한 것처럼, `cat` 명령에 대한 궁금한 점이 있으시면
+`$ man cat`으로 맨 페이지를 읽어 봅시다.
+
+`/etc/profile` 파일의 내용을 보면, 가장 먼저 경로에 대한 변수를 정의하고 `$PATH`
+`/etc/bash.bashrc`라는 파일이 있으면 읽어 들이도록 하고 있습니다.
+이후 쉘 프롬프트를 정의 `PS1` 하는데, user id가 0, 즉 root user이면 `#`를
+아니라면, `$`를 부여하고, 마지막으로 `/etc/profiled.d`라는 디렉토리 아래에 있는 `*.sh`
+파일들을 읽어 들입니다.
+
 
 ### 사용자 설정 파일 user initialization files
 
-사용자 설정은 (당연히) 홈 디렉토리에 있습니다.
-`.profile`, `.bashrc`로 있습니다.
+사용자 설정은 (당연히) 홈 디렉토리에 있습니다. 여기의 설정 파일들도 전역 설정과 비슷한 느낌이 있습니다.
+먼저 사용자가 로그인을 하게 되면, `~/.profile` 파일을 쉘이 읽게 됩니다.
+그리고 `~/.profile` 파일의 내부를 보면, 아래와 같습니다.
 
-### 사용자에게 쉘 초기 파일의 의미
+```bash
+$ cat ~/.profile
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
 
-사용자에게 쉘 초기 파일은 대체로 `$PATH
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+$ 
+```
+
+`$ cat ~/.profile` 이라는 구문은, `cat` 명령으로 홈 디렉토리(`~`) 아래에 있는
+`.profile`이라는 파일을 화면에 출력하라! 라고 설명할 수 있겠습니다.
+
+내용을 보면, `~/.bashrc_profile` 혹은 `~/.bashrc_login` 파일이 있으면
+`~/.profile`은 무시된다는 설명과 함께, 사용자의 홈 디렉토리 아래에 `.bashrc` 파일이 있으면
+읽어 들이고, 경로 설정을 `$PATH`하고 끝나는 것을 알 수 있습니다.
+
+앞으로 Linux를 사용하면서 이런 사용자 쉘 초기화 파일을 자주 들여다 볼 일이 있을 것입니다.
+여기에 각자 취향에 맞는 설정을 집어 넣고, 새로운 환경에 맞는 설정을 하게 됩니다.
+
+전, `$PATH`에 이것저것 추가하는 것 이외에는 `set -o vi`라는 정의 한 줄을 추가합니다.
+`bash`나 `ksh`에서 (혹은 유사 계열에서) 쉘 환경에서 vi 편집기 명령어를 사용할 수 있게
+하는 것입니다. 전 vi 편집기를 많이 좋아합니다.
+
+## logout 로그아웃
+
+로그아웃을 하는 방법은 `$ exit`라고 명령을 내리는 것과 `$ logout`이라고 명령을 내리는 방법
+그리고 대부분의 터미널에서 지원하는 `^D`가 있습니다. `^D`는 키보드의 control 키와 d 키를 함께
+누르는 것을 말합니다. `^D`는 EOF를 standard input으로 받아들이게 되어서 해당 터미널이 닫히게 됩니다.
+
+그리고 `exit`와 `logout`은 따로 명령어가 존재하지 않습니다.
+표준 쉘에서 입력을 받아서 처리합니다. 그리고 이 두 명령이 하나의
+목적으로 존재하는 이유가 있습니다.
+
+## exit
+
