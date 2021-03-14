@@ -317,8 +317,41 @@ $
 누르는 것을 말합니다. `^D`는 EOF를 standard input으로 받아들이게 되어서 해당 터미널이 닫히게 됩니다.
 
 그리고 `exit`와 `logout`은 따로 명령어가 존재하지 않습니다.
-표준 쉘에서 입력을 받아서 처리합니다. 그리고 이 두 명령이 하나의
-목적으로 존재하는 이유가 있습니다.
+쉘에서 입력을 받아서 처리합니다. `export`나 `set`과 성격이 같다고 볼 수 있습니다.
+그리고 이 두 명령이 비슷한 목적으로 존재하는 이유는 아래와 같습니다.
 
-## exit
+```bash
+$ logout --help
+logout: logout [n]
+    Exit a login shell.
 
+    Exits a login shell with exit status N.  Returns an error if not executed
+    in a login shell.
+$ exit --help
+exit: exit [n]
+    Exit the shell.
+
+    Exits the shell with a status of N.  If N is omitted, the exit status
+    is that of the last command executed.
+$ bash
+$ logout
+bash: logout: not login shell: use 'exit'
+$ exit
+$ exit
+logout
+```
+
+### logout
+
+`logout`은 로그인 쉘에서 일을 끝내고 나가는 것이다. `login`의 반대 개념입니다.
+위의 예시를 보면, 로그인 쉘에서 `bash`을 실행했습니다.
+이 때 실행한 `bash`는 로그인 쉘이 아니라 (같은 놈을 실한 한 것이지만 성격이) 다른
+쉘입니다. 이 때는 `logout`을 할 수 없습니다. 왜? `login`을 안 했으니까요.
+
+### exit
+
+빠져 나다는 것입니다. 쉘을 종료하는 것입니다. login shell 로그인 쉘은 사용자가 로그인하면서
+획득하는 쉘이고, 프로그래밍이나 다른 목적으로 쉘을 획득하거나 실행시킬 수 있습니다.
+그 쉘을 종료하는 선언입니다.
+
+그래서, 로그인 쉘에서는 `logout`대신 `exit`를 사용할 수도 있습니다. 어쨌든 종료이니까요.
