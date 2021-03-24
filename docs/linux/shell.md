@@ -2,8 +2,7 @@
 
 > shell
 
-쉘은 일종의 사용자 인터페이스입니다.
-사용자는 쉘을 통해서 운영체제와 대화를 하게 됩니다.
+쉘은 일종의 사용자 인터페이스이라고 생각합니다.
 
 우리가 사용하는 컴퓨터는 하드웨어가 있고, 그 위에 운영체제가 동작하는 구조입니다.
 운영체제에서 하드웨어에 가장 가까운 것이 kernel 커널이라는 존재가 있으며,
@@ -18,17 +17,21 @@ Windows 시스템에서 Explorer.exe도 쉘입니다.
 
 ## bash
 
-`bash`는 현재 가장 보편적인 UNIX/Linux 쉘입니다.  
-이에 대한 상세한 설명을 이곳이 하기 전에, 다음의 웹 문서가 좋은 참고 자료가 될 것입니다.
-<http://www.pyrasis.com/book/DockerForTheReallyImpatient/Chapter04>
+`bash`는 '배쉬'라고 읽으며 현재 가장 보편적인 쉘입니다.  
+`bash`는 GNU에서 만들어낸 Unix-like 시스템을 위한 쉘입니다. `bash`는 'Bourne-Again SHell'이라는 이름을 가지고 있는데, Bourne Shell(`sh`)을 발전적으로 계승한다는 의미라고 해석할 수 있겠습니다.
+`sh`, Bourne Shell은 UNIX의 고향, Bell Lab의 Stephen Bourne이 개발했고, UNIX Version 7의 기본 쉘로 채택되었습니다.  
+`sh`은 1979년 세상에 소개되었습니다.  
+`bash`는 1989년에 첫 릴리즈가 되었습니다.
+
+그리고, `bash`에 대하여 깊이 있는 이해를 원한다면, [공식 홈페이지](https://www.gnu.org/software/bash/)에 있는
+[Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html)을 정독해 보시길 권합니다.
 
 ## 쉘 프로그래밍
 
 Shell script 쉘 스크립트라는 것이 있습니다. 짧게, script 스크립트라고 말하기도 합니다.
-이 쉘 스크립트를 가운데에 놓고 마치 정교한 프로그램처럼 동작시키는 것을 그런 것을
-가능하게 하는 어떤 행위를 shell programming 쉘 프로그래밍이라고 부릅니다.
+이 쉘 스크립트를 가운데에 놓고 마치 정교한 프로그램처럼 동작시키는 것을 가능하게 하는 어떤 행위를 shell programming 쉘 프로그래밍이라고 부릅니다.
 
-쉘 프로그래밍에 대해서는 따로 구분된 글을 적고 싶은 마음도 있는데, 그 만큼 크고 넓습니다.
+쉘 프로그래밍에 대해서는 따로 구분된 글을 적고 싶은 마음도 있는데, 그 만큼 크고 넓고 유용합니다.
 
 쉘은 스스로 프로그래밍 언어의 환경을 가지고 있습니다.
 변수가 있고, 정의가 가능합니다.

@@ -24,7 +24,7 @@ GNU Hurd는 여전히 'no stable version'입니다.
 Linux는 오픈소스입니다. GNU Public License, GPL의 규정을 따르고 있습니다 -
 오픈소스 라이센스는 GPL 이외에도 MIT, CDDL, BSD, MPL 等 여럿이 있고
 각기 서로 추구하는 방향이나 규정이나 규약이 다릅니다.
-만약 흥미가 있다면, [https://opensource.org/licenses](https://opensource.org/licenses)
+만약 흥미가 있다면, <https://opensource.org/licenses>
 &larr; 이곳을 방문해 보는 것을 추천합니다.
 
 ### 배포판
@@ -33,6 +33,12 @@ Linux는 오픈소스입니다. GNU Public License, GPL의 규정을 따르고 �
 대표적인 것이 Ubuntu와 Red Hat이 있는데, Ubuntu는 Debian을 기반하여 제작된 배포판입니다.
 리눅스 배포판에 대한 설명은 Wikipedia <https://en.wikipedia.org/wiki/List_of_Linux_distributions> 에
 잘 설명되어 있습니다. 한 번 시간 내에 정독해 볼만 합니다.
+
+### Unix-like 운영체제
+
+한국어로 '유닉스 계열'이라고도 번역하는 Unix-like 운영체제는  UNIX라는 이름에 권리있는 곳으로부터 인증받지는 못 했지만, UNIX와 유사한 운영체제를 일컫는다 - 그래서, 'UNIX는 아니지만, UNIX인'이라는 이상한 상태를 가지는 운영체제를 말한다고 해석할 수도 있겠다. 그리고 '계열'이라고 하기에는 족보가 이어지지 않아서, Unix-like를 그대로 사용하는 것이 최선이라는 생각을 합니다.
+
+이 Unix-like 운영체제들의 묶음에 Linux도 포함이 됩니다.
 
 ## 명령어들
 
