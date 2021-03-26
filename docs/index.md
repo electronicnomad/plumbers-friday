@@ -36,19 +36,19 @@
 
 손으로 일일이 입력합니다. 그래서 정확도를 말할 수 없습니다.
 
-* 2021-02-22: [Learning Linux](/pf/linux) 추가. :material-new-box:  
+* 2021-02-22: [Learning Linux](/pf/linux) 추가  
   완성의 길은 멀고도 멉니다. 일단 시작을 했다는 의미라 하겠습니다.
-* 2021-02-21: 주소 변경. :material-human-baby-changing-table:  
+* 2021-02-21: 주소 변경   
   [aws.jhin.net](https://aws.jhin.net/)에서,
   [electronicnomad.net/pf](https://electronicnomad.net/pf)으로 변경하였습니다.
-* 2021-02-14: 사이트名 변경. :material-human-baby-changing-table:  
+* 2021-02-14: 사이트名 변경   
   *a Hitchihicker's unofficial guide to the AWS*는 더이상 사용하지 않고,
   **Plumbers' Friday 배관공들의 금요일**로 재명명했습니다.
   당초 계획이었던, 'AWS 비공식 안내서 작성'이라는 목표는 폐기되었습니다.
-* 2021-02-14: 리포지토리의 이름이 변경되었습니다. :material-rename-box:
-* 2021-02-14: 리포지토리의 소유자가 변경되었습니다. :material-human-baby-changing-table:
-* 2021-01-19: AWS에 대한 믿음을 완전히 상실했습니다. :material-heart-broken:
-* 2020-08-13: [AWS Networking](/networking)에 일부 변경 사항이 적용되었습니다. :material-plus-box:
-* 2020-06-22: [AWS Networking](/networking)이 추가 되었습니다. :material-new-box:
-* 2020-05-30: [Amazon Forecast](/forecast)가 추가 되었습니다. :material-new-box:
+* 2021-02-14: 리포지토리의 이름이 변경되었습니다. 
+* 2021-02-14: 리포지토리의 소유자가 변경되었습니다. 
+* 2021-01-19: AWS에 대한 믿음을 완전히 상실했습니다. 
+* 2020-08-13: [AWS Networking](/networking)에 일부 변경 사항이 적용되었습니다.
+* 2020-06-22: [AWS Networking](/networking)이 추가 되었습니다.
+* 2020-05-30: [Amazon Forecast](/forecast)가 추가 되었습니다.
 * 2020-05-30: 본 사이트가 만들어졌습니다.
