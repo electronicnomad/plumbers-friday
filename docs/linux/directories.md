@@ -158,5 +158,42 @@ $
 
 ### mkdir, rmdir
 
-`mkdir`은 디렉토리를 생성하는데 사용됩니다. make directory.
+`mkdir`은 디렉토리를 생성하는데 사용됩니다. make directory.  
 `rmdir`은 디렉토리를 삭제하는데 사용됩니다. remove directory.
+
+#### mkdir
+
+`mkdir`은 특별한 것은 없습니다. 다만, `mkdir -p`라고 옵션을 함께 쓰면 재미있습니다.
+`mkdir -p ./a/b/c/d`라고 명령을 하면 현재 디렉토리 아래에 a라는 디렉토리를 작성하고
+b, c, d까지 한 번에 만들어 줍니다. 만약 현재 디렉토리에 a라는 디렉토리가 존재하면
+그 하위 b, c, d를 만들어 냅니다.
+
+#### rmdir
+
+`rmdir`은 흔하게 `rm -r`로 대체되어 사용되기도 합니다. 두 명령은 같은 결과를 기대할 수 있습니다.
+다만, 다른 것이 있다면, `rmdir`은 해당 디렉토리 내에 어떤 파일이나 디렉토리가 존재하면
+- 아래의 예시와 같이 -
+기본적으로 명령 수행을 멈추고 메시지를 출력합니다.
+
+```bash
+$ ls -al
+total 0
+drwxr-xr-x   3 jhin  staff   96 Mar 25 18:17 .
+drwxr-xr-x+ 28 jhin  staff  896 Mar 25 18:16 ..
+drwxr-xr-x   3 jhin  staff   96 Mar 25 18:17 a
+$ rmdir ./a
+rmdir: ./a: Directory not empty
+$ ls -al ./a
+total 0
+drwxr-xr-x  3 jhin  staff  96 Mar 25 18:17 .
+drwxr-xr-x  3 jhin  staff  96 Mar 25 18:17 ..
+-rw-r--r--  1 jhin  staff   0 Mar 25 18:17 b
+$ 
+```
+
+이와는 달리, `rm -r`은 지정하는 디렉토리 내부에 파일이나 디렉토리의 존재여부와 상관없이 모두 지워냅니다.
+
+## 역할
+
+리눅스에서 각 디렉토리는 개별적인 역할을 가지고 있습니다. 이는 UNIX의 전통인데, 지금은 하나의 표준으로 정의되고
+표준의 준수와는 조금 더 큰 의미의 무시적 합의로 이어지고 있다고 볼 수 있습니다.
