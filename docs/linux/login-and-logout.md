@@ -257,7 +257,6 @@ fi
 아니라면, `$`를 부여하고, 마지막으로 `/etc/profiled.d`라는 디렉토리 아래에 있는 `*.sh`
 파일들을 읽어 들입니다.
 
-
 ### 사용자 설정 파일 user initialization files
 
 사용자 설정은 (당연히) 홈 디렉토리에 있습니다. 여기의 설정 파일들도 전역 설정과 비슷한 느낌이 있습니다.
@@ -280,7 +279,7 @@ $ cat ~/.profile
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+  . "$HOME/.bashrc"
     fi
 fi
 
