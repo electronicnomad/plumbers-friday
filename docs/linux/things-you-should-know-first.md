@@ -31,8 +31,7 @@ Linux는 오픈소스입니다. GNU Public License, GPL의 규정을 따르고 �
 
 리눅스는 몇 가지 배포한으로 보통의 사용자에게 전달됩니다.
 대표적인 것이 Ubuntu와 Red Hat이 있는데, Ubuntu는 Debian을 기반하여 제작된 배포판입니다.
-리눅스 배포판에 대한 설명은 Wikipedia <https://en.wikipedia.org/wiki/List_of_Linux_distributions> 에
-잘 설명되어 있습니다. 한 번 시간 내에 정독해 볼만 합니다.
+리눅스 배포판에 대한 설명은 [Wikipedia - List of Linux distributions](https://en.wikipedia.org/wiki/List_of_Linux_distributions)에 잘 설명되어 있습니다. 한 번 시간 내에 정독해 볼만 합니다.
 
 ### Unix-like 운영체제
 
