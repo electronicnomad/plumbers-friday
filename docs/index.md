@@ -16,13 +16,11 @@
 이 글을 읽는 여러분들의 참여를 적극적으로 바랍니다.
 여기의 모든 데이터는
 <https://github.com/electronicnomad/plumbers-friday/>
-:material-source-repository: 리포지토리에 오롯이 있습니다.
+리포지토리에 오롯이 있습니다.
 
 만약, pull request까지 하고 싶은 마음이 없다면,
 <https://github.com/electronicnomad/plumbers-friday/discussions> 혹은
-:octicons-comment-discussion-16:
 <https://github.com/electronicnomad/plumbers-friday/issues> 를 통해서
-:material-message-alert-outline:
 의견을 전달해 주시는 것도 환영합니다.
 
 ### 기여자 명단

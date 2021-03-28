@@ -165,7 +165,7 @@ jhin@home:~$
 
 위 예시에서, `unalias`라는 명령이 쓰였습니다. 이는 `alias`로 정의한 것을 해제한다는 의미입니다.
 
-### bg와 fg
+### bg와 fg 그리고 jobs
 
 `bg`는 background의 약자입니다. 실행시키는 프로그램이나 명령을 background로 동작시키는 것입니다.
 그리고, `fg`는 foreground의 약자입니다. 지정하는 background로 동작 중인 프로그램이나 명령을 foreground로 전환하는 명령입니다.
