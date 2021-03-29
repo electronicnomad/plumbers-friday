@@ -9,36 +9,38 @@
 그 상위에 devices 디바이스나 기타 library 라이브러리나 명령어들이 존재하게 됩니다.
 그리고 shell 쉘이 있는데, 이 쉘을 통해서 사람은 컴퓨터와 정보를 주고받게 됩니다.
 
-Linux에서는 현재 `bash`이 가장 보편적이며 `tcsh`과 `csh` 그리고 `zsh`도
-인기가 있는 것으로 알고 있습니다.
+Linux에서는 현재 `bash`이 가장 보편적이며, `bash`와 같은 같은 `sh`을 바탕으로 만들어진 `zsh`이 macOS Mojave 이후 기본 쉘이 되면서 주목받고 있습니다. 한 때 UNIX에서는 `csh`과 `tcsh`이 중심을 이루었는데,
+아무래도 그 때는 C 프로그래밍이 대세였기 때문은 아니었을까? 라는 나름의 추측을 해 봅니다.  
+아무튼, 본 문서에서는 우선, `bash`를 다룹니다.
 
-Windows 시스템에서 explorer.exe도 cmd.exe도 쉘이라고 할 수 있습니다.
-사람과 가장 가까이 있는 소프트웨어로 만들어진 컴퓨터 인터페이스가 쉘이라고 정의해도 대부분 틀리지 않습니다.
+Windows에서 explorer.exe도 cmd.exe도 쉘이라고 할 수 있습니다.
 
 ## bash
 
 `bash`는 '배쉬'라고 읽으며 현재 가장 보편적인 쉘입니다.  
-`bash`는 GNU에서 만들어낸 Unix-like 시스템을 위한 쉘입니다. `bash`는 'Bourne-Again SHell'이라는 이름을 가지고 있는데, Bourne Shell(`sh`)을 발전적으로 계승한다는 의미라고 해석할 수 있겠습니다.
-`sh`, Bourne Shell은 UNIX의 고향, Bell Lab의 Stephen Bourne이 개발했고, UNIX Version 7의 기본 쉘로 채택되었습니다.  
+`bash`는 [GNU](https://www.gnu.org/)에서 만들어낸 Unix-like 시스템을 위한 쉘입니다. `bash`는 'Bourne-Again SHell'이라는 이름을 가지고 있는데, Bourne Shell(`sh`)을 발전적으로 계승한다는 의미라고 해석할 수 있겠습니다. `sh`, Bourne Shell은 UNIX의 고향, Bell Lab의 Stephen Bourne이 개발했고, UNIX Version 7의 기본 쉘로 채택되었습니다.  
 `sh`은 1979년 세상에 소개되었습니다.  
 `bash`는 1989년에 첫 릴리즈가 되었습니다.
 
 그리고, `bash`에 대하여 깊이 있는 이해를 원한다면, [공식 홈페이지](https://www.gnu.org/software/bash/)에 있는 [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html)을 정독해 보시길 권합니다.
 
-## 쉘 프로그래밍
+### 초기 설정 파일들
 
-Shell script 쉘 스크립트라는 것이 있습니다. 짧게, script 스크립트라고 말하기도 합니다.
-이 쉘 스크립트를 가운데에 놓고 마치 정교한 프로그램처럼 동작시키는 것을 가능하게 하는 어떤 행위를 shell programming 쉘 프로그래밍이라고 부릅니다.
+이 부분에 대해서는 이전 챕터, '[로그인과 로그아웃 - 쉘 초기 설정](/linux/login-and-logout/#_4)'에서 다루었습니다.
 
-쉘 프로그래밍에 대해서는 따로 구분된 글을 적고 싶은 마음도 있는데, 그 만큼 크고 넓고 유용합니다.
+### 환경 변수
 
-쉘은 스스로 프로그래밍 언어의 환경을 가지고 있습니다.
-변수가 있고, 정의가 가능합니다.
-하지만, 대부분은 UNIX/Linux 내에 있는 명령어들을 잘 나열하는 것으로 완성될 수도 있습니다.
-리눅스 시스템 내에 존재하는 대부분의 제어 목적을 가진 명령어 수행은 쉘 스크립트로 작성되어 있습니다.
+`bash`는 고유의 환경 변수를 가지고는 있지만, 대부분 중요한 변수들은 `sh`에서 상속되었습니다.
+이에 대한 설명은 (간단하지만) [공식 메뉴얼](https://www.gnu.org/software/bash/manual/html_node/Shell-Variables.html)을 참조하면 좋겠습니다.
 
-다음의 웹 사이트가 기초적인 쉘 프그래밍/스크립트를 익히는데에 도움이 될 것입니다.
-<https://www.learnshell.org/>
+#### $PATH
+
+이전 챕터에서 언급하긴 했지만, 구체적인 설명은 없었습니다.
+`$PATH`는 
+
+#### $HOME
+
+#### $PS1
 
 ## Shell built-in commnads
 
@@ -171,3 +173,20 @@ jhin@home:~$
 그리고, `fg`는 foreground의 약자입니다. 지정하는 background로 동작 중인 프로그램이나 명령을 foreground로 전환하는 명령입니다.
 
 한국어로는, 혹은 전산용어로는, background를 배경(背景) 그리고 foreground를 전경(前景)이라고 사용하고 있습니다. 대부분의 번한한 전상용어들이 어색하듯 이 또한 익숙해지기가 쉽지 않습니다.
+
+## 기타
+
+### 쉘 프로그래밍
+
+Shell script 쉘 스크립트라는 것이 있습니다. 짧게, script 스크립트라고 말하기도 합니다.
+이 쉘 스크립트를 가운데에 놓고 마치 정교한 프로그램처럼 동작시키는 것을 가능하게 하는 어떤 행위를 shell programming 쉘 프로그래밍이라고 부릅니다.
+
+쉘 프로그래밍에 대해서는 따로 구분된 글을 적고 싶은 마음도 있는데, 그 만큼 크고 넓고 유용합니다.
+
+쉘은 스스로 프로그래밍 언어의 환경을 가지고 있습니다.
+변수가 있고, 정의가 가능합니다.
+하지만, 대부분은 UNIX/Linux 내에 있는 명령어들을 잘 나열하는 것으로 완성될 수도 있습니다.
+리눅스 시스템 내에 존재하는 대부분의 제어 목적을 가진 명령어 수행은 쉘 스크립트로 작성되어 있습니다.
+
+다음의 웹 사이트가 기초적인 쉘 프그래밍/스크립트를 익히는데에 도움이 될 것입니다.
+<https://www.learnshell.org/>
