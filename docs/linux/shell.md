@@ -280,3 +280,6 @@ Shell script 쉘 스크립트라는 것이 있습니다. 짧게, script 스크�
 
 다음의 웹 사이트가 쉘 프그래밍/스크립트를 익히는데에 도움이 될 것입니다.
 <https://www.javatpoint.com/bash>
+ 
+
+
