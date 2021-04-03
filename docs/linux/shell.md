@@ -66,7 +66,7 @@ $
 #### $PS1
 
 `$PS1`은 사용자의 쉘 프롬프트를 꾸며주는 변수입니다. ` $ ` 로그인 프롬프트가 이와 같이 보인다면 `$PS1`에 꾸밈이 들어간 것이죠, 이 꾸임에는 나름의 문법이 있는데, <https://access.redhat.com/solutions/505983>와 <https://wiki.archlinux.org/index.php/Bash/Prompt_customization>를 읽어보면 많은 도움이 됩니다. 하지만, 일단 배우고 익히는 건 뒤로 하고 내 쉘 프롬프트를 이쁘게 꾸미고 싶다! 라는 생각을 하신다면,
-<http://bashrcgenerator.com/> 이 곳에서 쉽게 만들 수 있답니다.
+<https://ezprompt.net/> 이 곳에서 쉽게 만들 수 있답니다.
 
 ## Shell built-in commnads
 
@@ -280,6 +280,3 @@ Shell script 쉘 스크립트라는 것이 있습니다. 짧게, script 스크�
 
 다음의 웹 사이트가 쉘 프그래밍/스크립트를 익히는데에 도움이 될 것입니다.
 <https://www.javatpoint.com/bash>
- 
-
-
