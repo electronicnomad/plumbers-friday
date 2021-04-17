@@ -105,10 +105,15 @@ x, 즉 실행(excute) 권한은 디렉토리에 접근할 권한을 의미합니
 
 ### chown
 
+`chown`은 소유권자를 변경하는 것입니다. change ownership.
+
 ### chgrp
+
+`chgrp`는 그룹을 변경하는 것입니다. change group.
 
 ### chmod
 
+`chmod`는 권한 설정을 변경하는 것입니다. change mode.
 
 | 표시 | 이진 Bin | 십진 Dec | 설명
 |--|--|--|--|
