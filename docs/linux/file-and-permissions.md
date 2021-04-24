@@ -112,6 +112,7 @@ $ ls -al ./test.sh
 -rwxr-xr-x 1 jhin jhin 111 Apr 23 20:24 ./test.sh
 $
 ```
+
 위 예시는 현재 디렉토리에 있는, `test.sh`이라는 파일을 `ls -al` 명령으로 조회한 것입니다.
 여기에서 3번째에 해당되는 것이 소유자, owner에 대한 표시입니다. `test.sh`이라는 파일은
 `jhin`이라는 사용자가 소유하고 있는 것이죠.
@@ -125,6 +126,7 @@ $ ls -al ./test.sh
 -rwxr-xr-x 1 nobody jhin 111 Apr 23 20:24 ./test.sh
 $
 ```
+
 `sudo`라는 명령으로 root 권한을 일시적으로 확득합니다. `sudo`는 그런 역할을 하는 용도가 단순하고 아주
 강력한 명령입니다. 그 뒤에 따르는 명령, `chown nobody ./test.sh`은 `nobody`라는 사용자로 `./` 현재 
 디렉토리에 위치하고 있는 `test.sh`이라는 파일의 소유권을 변경하라. 라는 뜻입니다.
@@ -137,7 +139,7 @@ $
 
 `chmod`는 권한 설정을 변경하는 것입니다. change mode.
 
-| 표시 | 이진 Bin | 십진 Dec | 설명
+| 표시 | 이진 Binany | 십진 Decimal | 설명
 |--|--|--|--|
 | --- | 000 | 0 | Nothing |
 | --x | 001 | 1 | Execute |
