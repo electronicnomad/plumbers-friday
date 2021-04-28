@@ -9,7 +9,7 @@
 개발 초기에 이 부분을 활용할 계획이었든지, 앞으로 지원한 계획을 가지고 있는 건 아닐까?
 하는 추정만 가능하겠습니다.
 
-![import target time series data - custom iam role arn](/images/forecast/steps/03-00-iam-custom.png)
+![import target time series data - custom iam role arn](../../images/forecast/steps/03-00-iam-custom.png)
 
 위 그림에서 보는 것과 같이, IAM role은 'Create a new role', 'Enter a custom IAM role ARN',
 그리고 'Use existing role'을 사용할 수 있다. 이미 준비해 둔 IAM role이 있다면 pull down 메뉴
@@ -19,7 +19,7 @@
 본 실습에서는 'Create a new role'을 안내하겠습니다.  
 Pull down 메뉴에서 'Create a new role'을 선택하여 아래의 화면으로 진행합니다.
 
-![create an IAM role](/images/forecast/steps/03-02-create-an-iam-role.png)
+![create an IAM role](../../images/forecast/steps/03-02-create-an-iam-role.png)
 
 무디게 설정하고 싶다면, 'Any S3 bucket'을 선택할 수도 있겠지만 좋은 생각은 아닙니다.
 보안은 최소한의 조건을 부여하면서 시작되는 것입니다. 우리는 'Specific S3 buckets'을
@@ -30,9 +30,9 @@ Pull down 메뉴에서 'Create a new role'을 선택하여 아래의 화면으�
 본 실습을 진행하면서 알게 될, 결과를 출력 export해서 담아낼 버킷을 따로 운영하고
 싶을 때 적당할 수 있습니다.
 
-![data location](/images/forecast/steps/03-01-s3-data-location.png) 
+![data location](../../images/forecast/steps/03-01-s3-data-location.png) 
 
-![AIM role setup & data location](/images/forecast/steps/03-03-success-you-created-an-iam-role-data-location.png)
+![AIM role setup & data location](../../images/forecast/steps/03-03-success-you-created-an-iam-role-data-location.png)
 
 본 단계의 마지막으로, 'Data location'에 준비 단계에서 업로드한 데이터의 위치를 정확히
 입력합니다. 자신의 훌륭한 기억력과 키보드 타건 동작으로 입력할 수도 있지만,
