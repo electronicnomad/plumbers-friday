@@ -43,7 +43,7 @@ $
 ```sh
 -  r  w  x 
 |  |  |  |
-|  |  |  +------ excute
+|  |  |  +------ execute
 |  |  +--------- write
 |  +------------ read
 +--------------- 'd' is directory

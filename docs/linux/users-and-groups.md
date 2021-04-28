@@ -10,3 +10,11 @@ user 사용자와 group 그룹은 단순히 리눅스에 로그인하고
 ## /etc/passwd
 
 사용자에 대한 개별 설정은 `/etc/passwd`에 모두 담겨 있습니다. `/etc/passwd`를 열어 보겠습니다.
+
+```bash
+ubuntu@node0:~$ cat /etc/passwd |grep $USER
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+ubuntu@node0:~$ 
+```
+
+위 예시는 /etc/passwd 파일에서 
