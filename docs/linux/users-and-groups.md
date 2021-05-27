@@ -32,19 +32,13 @@ DESCRIPTION
        /etc/passwd contains one line for each user account, with seven fields delimited by colons
        (":"). These fields are:
 
-       o   login name
-
-       o   optional encrypted password
-
-       o   numerical user ID
-
-       o   numerical group ID
-
-       o   user name or comment field
-
-       o   user home directory
-
-       o   optional user command interpreter
+       -   login name
+       -   optional encrypted password
+       -   numerical user ID
+       -   numerical group ID
+       -   user name or comment field
+       -   user home directory
+       -   optional user command interpreter
 
        The encrypted password field may be blank, in which case no password is required to
        authenticate as the specified login name. However, some applications which read the
@@ -76,6 +70,8 @@ FILES
            Note that this file is used by the tools of the shadow toolsuite, but not by all user
            and password management tools.
 ```
+
+`/etc/passwd`에 있는 7가지 컬럼(필드)에 대한 설명을 하겠습니다.
 
 ### 로그인 이름
 
@@ -116,6 +112,42 @@ $ ls -al /usr/bin/passwd
 -rwsr-xr-x 1 root root 45612 Jul 27  2018 /usr/bin/passwd
 ```
 
+### UID
+
+UID는 User ID의 약어입니다. 모든 사용자는 고유의 ID 값을 가집니다. 그것은 숫자로 기록되고
+`/etc/passwd`에 저장됩니다. 보통의 Linux에서는 사용자를 위한 UID를 1000번부터 시작합니다.
+
+아래는 사용자의 UID를 확인하는 방법입니다. 그냥 `/etc/passwd`를 열어봐도 무관합니다.
+
+```bash
+jhin@home:~$ id
+uid=1000(jhin) gid=1000(jhin) groups=1000(jhin),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev)
+jhin@home:~$
+```
+
+`id`라는 명령을 내리면 현재 명령을 내린 사용자의 UID와 GID를 알려줍니다. GID는 Group ID로 아래 항목에서 설명합니다.
+
+아래 예시와 같이 `id` 명령 뒤에 특정 사용자 이름을 지정하면, 해당 사용자의 UID와 GID를 화면에 출력합니다.
+
+```bash
+jhin@home:~$ id nobody
+uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)
+jhin@home:~$
+```
+
+UID는 사용자를 생성할 때 시스템에서 자동으로 1000번부터 부여하지만, 임의로 지정할 수도 있습니다.
+하지만, 사용하지 말아야할 영역(range)이 있는데, 그 영역은 0번부터 99번입니다. 이 영역은
+시스템에서 사용하고, privilege, 특권 사용자를 위해 남겨둡니다. UNIX에서는 여기까지가 제한인데,
+대부분의 Unix-like 시스템들에서는 그리고 Linux에서도 100번부터 499번까지도 일반 사용자가 사용하지 않도록 하고 있습니다. 이 또한 여러 용도에 따른 시스템에서 동적으로 사용자를 배정하여 사용하는 영역입니다.  
+
+Debian 계열 (Ubuntu도 여기에 해당됩니다) Linux에서는 다음과 같은 사용자 제한 영역이 있습니다.  
+0 - 99, 100 - 999, 60000 - 64999, 65000 - 65533.  
+그래서, Linux에서는 사용자를 생성할 때 1000번부터 부여하여 (일반적으로는) 59999번까지 사용합니다.
+
+어떤 UNIX에서는 UID에를 관리할 때 15bit 값을 사용하여 32,767개의 값을 지정할 수 있었는데,
+실상 Solaris/SunOS를 비롯한 대부분의 UNIX에서는 16bit 값을 사용하여 65,536개의 고유값을 부여할 수 있었습니다. 하지만, Solaris 2.0/SunOS 5.0 이후 32bit 체계를 갖추면서 32bit 값을 UID에서도 사용하여 2^32개, 4,294,967,296개의 고유한 UID값을 지정할 수 있게 되었습니다. Solaris는 1990년부터 이것이 적용되었고, Linux는 2001년, 21세기가 되어서야 가능하게 되었습니다.
+
+`root`사용자는 UID `0`로 지정됩니다. `nobody`는 UID `65534`를 가지게 됩니다. 이 두 사용자는 UNIX, Unix-like 시스템에서 상징적인 로그인 이름입니다.
 
 ## 참조
 
