@@ -18,7 +18,7 @@ ubuntu@node0:~$
 위 예시는 /etc/passwd 파일에서 ubuntu라는 계정을 찾아 그 행을 본 것입니다. /etc/passwd 파일은 이렇게 사용자 정보가 기록되어 있습니다.
 `:`으로 구분된 이 행은 한 사용자에 한 줄씩 정의 되어 있는데, 다음의 순서로 이루어져 있습니다.
 
-`로그인 이름:로그인 암호 정의:UID:GID:사용자 이름(혹은 설명):홈 디렉토리 위치:쉘`  
+`로그인 이름:로그인 암호 정의:UID:GID:사용자 이름(혹은 설명):홈 디렉토리 위치:로그인 쉘`  
 이를 아래와 대칭해서 본다면, 이해가 쉬울 수 있습니다.  
 `ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash`  
 
@@ -149,6 +149,55 @@ Debian 계열 (Ubuntu도 여기에 해당됩니다) Linux에서는 다음과 같
 
 `root`사용자는 UID `0`로 지정됩니다. `nobody`는 UID `65534`를 가지게 됩니다. 이 두 사용자는 UNIX, Unix-like 시스템에서 상징적인 로그인 이름입니다.
 
-## 참조
+### GID
 
-[Managing Users & Groups, File Permissions & Attributes and Enabling sudo Access on Accounts – Part 8](ttps://www.tecmint.com/manage-users-and-groups-in-linux/)
+GID는 Group ID입니다. 그룹에 부여하는 고유의 숫자값입니다. UID는 하나의 사용자에게 하나만 (원칙적으로) 부여할 수 있지만,
+하나의 사용자는 여러게의 그룹에 속할 수 있습니다. 앞서 본 예시를 다시 보면,
+
+```bash
+jhin@home:~$ id
+uid=1000(jhin) gid=1000(jhin) groups=1000(jhin),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev)
+jhin@home:~$
+```
+
+와 같이, `jhin`이라는 사용자는 그룹, `jhin, adm, cdrom, sudo, dip, plugdev`에 동시 속해 있습니다.
+GID 배정은 `/etc/passwd`에 있지 않습니다. `/etc/group` 파일에 정의되어 있습니다.
+
+`/etc/group`은 권한있는 사용자가 편집할 수도 있고, `addgroup`, `groupadd`로 추가, `delgroup`, `groupdel`으로 삭제하는 명령도 마련되어 있습니다.
+
+다중 그룹 지정은 매우 간단합니다.  
+아래는 `/etc/group` 내용 중 일부를 발췌한 것입니다.
+
+```bash
+lightdm:x:114:
+rdma:x:115:
+rtkit:x:116:
+lpadmin:x:117:root,pi
+ssl-cert:x:118:
+pulse:x:119:
+```
+
+위의 예시에서 `lpadmin:x:117:root,pi` 와 같이 마지막 컬럼에 로그인 이름을 추가해 주면 됩니다.
+
+### 사용자 이름
+
+이 부분에는 본디, 각 사용자의 이름을 적어 넣는 용도였습니다. 사람이 구분하기 위함입니다. 최근에는 그저 comment를 남기는 용도로도 사용됩니다. `finger`라는 명령으로 로그인 이름을 찾아보면 이 부분이 출력되는 걸 볼 수 있습니다.
+
+```bash
+$ finger gnats
+Login: gnats          			Name: Gnats Bug-Reporting System (admin)
+Directory: /var/lib/gnats           	Shell: /usr/sbin/nologin
+Never logged in.
+No mail.
+No Plan.
+$
+```
+
+### 홈 디렉토리
+
+해당 사용자의 홈 디렉토리를 지정합니다. 끝 :-)
+
+### 로그인 쉘
+
+해당 사용자가 사용할 로그인 쉘을 지정합니다. 일반적으로는 `/bin/bash`가 지정됩니다. `/etc/passwd`를 살펴보면,
+`/usr/sbin/nologin`으로 지정되어 있는 것을 볼 수 있습니다. 이 지정은 해당 사용자가 쉘을 획득하는 것을 방지합니다.
