@@ -1,13 +1,12 @@
 # 리눅스를 배워 봅시다
 
-리눅스라는 운영체제에 이제 막 진입하는 사람들을 위하여 만들었습니다.
+잘 알지도 못 하는데, 전문가도 아닌데 이런 걸 시작했습니다.
+일하면서 돈벌어 먹고 살면서 알게 된 것들을 나열해 보겠습니다.
+누군가에게는 도움이 되지 않을까요?
 
 ## 방향
 
-이제 리눅스와 마주하기 시작하는 사람들을 대상으로 글을 짓고 있습니다.
-다른 리눅스 문서 프로젝트와는 조금 다른 방향을 가지고 있습니다.
-그래서 깊이 있는 통찰과 폭넓은 응용은 다루어지지 않을 확률이 매우 높습니다.
-작은 것 하나라도 제대로 '이해'할 수 있게 하고 싶은 마음으로 작성합니다.
+리눅스라는 운영체제에 이제 막 진입하는 사람들을 위하여 만들고 있습니다.
 
 ### 기준
 
@@ -21,22 +20,23 @@ Debian 계열을 기준으로 잡는 이유는 매우 간단합니다. 지금 �
 
 ### 구성
 
-아래의 목차는 구성안(構成案)입니다. 그저 안(案)이어서 언제든 변경될 수 있습니다.
+아래의 목차는 구성안(構成案)입니다.  
+그저 안(案)이어서 언제든 변경될 수 있습니다.
 
-- login and logout 로그인과 로그아웃
-- shell 쉘
-- directory 디렉토리
-- file and permissions 파일과 권한
-- users and groups 사용자와 그룹
-- package management 패키지 관리
-- /var/log 로그 파일들
-- daemon and services 데몬과 서비스
-- hardware information 하드웨어 정보 조회
-- networking 네트워크
-- storage 스토리지
-- booting process 부팅 과정
-- performance monitoring 성능 모니터링
-- kernel 커널
+- [x] login and logout 로그인과 로그아웃
+- [x] shell 쉘
+- [x] directory 디렉토리
+- [x] file and permissions 파일과 권한
+- [x] users and groups 사용자와 그룹
+- [ ] package management 패키지 관리
+- [ ] /var/log/* 로그 파일들
+- [ ] daemon and services 데몬과 서비스
+- [ ] hardware information 하드웨어 정보 조회
+- [ ] networking 네트워크
+- [ ] storage 스토리지
+- [ ] booting process 부팅 과정
+- [ ] performance monitoring 성능 모니터링
+- [ ] kernel 커널
 
 ## 기타
 
