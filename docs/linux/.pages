@@ -7,3 +7,4 @@ arrange:
     - directories.md
     - users-and-groups.md
     - file-and-permissions.md
+    - package-management.md
