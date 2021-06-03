@@ -27,7 +27,6 @@ Ubuntu를 포함하는 Debian 계열은, dpkg, Debian Package Manager로
 판매목적으로 만들어진 소프트웨어 같은 경우에는 바이너리들과 라이브러리들을 `tar`와 같은 묶음으로
 테이프나 플로피 나중에는 CD-ROM 혹은 DVD-ROM에 넣어서 사용자에게 전달되었습니다.
 
-
 > ![storage tape](https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Dds_tape_drive_01.jpg/600px-Dds_tape_drive_01.jpg)  
 > DDS tape drive. Above, from left to right: DDS-4 tape (20 GB), 112m Data8 tape (2.5 GB), QIC DC-6250 tape (250 MB), and a 3.5" floppy disk (1.44 MB) - [Tape drive
 From Wikipedia](https://en.wikipedia.org/wiki/Tape_drive), 그리고 바닥에 깔려 있는 건, Sun UniPack DDS Tape Drive.
@@ -52,3 +51,42 @@ From Wikipedia](https://en.wikipedia.org/wiki/Tape_drive), 그리고 바닥에 �
 그리고 중앙에서 일괄적으로 데이터 센터나 클라우드에 배포된 다수의 OS를 관리한다면
 패키지 관리 시스템이 없이는 매우 복잡하고 어려울 수 있다. 이 것이 또 하나의 이유라고 할 수 있습니다.
 
+## 패키지 관리자
+
+직접 패키지 파일(.dev)을 설치할 때에는 `dpkg` 명령을 사용합니다. 그리고 온라인에 있는 리포지토리를 활용하여 패키지를 다운로드 받아 설치까지 마치는 방식이 있습니다. 이 때에는 `apt`라는 명령을 사용하게 됩니다.
+
+### dpkg
+
+### apt
+
+apt 명령은 최근에 소개되었습니다. 그 이전까지는 `apt-get`이라는 명령과 `apt-cache`라는 명령이 따로 역할 하던 것을 `apt` 하나로 갈음하게 되었습니다.
+
+`apt-get`과 `apt-cache`라는 명령도 여전히 존재합니다.
+
+#### /etc/apt
+
+`/etc/apt`에는 `apt` 명령을 위한 설정들이 있습니다.
+그 중에 빈도 있게 들여다 볼 기회가 있는 설정 파일은, 아무래도
+`/etc/apt/source.list`입니다.
+
+`/etc/apt/source.list`는 `apt` 명령이 수행되면서 참조하는 것인데, 이 곳에 패키지가 있을 곳을 정의해 둡니다.
+사용자가 추가할 수도 있으며, 기본적으로 배포판 제막한 곳에서
+제공하는 리포지토리들이 수록되어 있습니다. 기본값은 아래와 같습니다.
+
+```bash
+$ more /etc/apt/sources.list
+deb http://deb.debian.org/debian buster main
+deb http://deb.debian.org/debian buster-updates main
+deb http://security.debian.org/debian-security/ buster/updates main
+$
+```
+
+### 패키지 검색
+
+`$ apt search`로 패키지를 검색할 수 있습니다.
+
+`apt` 명령으로 패키지를 찾아서 설치하는 것이
+무언가 자연스러운 시스템 관리의 방법인 듯 하지만 ;-)
+원하는 패키지를 찾는 방법은 시대에 맞게 웹 브라우저에서도 가능합니다.
+[Debian Packages Search](https://packages.debian.org/index).
+물론, 구글링이 더 나은 결과를 얻을 때도 있습니다 :-)
