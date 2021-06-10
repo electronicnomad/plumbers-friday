@@ -103,3 +103,45 @@ $
 원하는 패키지를 찾는 방법은 시대에 맞게 웹 브라우저에서도 가능합니다.
 [Debian Packages Search](https://packages.debian.org/index).
 물론, 구글링이 더 나은 결과를 얻을 때도 있습니다 :-)
+
+```bash
+$ apt search nginx-full
+Sorting... Done
+Full Text Search... Done
+nginx/stable 1.14.2-2+deb10u4 all
+  small, powerful, scalable web/proxy server
+
+nginx-full/stable 1.14.2-2+deb10u4 armhf
+  nginx web/proxy server (standard version)
+
+$
+```
+
+위 예시는 `nginx-full`이라는 패키지를 검색한 것입니다.
+이 때, 연관된 그러니까, dependancy라고 부르는 상호 필요한 패키지도 함께 출력합니다.
+이 경우에는 `nginx`가 되겠습니다.
+
+`$ apt search nginx`라고 명령을 내리면 상당히 많은 패키지 목록을 볼 수 있습니다.
+`nginx`라는 패키지에 dpendancy가 있는 것들입니다.
+
+`apt` 명령으로 패키지를 설치하면, 관계된 그래서 필요한 다른 패키지도 함께 자동으로 설치해 줍니다.
+그래서 이 부분에 대한 걱정을 덜 수 있습니다.
+
+### 패키지 설치
+
+`$ apt install 패키지_이름`으로 설치할 수 있습니다.
+`apt` 명령은 인터넷에 있는 리포지토리에 해당 패키지를 다운로드하고 설치하는 과정을 거칩니다.
+따라서, 인터넷에 연결되지 않는 시스템에서는 대체로 사용할 수 없습니다.
+
+#### 로칼 리포지토리
+
+사설망에 리눅스 시스템이 있고 외부망과 연결할 계획이 없다면, 로칼 네트워크에 리포지토리를
+설치해서 운영할 수 있습니다. 물론, 리포지토리가 있는 서버는 외부와 일시적이든 영구적이든
+통신이 가능해야 합니다.
+
+이에 대한 설명은 [Ubuntu Wiki](https://help.ubuntu.com/community/Repositories/Personal)에
+잘 설명되어 있습니다.
+
+### 패키지 제거
+
+`$ apt remove 패키지_이름`으로 원하는 패키지를 제거할 수 있습니다.
