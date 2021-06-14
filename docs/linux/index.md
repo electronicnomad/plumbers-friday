@@ -7,6 +7,9 @@
 ## 방향
 
 리눅스라는 운영체제에 이제 막 진입하는 사람들을 위하여 만들고 있습니다.
+그리고 그래픽 사용자 인터페이스(GUI)에 대한 설명은 없을 것입니다.
+콘솔이든, 원격 접속이든 명령 라인(command line)으로 사용하고
+제어하는 방법을 알려드립니다.
 
 ### 기준
 
@@ -14,6 +17,7 @@
 Ubuntu에서 수행한 결과를 예제로 삼을 수도 있고,
 Debian을 언급할 수도 있고, Raspberry Pi OS를
 혹은, WSL(Windows Subsystem for Linux)에 대한 이야기가 있을 수도 있습니다.
+
 Debian 계열을 기준으로 잡는 이유는 매우 간단합니다. 지금 이 글을 적고 있는
 사람이 이것에 익숙하기 때문입니다. 다른 예를 추가 되거나, 차이점을 설명해 줄 수 있는
 기회가 있기를 바랍니다.
@@ -28,7 +32,7 @@ Debian 계열을 기준으로 잡는 이유는 매우 간단합니다. 지금 �
 - [x] directory 디렉토리
 - [x] file and permissions 파일과 권한
 - [x] users and groups 사용자와 그룹
-- [ ] package management 패키지 관리
+- [x] package management 패키지 관리
 - [ ] /var/log/* 로그 파일들
 - [ ] daemon and services 데몬과 서비스
 - [ ] hardware information 하드웨어 정보 조회
