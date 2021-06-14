@@ -264,7 +264,7 @@ Processing triggers for dbus (1.12.16-2ubuntu2.1) ...
 $ 
 ```
 
-#### 또 하나의 업그래이드
+#### 다른 방식의 업그래이드
 
 `apt upgrade`는 기존의 설치되었던 이전 버전의 패키지를 보존합니다.
 때에 따라서 되돌아가야 할 일이 있기도 하기 때문입니다. 그런 반면 `apt full-upgrade`라는
