@@ -47,7 +47,7 @@ extra:
       link: https://github.com/electronicnomad
     - icon: fontawesome/brands/blogger
       link: https://www.jhin.com
+  analytics:
+    provider: google
+    property: UA-113185952-3
 #
-google_analytics:
-  - UA-113185952-3
-  - auto
