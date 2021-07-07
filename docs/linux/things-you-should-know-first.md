@@ -52,19 +52,7 @@ Linux는 오픈소스입니다. GNU Public License, GPL의 규정을 따르고 �
 운영체제에서 거의 동일하게 동작합니다.
 
 ```bash
-man
-ls
-cd
-pwd
-cp
-mv
-cat
-more
-sort
-touch
-mkdir
-rmdir
-rm
+man ls cd pwd cp mv cat more sort touch mkdir rmdir rm
 ```
 
 ### 도움말 보기

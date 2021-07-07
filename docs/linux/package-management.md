@@ -18,18 +18,14 @@ Ubuntu를 포함하는 Debian 계열은, dpkg, Debian Package Manager로
 윈도(Windows)와 맥오에스(macOS)는 물론이거니와 iOS나 안드로이드(Android)와 같은 스마트폰 운영체제에서도
 이러한 체계를 사용합니다.
 
-이런 체계에서 가장 늦게 진입한 운영체제는 아무래도 리눅스와 같은 쪽이겠습니다.
-
 ### 패키지 매니저가 없던 시절
 
 패키지 단위의 소프트웨어 설치 및 관리 등이 등장하기 이전에는 사용자가 직접 소스 수준에서 컴파일하여
 사용자가 원하는 위치에 가져다 놓는 것으로 '설치'에 필요한 모든 과정을 처리하였으며,
 판매목적으로 만들어진 소프트웨어 같은 경우에는 바이너리들과 라이브러리들을 `tar`와 같은 묶음으로
-테이프나 플로피 나중에는 CD-ROM 혹은 DVD-ROM에 넣어서 사용자에게 전달되었습니다.
+테이프나 플로피 나중에는 CD-ROM 그리고 DVD-ROM에 넣어서 사용자에게 전달되었습니다.
 
-> ![storage tape](https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Dds_tape_drive_01.jpg/600px-Dds_tape_drive_01.jpg)  
-> DDS tape drive. Above, from left to right: DDS-4 tape (20 GB), 112m Data8 tape (2.5 GB), QIC DC-6250 tape (250 MB), and a 3.5" floppy disk (1.44 MB) - [Tape drive
-From Wikipedia](https://en.wikipedia.org/wiki/Tape_drive), 그리고 바닥에 깔려 있는 건, Sun UniPack DDS Tape Drive.
+[![storage tape](./tapes-and-floppy-diskette.jpg)](https://en.wikipedia.org/wiki/Tape_drive)
 
 이렇게 배포되는 소프트웨어의
 설치 과정은 동봉된 쉘 스크립트를 사용하여 각 바이너리들과 라이브러리와 설정에 관계되는 편집 가능한
