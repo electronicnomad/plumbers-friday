@@ -2,11 +2,11 @@
 
 ## 잡설 雜說
 
-[CERN](https://home.cern/)에서 웹 서비스를 선보인 이후,
+[CERN](https://home.cern/)에서 웹 서비스를 선보인 뒤,
 [CERN httpd](https://www.w3.org/Daemon/)가 사람들을 매료시켰습니다.
-이 후 대세는, Netscape(이후, Sun Netscape Alliance, 이후 Oracle)의
+Netscape(이후, Sun Netscape Alliance, 이후 Oracle)의
 [iPlanet](https://en.wikipedia.org/wiki/IPlanet)이 화려하게 등장했지만,
-협소한 영역에서 잠시 주목받기만 했습니다. 하지만, iPlanet은 당시 세상을 바꿔가던 전자상거래 서비스에
+한정된 영역에서 잠시 주목받기만 했습니다. 하지만, iPlanet은 당시 세상을 바꿔가던 전자상거래 서비스에
 보안과 모니터링 등의 편의를 제공하면서 중요한 역할을 수행했습니다. CERN httpd를 잇는
 오픈소스 진영의 [Apache HTTP Server](https://httpd.apache.org/)는
 오랫동안 왕좌를 지켜왔습니다. 물론, 이런 경쟁 속에서
