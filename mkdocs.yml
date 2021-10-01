@@ -9,8 +9,20 @@ repo_url: https://github.com/electronicnomad/plumbers-friday
 theme:
   name: material
   palette:
-    primary: black
-    accent: blue
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: cyan
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: lime
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
   font:
     text: Noto Sans KR
     code: Noto Mono
@@ -49,5 +61,6 @@ extra:
       link: https://www.jhin.com
   analytics:
     provider: google
-    property: UA-113185952-3
+#    property: UA-113185952-3
+    property: G-288189520
 #
