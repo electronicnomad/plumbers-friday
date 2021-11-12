@@ -45,8 +45,8 @@ Jul 24 22:31:45 bastion kernel: [2862974.405074] sd 0:0:0:0: [sda] Write cache: 
 Jul 24 22:31:45 bastion kernel: [2862974.450013]  sda: sda1
 Jul 24 22:31:45 bastion kernel: [2862974.452257] sd 0:0:0:0: [sda] Attached SCSI removable disk
 Jul 24 22:31:45 bastion kernel: [2862974.787033] exfat: Deprecated parameter 'namecase'
-Jul 24 22:31:46 bastion systemd[1]: Started Clean the /media/pi/Samsung USB mount point.
-Jul 24 22:31:46 bastion udisksd[398]: Mounted /dev/sda1 at /media/pi/Samsung USB on behalf of uid 1000
+Jul 24 22:31:46 bastion systemd[1]: Started Clean the /media/pi/256 mount point.
+Jul 24 22:31:46 bastion udisksd[398]: Mounted /dev/sda1 at /media/pi/256 on behalf of uid 1000
 ```
 
 위 예시는 리눅스 장비의 USB 포트에 USB 메모리 장치를 삽입한 후 시스템에서 출되는 메시지입니다.
@@ -56,8 +56,32 @@ Jul 24 22:31:46 bastion udisksd[398]: Mounted /dev/sda1 at /media/pi/Samsung USB
 우리가 필요한 정보는 새로운 디스크(저장 매체)의 위치 정보입니다.  
 위 메시지에서 우리가 주목해야 할 부분은 `/dev/...`로 시작되는 곳입니다.
 `/dev`는 디바이스에 대한 정보가 있는 디렉토리이고, 여기에 디스크의 정보도 수록됩니다.
-위 예시에서는 `/dev/sda1`이라는 새로운 디스크의 파티션이 `/media/pi/Samsung USB`로 마운트된 것까지 알 수 있습니다.
+위 예시에서는 `/dev/sda1`이라는 새로운 디스크의 파티션이 `/media/pi/256`로 마운트된 것까지 알 수 있습니다.
 
 장착한 새로운 디스크에 대한 정보를 얻는 방식으로 가장 흔하게 사용되는 것은, 다음의 명령을 수행하는 것입니다.
 
-`sudo lsblk`
+!!! info
+    위 syslog에 반영된 정보와 아래의 출력된 정보는 같은 시스템에서 가져온 것이라 대략적으로 같은 내용일 수 있지만
+    이 문서의 작성 시점에 수 개월의 공백에 있는 탓에 같은 하드웨어 구성인지 확신은 없습니다. 따라서 위의
+    syslog 출력문을 아래의 예제와 1:1로 견주어 생각하시지는 않기를 바랍니다.
+
+`sudo lsblk` 이 명령을 수행하면, 다음과 같은 결과가 화면에 출력됩니다.
+
+```bash
+$ sudo lsblk
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda           8:0    1  239G  0 disk 
+`-sda1        8:1    1  239G  0 part /media/pi/256
+mmcblk0     179:0    0 29.8G  0 disk 
+|-mmcblk0p1 179:1    0  256M  0 part /boot
+`-mmcblk0p2 179:2    0 29.6G  0 part /
+$ 
+```
+
+`lsblk`는 'list block devices'라는 의미로 해당 시스템에 논리적이든 물리적이든 연결된 block device(s)를
+화면에 출력해 주는 역할을 합니다. block device 블록 디바이스란, filesystem 파일 시스템을 작성해서 데이터를 직접 작성하거나 기록에 활용하는 저장 장치를 말합니다. 우리가 익히 알고 있는, HDD, SDD 같은 것이 여기에 해당됩니다.
+
+`lsblk`로 현재 시스템에 연결된 디스크/저장장치를 살펴볼 수 있고, 이 때 획득한 정보 - 디스크의 주소 - 를 통해서
+다음의 과정으로 나아갈 수 있습니다. 위 출력 내용을 보면, `sda`라는 새로운 디바이스가 있고, `sda1`이라는
+파일 시스템이 `/dedia/pi/256`에 마운트 되어 있다는 걸 알 수 있습니다.
+
