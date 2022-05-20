@@ -26,8 +26,8 @@ theme:
   font:
     text: Noto Sans KR
     code: Noto Mono
-  logo: images/logo-plumping-white.png
-  favicon: images/favicon-plumping-black.ico
+  logo: logo-plumping-white.png
+  favicon: favicon-plumping-black.ico
   icon:
     admonition:
       note: octicons/tag-16
@@ -48,6 +48,10 @@ plugins:
   - awesome-pages
   - git-revision-date-localized:
       type: timeago
+  - redirects:
+      redirect_maps:
+         'forecast/index.md': 'aws/forecast/index.md'
+         'networking/index.md': 'aws/networking/index.md'
 #
 markdown_extensions:
   - attr_list
@@ -76,6 +80,6 @@ extra:
       link: https://www.jhin.com
   analytics:
     provider: google
-#    property: UA-113185952-3
-    property: G-288189520
+    property: UA-113185952-3
+    #property: G-288189520
 #
