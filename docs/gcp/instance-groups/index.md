@@ -29,12 +29,3 @@ managed instance group은 autoscaling을 통해서 이 부분을 가능하게 �
 되는 건 가장 클라우드 다운 컴퓨팅이라고 할 수 있습니다.
 
 이러한 기능에 autohealing이 추가되고, updating의 방법이 다양하게 제공되어서, managed instance group으로 rolling update, canary 배포와 같은 응용이 가능하게 됩니다. 물론, managed instance group과 친구처럼 여겨지는 load balancer를 통한 A/B testing도 설게할 수 있습니다.
-
-!!! Disclaimer
-    이 글을 작성할 당시 주 작성자는 Google의 직원으로 재직하고 있는 중이었으며,
-    현재 화면에 출력될 수 있게 HTML 등으로 조판된 문서의 소스가 담겨져 있는
-    [GitHub의 프로파일](https://github.com/electronicnomad)에 그 사실이 명시되어 있습니다.
-    작성자는 본 글을 통하여 회사를 대변하는 역할을 하지 않으며, 작성자의 관점에서 정보의
-    취합과 전달을 목적으로 합니다. 만약 공식 홈페이지에 있는 내용과 상충되거나 조금이라도
-    달리 해석될 여지가 있는 내용은 공식 홈페이지에 있는 내용을 조건없이 정당한 것으로 여기고
-    본 문서에 있는 내용을 부정합니다.

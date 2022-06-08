@@ -52,6 +52,7 @@ plugins:
       redirect_maps:
          'forecast/index.md': 'aws/forecast/index.md'
          'networking/index.md': 'aws/networking/index.md'
+  - include-markdown
 #
 markdown_extensions:
   - attr_list
