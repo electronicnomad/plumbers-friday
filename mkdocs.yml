@@ -81,6 +81,6 @@ extra:
       link: https://www.jhin.com
   analytics:
     provider: google
-    property: UA-113185952-3
-    #property: G-288189520
+    #property: UA-113185952-3
+    property: G-1KEX2CMRTD
 #
