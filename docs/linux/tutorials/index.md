@@ -6,9 +6,9 @@
 
 ## 실습 환경
 
-리눅스 머신이 필요합니다. 여러분의 PC에 리눅스가 설치되어 있어도 좋고, Windows PC내의 Hyper-V 가상머신으로 리눅스를 가동시켜도 좋습니다.
+리눅스 머신이 필요합니다. 여러분의 PC에 리눅스가 설치되어 있어도 좋고, Windows PC내의 Hyper-V 가상머신으로 리눅스를 가동시켜도 좋습니다. 전 [Raspberry Pi](https://www.raspberrypi.org/) 하나 마련해서 사용한다면 리눅스 학습에 많은 도움이 된다고 생각합니다. 
 Azure나 AWS, 혹은 GCP의 리눅스 VM도 좋습니다. 다만 실습에서 기준이 되는 운영환경은 Ubuntu 20.04 LTS 버전입니다.
-다른 버전의 Ubuntu나 Debian 배포판도 큰 차이는 없지만, Fedora, CentOS, 그리고 RHEL 등은 큰 차이가 있을 수 있습니다.
+다른 버전의 Ubuntu나 Debian 배포판도 큰 차이는 없지만, Fedora, CentOS, 그리고 RHEL 등은 작은 정도의 차이가 있을 수 있습니다.
 
 ## 리눅스 설치
 
