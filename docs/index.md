@@ -4,21 +4,20 @@
 여기의 입력된 무언가가 누군가에게 어떤 도움이 될 수 있다면,
 밥 먹을 때마다 잠 들 때에도 즐거울 것 같습니다.
 
+설명과 직접 수행해 볼 수 있는 hands-on labs를 수록하고 있습니다.
+AWS Forecast와 AWS Networking에 관한 이야기를 시작으로,
+지금은 Linux 101 - 리눅스를 배워보는 것을 채워 넣고 있습니다.
+
 ## 차림
 
 Amazon Web Services
 
-- AWS Forecast      
-- AWS Networking
-  * Privatelink
-  * VPC peering
-  * Transit gateway
+- [AWS Forecast](/pf/aws/forecast/)      
+- [AWS Networking](/pf/aws/networking/)
+  * [Privatelink](/pf/aws/networking/privatelink/)
+  * [VPC peering](/pf/aws/networking/vpc-peering/)
+  * [Transit gateway](/pf/aws/networking/transit-gateway/)
 
-Linux 
+Linux 101
 
-- Login and logout
-- Shell
-- Directory
-- File and permissions
-- Users and groups
-- Package management
+- [리눅스를 배워 봅시다](/pf/linux/)
