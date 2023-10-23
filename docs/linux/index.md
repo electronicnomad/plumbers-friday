@@ -34,7 +34,7 @@ Debian 계열을 기준으로 잡는 이유는 매우 간단합니다. 지금 �
 - [x] directory 디렉토리
 - [x] file and permissions 파일과 권한
 - [x] users and groups 사용자와 그룹
-- [ ] package management 패키지 관리
+- [x] package management 패키지 관리
 - [ ] /var/log/* 로그 파일들
 - [ ] daemon and services 데몬과 서비스
 - [ ] hardware information 하드웨어 정보 조회

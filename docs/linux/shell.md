@@ -59,14 +59,14 @@ $
 
 #### $HOME
 
-현재 사용자의 홈 디렉토리입니다. 끝. ;-)
+현재 사용자의 홈 디렉토리입니다.
 
 #### $PS1
 
 `$PS1`은 사용자의 쉘 프롬프트를 꾸며주는 변수입니다. ` $ ` 로그인 프롬프트가 이와 같이 보인다면 `$PS1`에 꾸밈이 들어간 것이죠, 이 꾸임에는 나름의 문법이 있는데, <https://access.redhat.com/solutions/505983>와 <https://wiki.archlinux.org/index.php/Bash/Prompt_customization>를 읽어보면 많은 도움이 됩니다. 하지만, 일단 배우고 익히는 건 뒤로 하고 내 쉘 프롬프트를 이쁘게 꾸미고 싶다! 라는 생각을 하신다면,
 <https://ezprompt.net/> 이 곳에서 쉽게 만들 수 있답니다.
 
-## Shell built-in commnads
+## Shell built-in commands
 
 관련 번역서 등에서는 '쉘 내장 명령어'라고 한국어로 표현하고 있습니다.
 내장은 內藏으로 적을 수 있고, 우리가 아는 동물의 몸 속에 있는 장기들을 뜻 합니다.
