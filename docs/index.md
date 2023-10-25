@@ -12,12 +12,12 @@ AWS Forecast와 AWS Networking에 관한 이야기를 시작으로,
 
 Amazon Web Services
 
-- [AWS Forecast](/pf/aws/forecast/)      
-- [AWS Networking](/pf/aws/networking/)
-  * [Privatelink](/pf/aws/networking/privatelink/)
-  * [VPC peering](/pf/aws/networking/vpc-peering/)
-  * [Transit gateway](/pf/aws/networking/transit-gateway/)
+- [AWS Forecast](./aws/forecast/)      
+- [AWS Networking](./aws/networking/)
+  * [Privatelink](./aws/networking/privatelink/)
+  * [VPC peering](./aws/networking/vpc-peering/)
+  * [Transit gateway](./aws/networking/transit-gateway/)
 
 Linux 101
 
-- [리눅스를 배워 봅시다](/pf/linux/)
+- [리눅스를 배워 봅시다](./linux/)
