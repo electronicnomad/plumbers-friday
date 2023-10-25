@@ -72,6 +72,11 @@ markdown_extensions:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - mdx_truly_sane_lists
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 #
 extra:
   social:
@@ -83,3 +88,5 @@ extra:
     provider: google
     property: G-1KEX2CMRTD
 #
+#extra_css:
+#  - stylesheets/extra.css
