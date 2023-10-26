@@ -97,16 +97,16 @@ $
 `lsblk`는 'list block devices'라는 의미로 해당 시스템에 논리적이든 물리적이든 연결된 block device(s)를
 화면에 출력해 주는 역할을 합니다. block device 블록 디바이스란, filesystem 파일 시스템을 작성해서 데이터를 직접 작성하거나 기록에 활용하는 저장 장치를 말합니다. 우리가 익히 알고 있는, HDD, SDD 같은 것이 여기에 해당됩니다.
 
-`lsblk`로 현재 시스템에 연결된 디스크/저장장치를 살펴볼 수 있고, 이 때 획득한 정보 - 디스크의 주소 - 를 통해서
-다음의 과정으로 나아갈 수 있습니다. 위 출력 내용을 보면, `sda`라는 새로운 디바이스가 있고, `sda1`이라는
-파일 시스템이 `/media/pi/256`에 마운트 되어 있다는 걸 알 수 있습니다.
-
-!!! info "마운트란?"
+!!! info inline "마운트란?"
     마운트는 mount라는 명령 혹은 그 명령으로 꾀하는 행위를 말합니다. 영단어 mount가 지니고 있는
     의미가 가미되긴 했으리라 보지만, 아무튼, '마운트'는 저장 매체를 시스템에 인식시키고 
     파일 시스템을 작성했거나 이와 유사한 형태로 (프로그램을 포함하는)
     사용자가 '마운트 된 저장매체에' 파일을 생성하고 
     조작할 수 있는 상태라고 할 수 있습니다.
+
+`lsblk`로 현재 시스템에 연결된 디스크/저장장치를 살펴볼 수 있고, 이 때 획득한 정보 - 디스크의 주소 - 를 통해서
+다음의 과정으로 나아갈 수 있습니다. 위 출력 내용을 보면, `sda`라는 새로운 디바이스가 있고, `sda1`이라는
+파일 시스템이 `/media/pi/256`에 마운트 되어 있다는 걸 알 수 있습니다.
 
 현대의 사용자가 직접 (쉽게) 설치할 수 있는 리눅스 배포한들은 대체로 이동식 저장장치가 시스템에 연결되면
 자동 마운트를 해 줍니다. 위 예시에서 보이는 `/media/pi/256`로 그와 같은 경위로 우리가 조회할 수 있습니다.
@@ -124,7 +124,7 @@ mount라는 명령은 후속 옵셥이 없으면, 시스템에 현재 마운트�
 이 파일 시스템이 좋다면 이대로 사용해도 되겠습니다. 그런데, 다른 파일 시스템으로 작성하고자 한다면
 이 또한 가능합니다.
 
-!!! note
+!!! note "항상 그렇지 않다"
     위에서 보여준 예제는 Raspberry Pi OS가 동작하는 곳에 USB 메모리를 연결한 결과입니다.
     해당 환경에서는 OS가 인식할 수 있는 파일 시스템을 가지고 있는 스토리지 디바이스를 감지하면
     자동으로 마운트하게 됩니다. 모든 Linux를 커널로 가지고 있는 배포판이 동일하게 동작하지는 않습니다.
@@ -143,17 +143,142 @@ $ sudo umount /media/pi/256
 만약 파일 시스템을 작성하기 전에 대상 디스크의 파티션을 나누어야 한다면,
 `fdisk` 명령으로 해당 작업을 진행할 수 있습니다.
 
+### 파티션 작성
+
+`fdisk`는 전통적인 디스크 관리 명령입니다.
+파티션을 삭제 및 작성할 수 있으며, 아주 오래된 프로그램답게 
+이제는 거의 잊혀진 (쓸모 없어진) 옵션들도 즐비합니다.
+
+`fdisk` 대신 `parted`라는 명령어를 사용할 수도 있습니다.
+같은 목적을 가진 다른 명령어입니다. 여기에서는 `fdisk`를 설명합니다.
+현대적인 운영 환경에서는 `parted`가 더 적합할 수 있습니다.
+
+!!! info "parted 사용자 안내서"
+    https://www.gnu.org/software/parted/manual/parted.html 
+
+다음의 명령어와 같이 `fdisk`를 확인된 새 디스크 경로를 지정하여 실행합니다.
+
 ```bash
 $ sudo fdisk /dev/sda
-```
 
-!!! info "리눅스 배포판에서 디스크 경로"
+Welcome to fdisk (util-linux 2.37.2).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+
+Command (m for help):
+```
+`m`은 도움말을 보는 것인데, 매우 유용합니다.  
+모든 걸 기억하는 것보다 어디에 무엇이 있는지 잘 찾는 능력이 더 중요합니다.
+
+!!! note "리눅스 배포판에서 디스크 경로"
     `/dev/sda`는 위 예시에서 나타는 디스크의 경로입니다.<br />
     s는 SCSI, d는 Disk, a는 디스크 순번입니다.
     `/dev/sda는` 해당 시스템에 장착된 첫 번째 SCSI Disk라는 뜻이 됩니다. 
     두 번째 디스크는 `/dev/sdb`가 됩니다.
+    (과거의 IDE 형식의 디스크 이외에는 대체로 SCSI 디스크로 구분합니다)
     이 이후에 붙는 숫자는 파티션입니다. `/dev/sda1`은 첫 번째 SCSI Disk의 첫번째 파티션이라는
     의미가 됩니다. 파티션을 작성하는 작업은 그래서, `/dev/sda`를 `fdisk`에서 선택하게 됩니다.
+
+앞서 자동 마운트 된 것에서 알 수 있듯이 해당 `/dev/sda`는 exfat 파티션 1개를 가지고 있습니다.
+이 파티션을 지우고, 두 개의 파티션을 만들어 보겠습니다.
+먼저 해당 디스크가 어떤 파티션 정보를 가지고 있는지 확인합니다.
+
+```bash
+Command (m for help): p
+Disk /dev/sda: 239.02 GiB, 256641603584 bytes, 501253132 sectors
+Disk model: Flash Drive FIT 
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x1fe23221
+
+Device     Boot Start       End   Sectors  Size Id Type
+/dev/sda1        2048 501252095 501250048  239G  7 HPFS/NTFS/exFAT
+
+Command (m for help): 
+```
+
+우리의 기억과 다름없이 `/dev/sda1` 파티션 하나가 있습니다.  
+이 파티션을 지우겠습니다.
+
+```bash
+Command (m for help): d
+Selected partition 1
+Partition 1 has been deleted.
+
+Command (m for help): p
+Disk /dev/sda: 239.02 GiB, 256641603584 bytes, 501253132 sectors
+Disk model: Flash Drive FIT 
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x1fe23221
+
+Command (m for help): 
+```
+
+`d` 입력으로 파티션이 단 하나이기 때문에 재질문 없이 바로 파티션을 지우게 됩니다.
+`p`를 입력하여 작업 결과를 확인했습니다. 의도한 것과 같이 조회되는 파티션이 없습니다.
+
+```bash
+Command (m for help): F
+Unpartitioned space /dev/sda: 239.02 GiB, 256640555008 bytes, 501251084 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+
+Start       End   Sectors  Size
+ 2048 501253131 501251084  239G
+```
+
+`F`를 입력하여 전체 여유 공간을 확인했습니다.
+
+```bash
+Command (m for help): n
+Partition type
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (1-4, default 1): 1
+First sector (2048-501253131, default 2048): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-501253131, default 501253131): +100G
+
+Created a new partition 1 of type 'Linux' and of size 100 GiB.
+Partition #1 contains a ntfs signature.
+
+Do you want to remove the signature? [Y]es/[N]o: Y
+
+The signature will be removed by a write command.
+```
+
+`n`을 입력하여 새로운 파티션 작성을 선언했고,  
+`p`를 통해 primary 파티션 유형을 선택했습니다,  
+`+100G`를 입력하여 새로운 파티션의 크기를 100GB로 선언했습니다.  
+이전 파티션에 남아 있는 기록을 지우겠느냐? 라는 질의가 있었고, Yes라고 답했습니다.
+
+아래는 새로 작성한 파티션을 확인하는 `p`의 입력과 결과입니다.
+
+```bash
+Command (m for help): p
+Disk /dev/sda: 239.02 GiB, 256641603584 bytes, 501253132 sectors
+Disk model: Flash Drive FIT 
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x1fe23221
+
+Device     Boot Start       End   Sectors  Size Id Type
+/dev/sda1        2048 209717247 209715200  100G 83 Linux
+
+Filesystem/RAID signature on partition 1 will be wiped.
+
+Command (m for help): 
+```
+
+
 
 ## 과정 정리
 
