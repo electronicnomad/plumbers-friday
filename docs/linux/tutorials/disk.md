@@ -210,7 +210,7 @@ Partition 1 has been deleted.
 
 Command (m for help): p
 Disk /dev/sda: 239.02 GiB, 256641603584 bytes, 501253132 sectors
-Disk model: Flash Drive FIT 
+Disk model: External USB 3.0 
 Units: sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
@@ -263,7 +263,7 @@ The signature will be removed by a write command.
 ```bash
 Command (m for help): p
 Disk /dev/sda: 239.02 GiB, 256641603584 bytes, 501253132 sectors
-Disk model: Flash Drive FIT 
+Disk model: External USB 3.0 
 Units: sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
@@ -278,17 +278,248 @@ Filesystem/RAID signature on partition 1 will be wiped.
 Command (m for help): 
 ```
 
+나머지 공간에 파티션을 하나 더 만들어 봅니다.
+
+```
+Command (m for help): n
+Partition type
+   p   primary (1 primary, 0 extended, 3 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (2-4, default 2): 
+First sector (209717248-976773167, default 209717248): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (209717248-976773167, default 976773167): 
+
+Created a new partition 2 of type 'Linux' and of size 365.8 GiB.
+
+Command (m for help): p
+Disk /dev/sda: 465.76 GiB, 500107862016 bytes, 976773168 sectors
+Disk model: External USB 3.0
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xcb9878ae
+
+Device     Boot     Start       End   Sectors   Size Id Type
+/dev/sda1            2048 209717247 209715200   100G 83 Linux
+/dev/sda2       209717248 976773167 767055920 365.8G 83 Linux
+
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+$ 
+```
+
+일반적인 PC 기반의 컴퓨터에 연결되는 단일 디스크에서 DOS 형식의 파티션을 만들면
+Primary와 Extended를 선택하게 됩니다. Primary 파티션은 단일 디스크 디바이스 당 
+4개를 생성할 수 있습니다. 무엇을 선택하든, 추가 디스크로서는 큰 차이가 없습니다.
+
+대부분의 입력값을 시스템에서 주는 값(디폴트 값)으로 선택하면 남아 있는 모든 공간을
+새로 만드는 파티션에 할당할 수 있게 됩니다.
+
+`p`를 입력하여 작성한 파티션을 확인하고, `w`를 입력해서 디스크의 파티션 테이블을 저장합니다.
+
 ## 파일 시스템 작성
+
+`mkfs` 명령을 사용해서 일반적으로 파일 시스템을 작성합니다.
+
+```bash
+$ sudo mkfs -t ext4 /dev/sda1
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 26214400 4k blocks and 6553600 inodes
+Filesystem UUID: 3a790adb-946e-41c8-b160-68bc9bb64ac8
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (131072 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+$
+```
+
+`mkfs` 명령에서 `-t ext4`는 `ext4`라는 유형의 파일 시스템을 선택한다는 옵션입니다.
+`ext4`는 'the fourth extended file system'라고 `$ man fs`라면 설명이 있습니다.
+아무런 선언이 없으면, `ext2`가 선택됩니다. 
+
+이어오는 선언은, `/dev/sda1`으로 직전 작성한 파티션 정보까지 포함하는 디바이스 경로를
+입력한 것입니다. 파일 시스템은 파티션 단위로 작성됩니다. 같은 방식으로 두 번째 파티션도
+아래와 같이 작성합니다.
+
+```bash
+$ sudo mkfs -t ext4 /dev/sda2
+mke2fs 1.46.5 (30-Dec-2021)
+Found a dos partition table in /dev/sda2
+Proceed anyway? (y,N) y
+Creating filesystem with 95881990 4k blocks and 23977984 inodes
+Filesystem UUID: c047e4fd-abd8-453c-aeb7-af484330e425
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done     
+
+$
+```
 
 ## 마운트 디스크
 
+디스크를 마운트하여 지금까지의 작업에 문제가 없었는지 확인합니다.  
+우선 마운트 포인트가 될 디렉토리를 만들어 줍니다.
+
+```bash
+$ sudo mkdir /mnt/01
+$ sudo mkdir /mnt/02
+```
+
+그리고, `mount` 명령으로 두 개의 파티션을 마운트해 봅니다.
+
+```bash
+$ sudo mount /dev/sda1 /mnt/01
+$ sudo mount /dev/sda2 /mnt/02
+$ df -k
+Filesystem     1K-blocks    Used Available Use% Mounted on
+tmpfs             799544    3180    796364   1% /run
+/dev/mmcblk0p2  30444092 8144112  21018316  28% /
+tmpfs            3997704       0   3997704   0% /dev/shm
+tmpfs               5120       4      5116   1% /run/lock
+/dev/mmcblk0p1    258095  124431    133664  49% /boot/firmware
+tmpfs             799540      24    799516   1% /run/user/1000
+/dev/sda1      102626232      24  97366944   1% /mnt/01
+/dev/sda2      376388644      28 357195836   1% /mnt/02
+$
+```
+
+문제가 있었다면, `mount` 명령시 에러를 확인할 수 있습니다.  
+`df` 명령으로 마운트된 상태까지 확인합니다.
+
 ### 자동 마운트를 위한 설정
 
-위 예시와 같이 `mount` 명령으로 마운트한 디스크 혹은 파티션은 시스템이 재시작하면 상태 유지가 되지 않고, `mount` 명령을 내린 직전의 상태로 돌아갑니다. 
+위 예시와 같이 `mount` 명령으로 마운트한 디스크 혹은 파티션은 시스템이 재시작하면 상태 유지가 되지 않고, `mount` 명령을 내린 직전의 상태로 돌아갑니다. 그래서 `/etc/fstab`에 정보를 기입하여 시스템이 재시작할 때에도 사용자 혹은 운영자가 원하는 디스크의 마운트 상태를 유지할 수 있도록 설정할 수 있습니다.
 
-그래서 `/etc/fstab`에 정보를 기입하여 시스템이 재시작할 때에도 사용자 혹은 운영자가 원하는 디스크의 마운트 상태를 유지할 수 있도록 설정할 수 있습니다.
+이에 대한 상세한 정보를 진지하게 알고 싶다면, `$ man fstab`와 `$ man mount` 입력해서 man page를 
+읽어보길 권합니다.
 
+우선, 현재 시스템에 있는 `/etc/fstab`을 조회해 봅니다.
 
+```bash
+$ cat /etc/fstab
+LABEL=writable	/	 ext4	defaults	0 0
+LABEL=system-boot	/boot/firmware  vfat    defaults        0       1
+$ 
+```
+
+슬쩍 살펴보면, `대상 디스크 이름`, `마운트 포인트`, `파일 시스템 유형`, `마운트 옵셥`, `무엇`, `무엇` 순서로 되어 있다는 것을 알 수 있습니다. 
+이 문법을 따라 기입한다면 크게 문제 없이 잘 동작할 것만 같은 느낌은 옳은 느낌입니다.
+하지만, 약간은 더 알아 보도록 합시다.
+
+첫번째 컬럼은 여러가지 이름으로 지정할 수 있습니다. 
+
+* /dev/sda1 - 와 같이 디바이스 경로를 기입하는 전통적인 방식이 있습니다.
+* UUID - Universally Unique Identifiers라는 이름의 UUID는 128bit로 형성되며 각 파티션 마다 고유하게 부여됩니다. SAN와 같은 복잡한 환경에서 이러한 UUID는 개별 디바이스를 구별하는 아주 중요한 역할을 하게 됩니다.
+* LABEL - 위 `/etc/fstab`의 예시와 같이 사용자가 직접 부여한 개별 파티션의 레이블 정보를 기입하여 사용하는 것입니다. UUID가 복잡하고 대규모 스토리지 네트워크 상에서는 좋은 역할을 하지만, 소규모 그리고 단일 시스템 내에서는 귀찮은 존재이기도 합니다. (UUID는 사람이 읽어 내기엔 복잡하고 가독성도 좋지 못 합니다)
+그래서 사용자 혹은 관리자가 직접 개별 파티션이 '이름' 즉, 레이블을 부여하고 그것을 활용하여 직관적으로 사용하는 방식입니다.
+
+디스크 디바이스를 이름으로 구별하는 방식은 다양하게 마련되어 있습니다. 아래의 예시를 봅시다.
+
+```bash
+$ ls -al
+total 0
+drwxr-xr-x  7 root root   140 Jan  1  1970 .
+drwxr-xr-x 17 root root 14120 Nov  3 09:57 ..
+drwxr-xr-x  2 root root   200 Nov  3 10:04 by-id
+drwxr-xr-x  2 root root   100 Nov  3 09:51 by-label
+drwxr-xr-x  2 root root   140 Nov  3 10:04 by-partuuid
+drwxr-xr-x  2 root root   200 Nov  3 10:04 by-path
+drwxr-xr-x  2 root root   140 Nov  3 10:04 by-uuid
+$ pwd
+/dev/disk
+$ 
+```
+
+`/dev/disk/` 디렉토리에 접근하면, `by-...` 라는 하위 디렉토리들이 있습니다.
+그 속을 조회해 보면, 여러가지 방식의 해당 디스크 디바이스를 지정하는 이름들이 있습니다.
+하지만, 그 모든 방식이 항상 가르키는 곳에 있습니다. 그건, 위 `mkfs`에서 사용하고
+`fdisk`에서도 사용한 고유한 디바이스 경로입니다.
+
+그래서 저는 `/dev/sda1`과 같은 디바이스 경로를 `/etc/fstab`에 넣는 걸 선호합니다만,
+이 선호는 UNIX System V 계열과 작별을 할 수 밖에 없었던 그 순간 (시기적으로나 상황적으로나) 이후, 
+UUID를 사용하기로 마음 먹었습니다.
+
+하지만, SAN이나 기타 로칼 시스템에 종속되는 (그래서 변경이 없다고 가정할 수 있는) 다비이스가 아닌 경우, 
+이 경로가 변경될 확률이 존재합니다. 사실 로칼 시스템에 종속되더라도 디스크 교체와 같은 행위 중에 
+시스템의 재시작이라는 이벤트 혹은 그와 동등한 의미의 커널의 재인식이 행하여지면 디바이스 경로가 변경될
+수 있습니다. 그래서 UUID를 사용하는 것이 매우 이성적인 선택입니다.
+
+```bash
+$ blkid /dev/sda1
+/dev/sda1: UUID="1b81984a-9e01-488b-bd6c-ecda17d66080" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="cb9878ae-01"
+$ blkid /dev/sda2
+/dev/sda2: UUID="c047e4fd-abd8-453c-aeb7-af484330e425" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="cb9878ae-02"
+$ 
+```
+
+`blkid` 블록 디바이스의 ID를 조회하는 명령으로, 디바이스 경로를 뒤이어 입력하면 개별 파티션의 UUID를 확인할 수 있습니다. 이 값을 `/etc/fstab`에 첫번째 컬럼에 기입합니다.
+
+그렇게 기입하게 되는 `/etc/fstab`은 다음과 같습니다.
+
+```bash
+...
+UUID=1b81984a-9e01-488b-bd6c-ecda17d66080       /mnt/01 ext4    defaults        0       0
+UUID=c047e4fd-abd8-453c-aeb7-af484330e425       /mnt/02 ext4    defaults        0       0
+```
+
+* 각 컬럼 사이의 공백은 TAB으로 띄우는 것이 일반적입니다.   
+* 두 번째 컬럼의 마운트 포인트는 본 예제에서 위와 같이 `mkdir`로 미리 만들어 놓았습니다.
+* 세 번째 컬럼은 `mkfs` 명령을 내리면서 정해졌습니다. 본 에시에서는 `ext4`이었습니다.
+* 네 번째 컬럼의 `defaults`는 옵션을 기본 옵션을 사용하겠다는 뜻이며, 다양한 선택을 알고 싶으시면, `fstab`의 man page를 참조하면 좋겠습니다.
+* 다섯 번째 컬럼은, `0`이 기입되어 있는데, 이건 지금부터 영원히 `0`이외의 값은 의미가 없을 것입니다.  
+고전적 의미에서의 백업을 담당하던 `dump`와 같은 유틸리티가 특정한 작동을 '자동'으로 행할 때 `/etc/fstab`을 조회하여 
+백업의 대상이 되는 파티션을 선택할 수 있도록 하던 표식입니다.  
+`0`은 대상이 아님, `1`은 대상임 - 을 의미합니다.  
+이제는 그 '고전적 의미의 백업'을 행하지 않습니다.
+* 여섯 번재 컬럼은, `0`이면 시스템이 부팅할 때 파일 시스템을 점검하지 않는 것을 의미합니다.  
+`0`이 아닌 수가 기입되면 `fsck` 명령을 수행하면서 파일 시스템을 점검합니다.  
+일반적으로 root/부팅 파티션이면 `1`을 부여하고
+기타 파티션이면 1보다 높은 수를 부여합니다.  
+수가 낮을 수록 먼저 `fsck`를 수행합니다.
+
+이제 기입한 `/etc/fstab`이 제대로 작동하는지 다음의 명령을 통하여 확인합니다.
+
+```bash
+$ sudo umount /mnt/01
+$ sudo umount /mnt/02
+```
+
+위에서 마운트 해 두었던 각 파일 시스템을 `umount`합니다.
+
+```bash
+$ sudo mount /mnt/01
+$ sudo mount /mnt/02
+$ df /mnt/01
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/sda1      102626232    24  97366944   1% /mnt/01
+$ df /mnt/02
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/sda2      376388644    28 357195836   1% /mnt/02
+$
+```
+
+`/etc/fstab`에 제대로 기입되었다면, `mount` 명령 뒤에 마운트 포인트만 지정하면
+미리 선언해 둔 조건에 맞춰 마운트를 하게 됩니다.
+그리고 `df` 명령으로 마운트 상태를 확인합니다.
+
+이렇게 하면 모든 것이 제대로 끝났습니다.   
+혹시 여유가 되면 시스템을 재시작하게 하여 모든 것이 의도대로 동작하는지 확인하는 것도 
+나쁘지 않은 판단입니다 - 서비스를 책임지는 프러덕션 시스템이 아니라면 말이죠. 
 
 ## 과정 정리
 
