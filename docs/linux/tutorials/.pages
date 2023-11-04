@@ -1,5 +1,4 @@
 title: 실습
 arrange:
     - index.md
-    - nginx.md
     - disk.md

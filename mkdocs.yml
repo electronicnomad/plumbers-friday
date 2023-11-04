@@ -46,6 +46,7 @@ theme:
 plugins:
   - search
   - awesome-pages
+  #- git-authors
   - git-revision-date-localized:
       type: timeago
   - redirects:
@@ -90,3 +91,4 @@ extra:
 #
 #extra_css:
 #  - stylesheets/extra.css
+copyright: Copyright &copy; 2017 - 2023 Kwanghoon Jhin
