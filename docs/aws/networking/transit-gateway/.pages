@@ -1,7 +1,0 @@
-title: Transit Gateway
-arrange:
-  - index.md
-  - objectives.md
-  - lab.md
-  - testing.md
-  - network-manager.md

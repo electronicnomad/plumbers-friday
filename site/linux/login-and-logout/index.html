@@ -1,0 +1,2109 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="unofficial manual and/or commentary on IT technologies.">
+      
+      
+        <meta name="author" content="Kwanghoon Jhin">
+      
+      
+        <link rel="canonical" href="https://electronicnomad.net/pf/linux/login-and-logout/">
+      
+      
+        <link rel="prev" href="../things-you-should-know-first/">
+      
+      
+        <link rel="next" href="../shell/">
+      
+      
+      <link rel="icon" href="../../favicon-plumping-black.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.7">
+    
+    
+      
+        <title>로그인과 로그아웃 - Plumbers' Friday</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4b4a2bd9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.484 4.484 0 0 1-.563-1.191 3.835 3.835 0 0 1-.05-2.063 4.647 4.647 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .748.748 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.425 2.425 0 0 1-.507-.441 3.075 3.075 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.884.884 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.737 3.737 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CNoto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"Noto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-1KEX2CMRTD"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-1KEX2CMRTD",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-1KEX2CMRTD",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Plumbers&#39; Friday" class="md-header__button md-logo" aria-label="Plumbers' Friday" data-md-component="logo">
+      
+  <img src="../../logo-plumping-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Plumbers' Friday
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              로그인과 로그아웃
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/electronicnomad/plumbers-friday" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    electronicnomad/plumbers-friday
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Plumbers&#39; Friday" class="md-nav__button md-logo" aria-label="Plumbers' Friday" data-md-component="logo">
+      
+  <img src="../../logo-plumping-white.png" alt="logo">
+
+    </a>
+    Plumbers' Friday
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/electronicnomad/plumbers-friday" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    electronicnomad/plumbers-friday
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    배관공들의 금요일
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AWS
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Amazon Forecast
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Amazon Forecast
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    시작
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hands-on Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hands-on Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/handson-labs/preparation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    준비
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/handson-labs/prepare-training-data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    훈련 데이터 준비
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/handson-labs/dataset-groups/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    데이터-셋 그룹 작성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/handson-labs/create-target-time-series-dataset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    대상 시계열 데이터-셋 생성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/handson-labs/import-target-time-series-data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    대상 시계열 데이터 입수
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/handson-labs/train-a-predictor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    예측기 훈련
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/handson-labs/generate-forecast/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    예측 생성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/handson-labs/forecast-lookup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    예측 검색하기
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    평가
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/forecast/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    참조
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AWS Networking
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            AWS Networking
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    시작
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/objectives/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    목표
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/preparations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    준비
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PrivateLink
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            PrivateLink
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/privatelink/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    개요
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/privatelink/lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    실습
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    VPC Peering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            VPC Peering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/vpc-peering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    개요
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/vpc-peering/lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    실습
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_6" id="__nav_2_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Transit Gateway
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Transit Gateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/transit-gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    개요
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/transit-gateway/objectives/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    목표
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/transit-gateway/lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    실습
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/transit-gateway/testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    시험
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/transit-gateway/network-manager/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Network Manager
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking/cleanup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    정리
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Linux 101
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Linux 101
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    리눅스를 배워 봅시다
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../things-you-should-know-first/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    먼저 알면 좋을 것들
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    로그인과 로그아웃
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    로그인과 로그아웃
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    메시지
+  </a>
+  
+    <nav class="md-nav" aria-label="메시지">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#motd-message-of-the-day" class="md-nav__link">
+    motd - message of the day
+  </a>
+  
+    <nav class="md-nav" aria-label="motd - message of the day">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu" class="md-nav__link">
+    Ubuntu의 경우
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcissue" class="md-nav__link">
+    /etc/issue
+  </a>
+  
+    <nav class="md-nav" aria-label="/etc/issue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcissuenet" class="md-nav__link">
+    /etc/issue.net
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    그래서
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prompt" class="md-nav__link">
+    Prompt 프롬프트
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    쉘 초기 설정
+  </a>
+  
+    <nav class="md-nav" aria-label="쉘 초기 설정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system-wide-initialization-files" class="md-nav__link">
+    전역 설정 파일 System wide initialization files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-initialization-files" class="md-nav__link">
+    사용자 설정 파일 user initialization files
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logout" class="md-nav__link">
+    logout 로그아웃
+  </a>
+  
+    <nav class="md-nav" aria-label="logout 로그아웃">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logout_1" class="md-nav__link">
+    logout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exit" class="md-nav__link">
+    exit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    쉘
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../directories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    디렉토리
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../users-and-groups/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    사용자와 그룹
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../file-and-permissions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    파일과 권한
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    패키지 관리
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    실습
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            실습
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    실습 안내
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/disk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    새 디스크 추가하기
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    메시지
+  </a>
+  
+    <nav class="md-nav" aria-label="메시지">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#motd-message-of-the-day" class="md-nav__link">
+    motd - message of the day
+  </a>
+  
+    <nav class="md-nav" aria-label="motd - message of the day">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu" class="md-nav__link">
+    Ubuntu의 경우
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcissue" class="md-nav__link">
+    /etc/issue
+  </a>
+  
+    <nav class="md-nav" aria-label="/etc/issue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcissuenet" class="md-nav__link">
+    /etc/issue.net
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    그래서
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prompt" class="md-nav__link">
+    Prompt 프롬프트
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    쉘 초기 설정
+  </a>
+  
+    <nav class="md-nav" aria-label="쉘 초기 설정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system-wide-initialization-files" class="md-nav__link">
+    전역 설정 파일 System wide initialization files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-initialization-files" class="md-nav__link">
+    사용자 설정 파일 user initialization files
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logout" class="md-nav__link">
+    logout 로그아웃
+  </a>
+  
+    <nav class="md-nav" aria-label="logout 로그아웃">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logout_1" class="md-nav__link">
+    logout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exit" class="md-nav__link">
+    exit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="_1">로그인과 로그아웃<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>어떤 호스트에 정상적인 접근<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>을 시도하면 처음 만나는 대화형 화면이
+login prompt 로그인 프롬프트입니다. 대략 아래와 같이 표현됩니다.</p>
+<div class="highlight"><pre><span></span><code>host0<span class="w"> </span>login:
+</code></pre></div>
+<p>위 예시에서 <code>host0</code>는 해당 호스트의 이름, 즉 hostname 호스트 네임입니다.
+이 로그인 프롬프트에 user name 사용자 이름(account name 계정 이름이라고 부르기도 합니다)과
+password 암호를 대화식으로 입력하여 다음 단계인, shell prompt 쉘 프롬프트를 만나게 되는 과정을
+login 로그인이라고 합니다. 그 반대의 작업이 즉, 접속을 종료하는 과정을
+logout 로그아웃이라고 합니다. 대략 아래와 같은 화면을 만날 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code>host0<span class="w"> </span>login:<span class="w"> </span>user1
+password:
+Linux<span class="w"> </span>bastion<span class="w"> </span><span class="m">5</span>.10.11-v7+<span class="w"> </span><span class="c1">#1399 SMP Thu Jan 28 12:06:05 GMT 2021 armv7l</span>
+
+The<span class="w"> </span>programs<span class="w"> </span>included<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>Debian<span class="w"> </span>GNU/Linux<span class="w"> </span>system<span class="w"> </span>are<span class="w"> </span>free<span class="w"> </span>software<span class="p">;</span>
+the<span class="w"> </span>exact<span class="w"> </span>distribution<span class="w"> </span>terms<span class="w"> </span><span class="k">for</span><span class="w"> </span>each<span class="w"> </span>program<span class="w"> </span>are<span class="w"> </span>described<span class="w"> </span><span class="k">in</span><span class="w"> </span>the
+individual<span class="w"> </span>files<span class="w"> </span><span class="k">in</span><span class="w"> </span>/usr/share/doc/*/copyright.
+
+Debian<span class="w"> </span>GNU/Linux<span class="w"> </span>comes<span class="w"> </span>with<span class="w"> </span>ABSOLUTELY<span class="w"> </span>NO<span class="w"> </span>WARRANTY,<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>extent
+permitted<span class="w"> </span>by<span class="w"> </span>applicable<span class="w"> </span>law.
+Last<span class="w"> </span>login:<span class="w"> </span>Mon<span class="w"> </span>Feb<span class="w"> </span><span class="m">22</span><span class="w"> </span><span class="m">13</span>:22:31<span class="w"> </span><span class="m">2021</span><span class="w"> </span>from<span class="w"> </span><span class="m">192</span>.168.1.91
+user1@node0:~$
+</code></pre></div>
+<p>Windows 윈도 계열에서 logon 로그온 그리고 logoff 로그오프라고 표현하는
+그것과 같은 것입니다.</p>
+<h2 id="_2">메시지<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>UNIX 계열 OS들은 사용자가 로그인할 때 환영(혹은 경고) 메시지를 터미널에 출력하는
+기능을 가지고 있습니다. 다중 사용자들에게 관리자가 알리고 싶은 메시지를 강제
+화면 출력을 하게 하는 것이 목적이었습니다. 그 메시지는 두 가지로 나뉘어 다루어지게 됩니다.
+하나는 <code>/etc/motd</code>이고 나머지는 <code>/etc/issue</code>라는 파일로 존재합니다.</p>
+<h3 id="motd-message-of-the-day">motd - message of the day<a class="headerlink" href="#motd-message-of-the-day" title="Permanent link">&para;</a></h3>
+<p><code>/etc/motd</code>에 기록된 메시지는 사용자가 로그인할 때마다 터미널에 출력됩니다.
+message of th day의 약자가 motd인 만큼, 앞서 설명한 것과 같이 시스템 관리자가
+사용자들에게 공람 가능한 게시판을 운영하는 것과 같습니다.</p>
+<p>위 예제에서 <code>password:</code> 라인 아랫쪽에서 <code>user1@node0:~$</code> 윗쪽까지의
+내용이 이에 해당됩니다. 만약 이 메시지를 변경하고 싶다면,
+(대부분의 UNIX/Linux 배포판에서) <code>/etc/motd</code> 파일을 편집하면 됩니다.</p>
+<h4 id="ubuntu">Ubuntu의 경우<a class="headerlink" href="#ubuntu" title="Permanent link">&para;</a></h4>
+<p>Ubuntu의 경우에는 이 부분이 조금 복잡하게 구성되어 있습니다.
+한 번 들여다 보겠습니다.</p>
+<div class="highlight"><pre><span></span><code>ubuntu@node1:~$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/etc/
+ubuntu@node1:/etc$<span class="w"> </span>ls<span class="w"> </span>-al<span class="w"> </span><span class="p">|</span>grep<span class="w"> </span>motd
+drwxr-xr-x<span class="w">  </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">       </span><span class="m">4096</span><span class="w"> </span>Feb<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">11</span>:17<span class="w"> </span>update-motd.d
+ubuntu@node1:/etc$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>./update-motd.d/
+ubuntu@node1:/etc/update-motd.d$<span class="w"> </span>ls
+<span class="m">00</span>-header<span class="w">     </span><span class="m">50</span>-landscape-sysinfo<span class="w">  </span><span class="m">85</span>-fwupd<span class="w">              </span><span class="m">91</span>-release-upgrade<span class="w">      </span><span class="m">95</span>-hwe-eol<span class="w">      </span><span class="m">98</span>-fsck-at-reboot
+<span class="m">10</span>-help-text<span class="w">  </span><span class="m">50</span>-motd-news<span class="w">          </span><span class="m">90</span>-updates-available<span class="w">  </span><span class="m">92</span>-unattended-upgrades<span class="w">  </span><span class="m">97</span>-overlayroot<span class="w">  </span><span class="m">98</span>-reboot-required
+ubuntu@node1:/etc/update-motd.d$
+</code></pre></div>
+<p>위에서와 같이 <code>/etc/motd</code>는 존재하지 않고, 대신 <code>/etc/update-motd.d</code>라는
+디렉토리가 있습니다. 그 속에 여러 파일들이 <code>/etc/motd</code>의 단순한 기능을
+확장하여 제공하고 있습니다. 이 파일들은 shell scripts 쉘 스크립트들로 이루어 져 있으며,
+파일 이름에서 지정된 수자(數字) 순서로 실행되는 것 뿐입니다.
+이제는 과거의 유물이 되어버린 - 하지만, 제가 사랑하는 - rc scripts와 같습니다.</p>
+<p>Ubuntu에서 제공하는 동적 message of the day는 아래와 같습니다.</p>
+<div class="highlight"><pre><span></span><code>Welcome<span class="w"> </span>to<span class="w"> </span>Ubuntu<span class="w"> </span><span class="m">20</span>.04.2<span class="w"> </span>LTS<span class="w"> </span><span class="o">(</span>GNU/Linux<span class="w"> </span><span class="m">5</span>.4.0-1029-raspi<span class="w"> </span>aarch64<span class="o">)</span>
+
+<span class="w"> </span>*<span class="w"> </span>Documentation:<span class="w">  </span>https://help.ubuntu.com
+<span class="w"> </span>*<span class="w"> </span>Management:<span class="w">     </span>https://landscape.canonical.com
+<span class="w"> </span>*<span class="w"> </span>Support:<span class="w">        </span>https://ubuntu.com/advantage
+
+<span class="w">  </span>System<span class="w"> </span>information<span class="w"> </span>as<span class="w"> </span>of<span class="w"> </span>Sat<span class="w"> </span>Mar<span class="w">  </span><span class="m">6</span><span class="w"> </span><span class="m">15</span>:50:36<span class="w"> </span>UTC<span class="w"> </span><span class="m">2021</span>
+
+<span class="w">  </span>System<span class="w"> </span>load:<span class="w">  </span><span class="m">0</span>.08<span class="w">              </span>Temperature:<span class="w">            </span><span class="m">48</span>.7<span class="w"> </span>C
+<span class="w">  </span>Usage<span class="w"> </span>of<span class="w"> </span>/:<span class="w">   </span><span class="m">8</span>.6%<span class="w"> </span>of<span class="w"> </span><span class="m">29</span>.05GB<span class="w">   </span>Processes:<span class="w">              </span><span class="m">132</span>
+<span class="w">  </span>Memory<span class="w"> </span>usage:<span class="w"> </span><span class="m">3</span>%<span class="w">                </span>Users<span class="w"> </span>logged<span class="w"> </span><span class="k">in</span>:<span class="w">        </span><span class="m">0</span>
+<span class="w">  </span>Swap<span class="w"> </span>usage:<span class="w">   </span><span class="m">0</span>%<span class="w">                </span>IPv4<span class="w"> </span>address<span class="w"> </span><span class="k">for</span><span class="w"> </span>wlan0:<span class="w"> </span><span class="m">192</span>.168.1.21
+
+<span class="w"> </span>*<span class="w"> </span>Introducing<span class="w"> </span>self-healing<span class="w"> </span>high<span class="w"> </span>availability<span class="w"> </span>clusters<span class="w"> </span><span class="k">in</span><span class="w"> </span>MicroK8s.
+<span class="w">   </span>Simple,<span class="w"> </span>hardened,<span class="w"> </span>Kubernetes<span class="w"> </span><span class="k">for</span><span class="w"> </span>production,<span class="w"> </span>from<span class="w"> </span>RaspberryPi<span class="w"> </span>to<span class="w"> </span>DC.
+
+<span class="w">     </span>https://microk8s.io/high-availability
+
+<span class="m">0</span><span class="w"> </span>updates<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>installed<span class="w"> </span>immediately.
+<span class="m">0</span><span class="w"> </span>of<span class="w"> </span>these<span class="w"> </span>updates<span class="w"> </span>are<span class="w"> </span>security<span class="w"> </span>updates.
+
+
+Last<span class="w"> </span>login:<span class="w"> </span>Sat<span class="w"> </span>Mar<span class="w">  </span><span class="m">6</span><span class="w"> </span><span class="m">11</span>:29:09<span class="w"> </span><span class="m">2021</span><span class="w"> </span>from<span class="w"> </span><span class="m">192</span>.168.1.91
+ubuntu@node1:~$
+</code></pre></div>
+<p>Canonical/Ubuntu에서는 이것을 'dynamic MOTD generation'이라고 설명하고 있는데,
+그 구성은 그렇게 복잡하지는 않습니다. 이에 대한 상세한 설명은
+<code>$ man update-motd</code>를 터미널에서 입력하여 man page 맨 페이지를 읽는 것을
+추천합니다.</p>
+<h3 id="etcissue">/etc/issue<a class="headerlink" href="#etcissue" title="Permanent link">&para;</a></h3>
+<p>이 파일도 메시지를 출력하는 것입니다. login prompt 로그인 프롬프트가 출력되기
+직전에 이 파일의 내용을 읽어드려 접속하려는 사용자의 터미널에 출력해 줍니다.</p>
+<p>한 때, host 호스트의 OS 이름과 버전을 출력해 내는 <code>/etc/issue</code>는
+시스템에 부정하게 침입하려는 자들에게 불필요한 정보를 제공한다는 사유로
+<code># cat /dev/null &gt; /etc/issue</code>라는 명령을 root 루트 사용자가 입력함으로써,
+0 byte 바이트 파일로 만들기도 했습니다.</p>
+<p>요즈음처럼, rlogind와 telnetd가 배제되고 ssh/sshd를 이용하여
+원격 host 호스트에 접근하는 경우 로그인 프롬프트를
+볼 기회조차 없어서 거의 용도가 폐기 상태에 가깝다 할 수 있습니다.</p>
+<h4 id="etcissuenet">/etc/issue.net<a class="headerlink" href="#etcissuenet" title="Permanent link">&para;</a></h4>
+<p>지금 이 글을 읽는 분께서 터미널을 열어 자신이 로그인할 수 있는 UNIX/Linux 머신에서
+<code>$ ls /etc/issue.net</code>이라는 명령을 내렸을 때 이 파일을 발견할 수 있다면,
+그 머신은 (혹은 그 운영체제는) 상당히 오래된 것이거나,
+오래된 전통을 존중하는 패키징을 가지고 있을 것입니다.</p>
+<p>과거 UNIX 시스템은 <code>/etc/issue.net</code>은 <code>/etc/issue</code>와 구분되어 관리되었고 그 역할도 달랐습니다.
+파일 이름 마지막에 <code>net</code>이라는 단어가 붙어진 것에서 유추할 수 있듯이, <code>/etc/issue.net</code>은
+네트워크를 통하여 접근<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>하는 사용자에게 알림 전하기 위해서 존재했고,
+<code>/etc/issue</code>는 네트워크로 접근하지 않는 - 다른 방식의 터미널이나 콘솔도 여기에 해당 -
+사용자에게 전달할 메시지가 수록됩니다.</p>
+<p>이제는 <code>/etc/issue</code>라는 것을 활요하는 경우는 거의 없으며, 과거 UNIX에서도
+OS의 버전이나 패치 레벨을 알리는 것에 머물기도 했습니다.</p>
+<h3 id="_3">그래서<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><code>/etc/motd</code>는 게시판을 통한 '공람' 혹은 '회람'의 역할을 한다면,
+<code>/etc/issue</code>는 '거의' 고정된 메시지 전달 역할을 하는데,
+어떤 건물이나 캠퍼스의 정문에 걸려 있는 안내 - 화장실은 오른쪽 10미터 전방에 있습니다 -
+와 후문에 걸려 있는 안내 - 고객 접견실은 정문에 위치해 있습니다 - 정도의 역할이라고
+할 수 있겠습니다.</p>
+<p>모두 다중 사용자 환경에서 <code>write</code>, <code>talk</code>와 더불어 정겨운 장치들입니다.</p>
+<h2 id="prompt">Prompt 프롬프트<a class="headerlink" href="#prompt" title="Permanent link">&para;</a></h2>
+<p>프롬프트는 사용자의 입력을 기다리는 무엇입니다. 앞서 설명한 것처럼
+로그인을 위하여 사용자 이름과 암호를 입력하는 곳은 로그인 프롬프트
+로그인 이후 명령어 등을 입력하는 곳이 shell prompt 쉘 프롬프트입니다.</p>
+<p>이미 설명을 하지는 못 해도 알고 있다는 느낌이 있을 겁니다.
+프롬프트는 컴퓨터와 사용자 간의 입력을 할 수 있는 그 무엇을 뜻 합니다.</p>
+<p>보통의 일반 사용자의 프롬프트를 <code>$</code>로 표현하며, 루트 사용자를 <code>#</code>로
+표현하는 것이 일반적인 방식이었는데, 요즈음은 루트 사용자로 로그인하거나
+전환하는 경우는 거의 없기 때문에 UNIX나 Linux의 프롬프트는 <code>$</code>로
+통일되어 표현하는 것이 요즈음의 쓰임입니다.</p>
+<p>루트 사용자에 관한 이야기는 따로 다루도록 하겠습니다.</p>
+<h2 id="_4">쉘 초기 설정<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>사용자가 로그인을 성공적으로 마치면, 위에서 설명한 쉘 프롬프트가 화면에 나타나기 직전에
+자동적으로 수행되는 일이 사용자의 쉘 환경에 따른 여러 정의를 읽어 들이는 것입니다.
+이런 정의들은 shell initialization files 쉘 초기화<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> 파일들에 수록되게 됩니다.</p>
+<p>이 쉘 초기화 파일들을 활용하여 사용자는 터미널에서의 작업환경을 자신의 구미에 맞게
+변경하여 작업 효율을 높일 수도 있고, 특정 소프트웨어가 요구하는 조건을 맞춰 낼 수도 있게 됩니다.</p>
+<p>이런 초기화 설정은 system wide 전역 설정 파일이 존재하고,
+개별 사용자가 정의하는 것이 존재합니다.
+먼저 사용자가 로그인을 하게 되면 전역 설정이 먼저 적용되고, 후차적으로
+개별 사용자의 정의가 적용됩니다.</p>
+<p>아래에서부터는 대표적인 사용자 쉘인, <code>bash</code>를 기준으로 설명합니다.</p>
+<h3 id="system-wide-initialization-files">전역 설정 파일 System wide initialization files<a class="headerlink" href="#system-wide-initialization-files" title="Permanent link">&para;</a></h3>
+<p>system wide 전역(全域)이라는 단어 그대로 여기에 수록된 정의는
+시스템에 접근하는 모든 <code>bash</code> 쉘이 기본인 사용자에게 적용됩니다.
+system administrator 시스템 관리자가 강제할 수 있는 조건들을
+손쉽게 적용할 수 있습니다. 아래의 설명은 <code>bash</code>, <code>ksh</code>, 그리고 <code>ash</code>에 공통됩니다.
+다른 쉘일 경우에는 다른 파일에 정의가 있습니다.
+이를 알기 위해서는 각 쉘의 맨 페이지를 참조하는 것도 방법일 수 있습니다.</p>
+<p>시스템 기본값은 다음의 파일들이 정의를 가지고 있습니다.
+<code>/etc/profile</code>
+그리고 이 파일의 내용을 보면, 무엇을 더 읽어 들이는지 알 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code>:/etc<span class="w"> </span>$<span class="w"> </span>cat<span class="w"> </span>./profile
+<span class="c1"># /etc/profile: system-wide .profile file for the Bourne shell (sh(1))</span>
+<span class="c1"># and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;`id -u`&quot;</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games&quot;</span>
+<span class="k">fi</span>
+<span class="nb">export</span><span class="w"> </span>PATH
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PS1</span><span class="p">-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASH</span><span class="p">-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASH</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;/bin/sh&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="c1"># The file bash.bashrc already sets the default PS1.</span>
+<span class="w">    </span><span class="c1"># PS1=&#39;\h:\w\$ &#39;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span>/etc/bash.bashrc<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span>.<span class="w"> </span>/etc/bash.bashrc
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;`id -u`&quot;</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;# &#39;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">      </span><span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;$ &#39;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span>/etc/profile.d<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>/etc/profile.d/*.sh<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-r<span class="w"> </span><span class="nv">$i</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span>.<span class="w"> </span><span class="nv">$i</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">done</span>
+<span class="w">  </span><span class="nb">unset</span><span class="w"> </span>i
+<span class="k">fi</span>
+:/etc<span class="w"> </span>$<span class="w"> </span>
+</code></pre></div>
+<p>다음에 설명할 기회가 있을지 모르겠지만, 위 예시에서 처음 등장하는 구문은,
+<code>/etc</code> 디렉토리에서 현재 디렉토리에 있는 <code>profile</code> 이라는 파일의 내용을 보자(<code>cat</code>)!라는 명령입니다.
+앞서 '미리 알면 좋을 것들'에서 설명한 것처럼, <code>cat</code> 명령에 대한 궁금한 점이 있으시면
+<code>$ man cat</code>으로 맨 페이지를 읽어 봅시다.</p>
+<p><code>/etc/profile</code> 파일의 내용을 보면, 가장 먼저 경로에 대한 변수를 정의하고 <code>$PATH</code>
+<code>/etc/bash.bashrc</code>라는 파일이 있으면 읽어 들이도록 하고 있습니다.
+이후 쉘 프롬프트를 정의 <code>PS1</code> 하는데, user id가 0, 즉 root user이면 <code>#</code>를
+아니라면, <code>$</code>를 부여하고, 마지막으로 <code>/etc/profiled.d</code>라는 디렉토리 아래에 있는 <code>*.sh</code>
+파일들을 읽어 들입니다.</p>
+<h3 id="user-initialization-files">사용자 설정 파일 user initialization files<a class="headerlink" href="#user-initialization-files" title="Permanent link">&para;</a></h3>
+<p>사용자 설정은 (당연히) 홈 디렉토리에 있습니다. 여기의 설정 파일들도 전역 설정과 비슷한 느낌이 있습니다.
+먼저 사용자가 로그인을 하게 되면, <code>~/.profile</code> 파일을 쉘이 읽게 됩니다.
+그리고 <code>~/.profile</code> 파일의 내부를 보면, 아래와 같습니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>cat<span class="w"> </span>~/.profile
+<span class="c1"># ~/.profile: executed by the command interpreter for login shells.</span>
+<span class="c1"># This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login</span>
+<span class="c1"># exists.</span>
+<span class="c1"># see /usr/share/doc/bash/examples/startup-files for examples.</span>
+<span class="c1"># the files are located in the bash-doc package.</span>
+
+<span class="c1"># the default umask is set in /etc/profile; for setting the umask</span>
+<span class="c1"># for ssh logins, install and configure the libpam-umask package.</span>
+<span class="c1">#umask 022</span>
+
+<span class="c1"># if running bash</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASH_VERSION</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="c1"># include .bashrc if it exists</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.bashrc&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.bashrc&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">fi</span>
+
+<span class="c1"># set PATH so it includes user&#39;s private bin if it exists</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/bin&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># set PATH so it includes user&#39;s private bin if it exists</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/bin&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+$<span class="w"> </span>
+</code></pre></div>
+<p><code>$ cat ~/.profile</code> 이라는 구문은, <code>cat</code> 명령으로 홈 디렉토리(<code>~</code>) 아래에 있는
+<code>.profile</code>이라는 파일을 화면에 출력하라! 라고 설명할 수 있겠습니다.</p>
+<p>내용을 보면, <code>~/.bashrc_profile</code> 혹은 <code>~/.bashrc_login</code> 파일이 있으면
+<code>~/.profile</code>은 무시된다는 설명과 함께, 사용자의 홈 디렉토리 아래에 <code>.bashrc</code> 파일이 있으면
+읽어 들이고, 경로 설정을 <code>$PATH</code>하고 끝나는 것을 알 수 있습니다.</p>
+<p>앞으로 Linux를 사용하면서 이런 사용자 쉘 초기화 파일을 자주 들여다 볼 일이 있을 것입니다.
+여기에 각자 취향에 맞는 설정을 집어 넣고, 새로운 환경에 맞는 설정을 하게 됩니다.</p>
+<p>전, <code>$PATH</code>에 이것저것 추가하는 것 이외에는 <code>set -o vi</code>라는 정의 한 줄을 추가합니다.
+<code>bash</code>나 <code>ksh</code>에서 (혹은 유사 계열에서) 쉘 환경에서 vi 편집기 명령어를 사용할 수 있게
+하는 것입니다. 전 vi 편집기를 많이 좋아합니다.</p>
+<h2 id="logout">logout 로그아웃<a class="headerlink" href="#logout" title="Permanent link">&para;</a></h2>
+<p>로그아웃을 하는 방법은 <code>$ exit</code>라고 명령을 내리는 것과 <code>$ logout</code>이라고 명령을 내리는 방법
+그리고 대부분의 터미널에서 지원하는 <code>^D</code>가 있습니다. <code>^D</code>는 키보드의 control 키와 d 키를 함께
+누르는 것을 말합니다. <code>^D</code>는 EOF를 standard input으로 받아들이게 되어서 해당 터미널이 닫히게 됩니다.</p>
+<p>그리고 <code>exit</code>와 <code>logout</code>은 따로 명령어가 존재하지 않습니다.
+쉘에서 입력을 받아서 처리합니다. <code>export</code>나 <code>set</code>과 성격이 같다고 볼 수 있습니다.
+그리고 이 두 명령이 비슷한 목적으로 존재하는 이유는 아래와 같습니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">logout</span><span class="w"> </span>--help
+logout:<span class="w"> </span><span class="nb">logout</span><span class="w"> </span><span class="o">[</span>n<span class="o">]</span>
+<span class="w">    </span>Exit<span class="w"> </span>a<span class="w"> </span>login<span class="w"> </span>shell.
+
+<span class="w">    </span>Exits<span class="w"> </span>a<span class="w"> </span>login<span class="w"> </span>shell<span class="w"> </span>with<span class="w"> </span><span class="nb">exit</span><span class="w"> </span>status<span class="w"> </span>N.<span class="w">  </span>Returns<span class="w"> </span>an<span class="w"> </span>error<span class="w"> </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>executed
+<span class="w">    </span><span class="k">in</span><span class="w"> </span>a<span class="w"> </span>login<span class="w"> </span>shell.
+$<span class="w"> </span><span class="nb">exit</span><span class="w"> </span>--help
+exit:<span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="o">[</span>n<span class="o">]</span>
+<span class="w">    </span>Exit<span class="w"> </span>the<span class="w"> </span>shell.
+
+<span class="w">    </span>Exits<span class="w"> </span>the<span class="w"> </span>shell<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>status<span class="w"> </span>of<span class="w"> </span>N.<span class="w">  </span>If<span class="w"> </span>N<span class="w"> </span>is<span class="w"> </span>omitted,<span class="w"> </span>the<span class="w"> </span><span class="nb">exit</span><span class="w"> </span>status
+<span class="w">    </span>is<span class="w"> </span>that<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>last<span class="w"> </span><span class="nb">command</span><span class="w"> </span>executed.
+$<span class="w"> </span>bash
+$<span class="w"> </span><span class="nb">logout</span>
+bash:<span class="w"> </span>logout:<span class="w"> </span>not<span class="w"> </span>login<span class="w"> </span>shell:<span class="w"> </span>use<span class="w"> </span><span class="s1">&#39;exit&#39;</span>
+$<span class="w"> </span><span class="nb">exit</span>
+$<span class="w"> </span><span class="nb">exit</span>
+<span class="nb">logout</span>
+</code></pre></div>
+<h3 id="logout_1">logout<a class="headerlink" href="#logout_1" title="Permanent link">&para;</a></h3>
+<p><code>logout</code>은 로그인 쉘에서 일을 끝내고 나가는 것이다. <code>login</code>의 반대 개념입니다.
+위의 예시를 보면, 로그인 쉘에서 <code>bash</code>을 실행했습니다.
+이 때 실행한 <code>bash</code>는 로그인 쉘이 아니라 (같은 놈을 실한 한 것이지만 성격이) 다른
+쉘입니다. 이 때는 <code>logout</code>을 할 수 없습니다. 왜? <code>login</code>을 안 했으니까요.</p>
+<h3 id="exit">exit<a class="headerlink" href="#exit" title="Permanent link">&para;</a></h3>
+<p>빠져 나다는 것입니다. 쉘을 종료하는 것입니다. login shell 로그인 쉘은 사용자가 로그인하면서
+획득하는 쉘이고, 프로그래밍이나 다른 목적으로 쉘을 획득하거나 실행시킬 수 있습니다.
+그 쉘을 종료하는 선언입니다.</p>
+<p>그래서, 로그인 쉘에서는 <code>logout</code>대신 <code>exit</code>를 사용할 수도 있습니다. 어쨌든 종료이니까요.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>접근이라는 방식에 원격 접속과 직접 장치에 연결된 키보드 마우스 모니터를
+  사용하는 방법, 두 가지 모두를 의미하겠다. 전자(前者) 경우에는
+  사용할 수 있는 방식이 <code>rlogin</code>, <code>telnet</code>, <code>ssh</code>, <code>ftp</code>, <code>sftp</code> 등이 있습니다.
+  이 중에서 <code>rlogin</code>, <code>telnet</code>, <code>ftp</code>는 보안의 문제로 이제는 사용하지 않는 것이 상식이 되었습니다.
+  후자(後者)의 경우는 여러분이 익숙한 윈도나 맥 컴퓨터를 사용하는 것과
+  다름이 없습니다.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>당시 네트워크를 통한 접근이라고 해 봐야, telnet과 rlogin이 전부였습니다. 하지만,
+  후기 UNIX에서는 ssh를 통해 접근하였을 때에도 해당 파일을 읽어들여 출력하는 경우도 있었습니다.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>initialization과 초기화(初期化)는 서로 의미하는 바가 같지는 않지만,
+이와 같이 널리 번역되는 것을 존중하여 초기화라는 표현을 사용합니다.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-05-20T11:41:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-05-20</span>
+      
+    
+  </small>
+</div>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2017 - 2023 Kwanghoon Jhin
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/electronicnomad" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.jhin.com" target="_blank" rel="noopener" title="www.jhin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M162.4 196c4.8-4.9 6.2-5.1 36.4-5.1 27.2 0 28.1.1 32.1 2.1 5.8 2.9 8.3 7 8.3 13.6 0 5.9-2.4 10-7.6 13.4-2.8 1.8-4.5 1.9-31.1 2.1-16.4.1-29.5-.2-31.5-.8-10.3-2.9-14.1-17.7-6.6-25.3zm61.4 94.5c-53.9 0-55.8.2-60.2 4.1-3.5 3.1-5.7 9.4-5.1 13.9.7 4.7 4.8 10.1 9.2 12 2.2 1 14.1 1.7 56.3 1.2l47.9-.6 9.2-1.5c9-5.1 10.5-17.4 3.1-24.4-5.3-4.7-5-4.7-60.4-4.7zm223.4 130.1c-3.5 28.4-23 50.4-51.1 57.5-7.2 1.8-9.7 1.9-172.9 1.8-157.8 0-165.9-.1-172-1.8-8.4-2.2-15.6-5.5-22.3-10-5.6-3.8-13.9-11.8-17-16.4-3.8-5.6-8.2-15.3-10-22C.1 423 0 420.3 0 256.3 0 93.2 0 89.7 1.8 82.6 8.1 57.9 27.7 39 53 33.4c7.3-1.6 332.1-1.9 340-.3 21.2 4.3 37.9 17.1 47.6 36.4 7.7 15.3 7-1.5 7.3 180.6.2 115.8 0 164.5-.7 170.5zm-85.4-185.2c-1.1-5-4.2-9.6-7.7-11.5-1.1-.6-8-1.3-15.5-1.7-12.4-.6-13.8-.8-17.8-3.1-6.2-3.6-7.9-7.6-8-18.3 0-20.4-8.5-39.4-25.3-56.5-12-12.2-25.3-20.5-40.6-25.1-3.6-1.1-11.8-1.5-39.2-1.8-42.9-.5-52.5.4-67.1 6.2-27 10.7-46.3 33.4-53.4 62.4-1.3 5.4-1.6 14.2-1.9 64.3-.4 62.8 0 72.1 4 84.5 9.7 30.7 37.1 53.4 64.6 58.4 9.2 1.7 122.2 2.1 133.7.5 20.1-2.7 35.9-10.8 50.7-25.9 10.7-10.9 17.4-22.8 21.8-38.5 3.2-10.9 2.9-88.4 1.7-93.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  </body>
+</html>

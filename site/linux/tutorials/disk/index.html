@@ -1,0 +1,2195 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="unofficial manual and/or commentary on IT technologies.">
+      
+      
+        <meta name="author" content="Kwanghoon Jhin">
+      
+      
+        <link rel="canonical" href="https://electronicnomad.net/pf/linux/tutorials/disk/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+      
+      <link rel="icon" href="../../../favicon-plumping-black.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.7">
+    
+    
+      
+        <title>새 디스크 추가하기 - Plumbers' Friday</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4b4a2bd9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.484 4.484 0 0 1-.563-1.191 3.835 3.835 0 0 1-.05-2.063 4.647 4.647 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .748.748 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.425 2.425 0 0 1-.507-.441 3.075 3.075 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.884.884 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.737 3.737 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CNoto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"Noto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-1KEX2CMRTD"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-1KEX2CMRTD",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-1KEX2CMRTD",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Plumbers&#39; Friday" class="md-header__button md-logo" aria-label="Plumbers' Friday" data-md-component="logo">
+      
+  <img src="../../../logo-plumping-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Plumbers' Friday
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              새 디스크 추가하기
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/electronicnomad/plumbers-friday" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    electronicnomad/plumbers-friday
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Plumbers&#39; Friday" class="md-nav__button md-logo" aria-label="Plumbers' Friday" data-md-component="logo">
+      
+  <img src="../../../logo-plumping-white.png" alt="logo">
+
+    </a>
+    Plumbers' Friday
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/electronicnomad/plumbers-friday" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    electronicnomad/plumbers-friday
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    배관공들의 금요일
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AWS
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Amazon Forecast
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Amazon Forecast
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    시작
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hands-on Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hands-on Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/handson-labs/preparation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    준비
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/handson-labs/prepare-training-data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    훈련 데이터 준비
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/handson-labs/dataset-groups/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    데이터-셋 그룹 작성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/handson-labs/create-target-time-series-dataset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    대상 시계열 데이터-셋 생성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/handson-labs/import-target-time-series-data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    대상 시계열 데이터 입수
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/handson-labs/train-a-predictor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    예측기 훈련
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/handson-labs/generate-forecast/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    예측 생성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/handson-labs/forecast-lookup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    예측 검색하기
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    평가
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/forecast/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    참조
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AWS Networking
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            AWS Networking
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    시작
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/objectives/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    목표
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/preparations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    준비
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PrivateLink
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            PrivateLink
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/privatelink/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    개요
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/privatelink/lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    실습
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    VPC Peering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            VPC Peering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/vpc-peering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    개요
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/vpc-peering/lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    실습
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_6" id="__nav_2_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Transit Gateway
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Transit Gateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/transit-gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    개요
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/transit-gateway/objectives/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    목표
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/transit-gateway/lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    실습
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/transit-gateway/testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    시험
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/transit-gateway/network-manager/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Network Manager
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aws/networking/cleanup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    정리
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Linux 101
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Linux 101
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    리눅스를 배워 봅시다
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../things-you-should-know-first/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    먼저 알면 좋을 것들
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../login-and-logout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    로그인과 로그아웃
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    쉘
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../directories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    디렉토리
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../users-and-groups/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    사용자와 그룹
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../file-and-permissions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    파일과 권한
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    패키지 관리
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    실습
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            실습
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    실습 안내
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    새 디스크 추가하기
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    새 디스크 추가하기
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    새로운 디스크 장착
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    새 디스크 찾기
+  </a>
+  
+    <nav class="md-nav" aria-label="새 디스크 찾기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#varlogsyslog" class="md-nav__link">
+    /var/log/syslog를 관찰하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lsblk" class="md-nav__link">
+    lsblk 명령어 수행
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    파일 시스템 작성
+  </a>
+  
+    <nav class="md-nav" aria-label="파일 시스템 작성">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    파티션 작성
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    파일 시스템 작성
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    마운트 디스크
+  </a>
+  
+    <nav class="md-nav" aria-label="마운트 디스크">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    자동 마운트를 위한 설정
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    과정 정리
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    새로운 디스크 장착
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    새 디스크 찾기
+  </a>
+  
+    <nav class="md-nav" aria-label="새 디스크 찾기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#varlogsyslog" class="md-nav__link">
+    /var/log/syslog를 관찰하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lsblk" class="md-nav__link">
+    lsblk 명령어 수행
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    파일 시스템 작성
+  </a>
+  
+    <nav class="md-nav" aria-label="파일 시스템 작성">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    파티션 작성
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    파일 시스템 작성
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    마운트 디스크
+  </a>
+  
+    <nav class="md-nav" aria-label="마운트 디스크">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    자동 마운트를 위한 설정
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    과정 정리
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="_1">새 디스크 추가하기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>새로운 디스크를 추가하기 - 라고 적었지만, 사실 여기에서는 다음의 과정을 다룹니다.</p>
+<ol>
+<li>새로운 디스크 찾아내기</li>
+<li>찾은 디스크 초기화 및 파티션 나누기</li>
+<li>파일 시스템 작성하기</li>
+<li>마운트하기</li>
+</ol>
+<p>그리고 아래의 설명은 정확히 위의 순서에 따른 설명이 되겠습니다.</p>
+<h2 id="_2">새로운 디스크 장착<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>시스템를 끄고 (plug-and-play를 지원하는 환경이면 시스템의 off/on 과정이 필요하지 않습니다)
+디스크를 장착합니다. 빈자리에 적당히 넣으면 요즈음은 잘 작동합니다. 참 쉬운 세상이 되었습니다.
+클라우드에 대포한 VM에 디스크를 추가하는 건 더욱 쉬운 일이 되겠죠?</p>
+<h2 id="_3">새 디스크 찾기<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>장착된 새로운 디스크를 찾는 방법은 여러가지가 있습니다. 그러니 누군가가 '이렇게 해야만 해'라고 주장한다면,
+그 사람과 멀리하시는 것이 좋습니다. 세상 모든 일이 그렇겠지만, 특히나 오픈소스 세상에서는
+'반드시', '꼭', '절대적으로' 라는 것은 대부분, 성립되지 않습니다.</p>
+<h3 id="varlogsyslog"><code>/var/log/syslog</code>를 관찰하기<a class="headerlink" href="#varlogsyslog" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:40<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862970</span>.027539<span class="o">]</span><span class="w"> </span>usb<span class="w"> </span><span class="m">1</span>-1.3:<span class="w"> </span>new<span class="w"> </span>high-speed<span class="w"> </span>USB<span class="w"> </span>device<span class="w"> </span>number<span class="w"> </span><span class="m">5</span><span class="w"> </span>using<span class="w"> </span>dwc_otg
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862970</span>.158911<span class="o">]</span><span class="w"> </span>usb<span class="w"> </span><span class="m">1</span>-1.3:<span class="w"> </span>New<span class="w"> </span>USB<span class="w"> </span>device<span class="w"> </span>found,<span class="w"> </span><span class="nv">idVendor</span><span class="o">=</span>090c,<span class="w"> </span><span class="nv">idProduct</span><span class="o">=</span><span class="m">1000</span>,<span class="w"> </span><span class="nv">bcdDevice</span><span class="o">=</span><span class="m">11</span>.00
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862970</span>.158938<span class="o">]</span><span class="w"> </span>usb<span class="w"> </span><span class="m">1</span>-1.3:<span class="w"> </span>New<span class="w"> </span>USB<span class="w"> </span>device<span class="w"> </span>strings:<span class="w"> </span><span class="nv">Mfr</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">Product</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">SerialNumber</span><span class="o">=</span><span class="m">3</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862970</span>.158955<span class="o">]</span><span class="w"> </span>usb<span class="w"> </span><span class="m">1</span>-1.3:<span class="w"> </span>Product:<span class="w"> </span>Flash<span class="w"> </span>Drive<span class="w"> </span>FIT
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862970</span>.158970<span class="o">]</span><span class="w"> </span>usb<span class="w"> </span><span class="m">1</span>-1.3:<span class="w"> </span>Manufacturer:<span class="w"> </span>Samsung
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862970</span>.158986<span class="o">]</span><span class="w"> </span>usb<span class="w"> </span><span class="m">1</span>-1.3:<span class="w"> </span>SerialNumber:<span class="w"> </span><span class="m">0373221010008377</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862970</span>.162706<span class="o">]</span><span class="w"> </span>usb-storage<span class="w"> </span><span class="m">1</span>-1.3:1.0:<span class="w"> </span>USB<span class="w"> </span>Mass<span class="w"> </span>Storage<span class="w"> </span>device<span class="w"> </span>detected
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862970</span>.167001<span class="o">]</span><span class="w"> </span>usb-storage<span class="w"> </span><span class="m">1</span>-1.3:1.0:<span class="w"> </span>Quirks<span class="w"> </span>match<span class="w"> </span><span class="k">for</span><span class="w"> </span>vid<span class="w"> </span>090c<span class="w"> </span>pid<span class="w"> </span><span class="m">1000</span>:<span class="w"> </span><span class="m">400</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862970</span>.168031<span class="o">]</span><span class="w"> </span>scsi<span class="w"> </span>host0:<span class="w"> </span>usb-storage<span class="w"> </span><span class="m">1</span>-1.3:1.0
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>mtp-probe:<span class="w"> </span>checking<span class="w"> </span>bus<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>device<span class="w"> </span><span class="m">5</span>:<span class="w"> </span><span class="s2">&quot;/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.3&quot;</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>mtp-probe:<span class="w"> </span>bus:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>device:<span class="w"> </span><span class="m">5</span><span class="w"> </span>was<span class="w"> </span>not<span class="w"> </span>an<span class="w"> </span>MTP<span class="w"> </span>device
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>mtp-probe:<span class="w"> </span>checking<span class="w"> </span>bus<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>device<span class="w"> </span><span class="m">5</span>:<span class="w"> </span><span class="s2">&quot;/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.3&quot;</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:41<span class="w"> </span>bastion<span class="w"> </span>mtp-probe:<span class="w"> </span>bus:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>device:<span class="w"> </span><span class="m">5</span><span class="w"> </span>was<span class="w"> </span>not<span class="w"> </span>an<span class="w"> </span>MTP<span class="w"> </span>device
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:45<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862974</span>.397768<span class="o">]</span><span class="w"> </span>scsi<span class="w"> </span><span class="m">0</span>:0:0:0:<span class="w"> </span>Direct-Access<span class="w">     </span>Samsung<span class="w">  </span>Flash<span class="w"> </span>Drive<span class="w"> </span>FIT<span class="w">  </span><span class="m">1100</span><span class="w"> </span>PQ:<span class="w"> </span><span class="m">0</span><span class="w"> </span>ANSI:<span class="w"> </span><span class="m">6</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:45<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862974</span>.400294<span class="o">]</span><span class="w"> </span>sd<span class="w"> </span><span class="m">0</span>:0:0:0:<span class="w"> </span>Attached<span class="w"> </span>scsi<span class="w"> </span>generic<span class="w"> </span>sg0<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="m">0</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:45<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862974</span>.404295<span class="o">]</span><span class="w"> </span>sd<span class="w"> </span><span class="m">0</span>:0:0:0:<span class="w"> </span><span class="o">[</span>sda<span class="o">]</span><span class="w"> </span><span class="m">501253132</span><span class="w"> </span><span class="m">512</span>-byte<span class="w"> </span>logical<span class="w"> </span>blocks:<span class="w"> </span><span class="o">(</span><span class="m">257</span><span class="w"> </span>GB/239<span class="w"> </span>GiB<span class="o">)</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:45<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862974</span>.404727<span class="o">]</span><span class="w"> </span>sd<span class="w"> </span><span class="m">0</span>:0:0:0:<span class="w"> </span><span class="o">[</span>sda<span class="o">]</span><span class="w"> </span>Write<span class="w"> </span>Protect<span class="w"> </span>is<span class="w"> </span>off
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:45<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862974</span>.404765<span class="o">]</span><span class="w"> </span>sd<span class="w"> </span><span class="m">0</span>:0:0:0:<span class="w"> </span><span class="o">[</span>sda<span class="o">]</span><span class="w"> </span>Mode<span class="w"> </span>Sense:<span class="w"> </span><span class="m">43</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span><span class="w"> </span><span class="m">00</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:45<span class="w"> </span>bastion<span class="w"> </span>kernel:<span class="w"> </span><span class="o">[</span><span class="m">2862974</span>.405074<span class="o">]</span><span class="w"> </span>sd<span class="w"> </span><span class="m">0</span>:0:0:0:<span class="w"> </span><span class="o">[</span>sda<span class="o">]</span><span class="w"> </span>Write<span class="w"> </span>cache:<span class="w"> </span>enabled,<span class="w"> </span><span class="nb">read</span><span class="w"> </span>cache:<span class="w"> </span>enabled,<span class="w"> </span>doesn<span class="s1">&#39;t support DPO or FUA</span>
+<span class="s1">Jul 24 22:31:45 bastion kernel: [2862974.450013]  sda: sda1</span>
+<span class="s1">Jul 24 22:31:45 bastion kernel: [2862974.452257] sd 0:0:0:0: [sda] Attached SCSI removable disk</span>
+<span class="s1">Jul 24 22:31:45 bastion kernel: [2862974.787033] exfat: Deprecated parameter &#39;</span>namecase<span class="err">&#39;</span>
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:46<span class="w"> </span>bastion<span class="w"> </span>systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>:<span class="w"> </span>Started<span class="w"> </span>Clean<span class="w"> </span>the<span class="w"> </span>/media/pi/256<span class="w"> </span>mount<span class="w"> </span>point.
+Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">22</span>:31:46<span class="w"> </span>bastion<span class="w"> </span>udisksd<span class="o">[</span><span class="m">398</span><span class="o">]</span>:<span class="w"> </span>Mounted<span class="w"> </span>/dev/sda1<span class="w"> </span>at<span class="w"> </span>/media/pi/256<span class="w"> </span>on<span class="w"> </span>behalf<span class="w"> </span>of<span class="w"> </span>uid<span class="w"> </span><span class="m">1000</span>
+</code></pre></div>
+<p>위 예시는 리눅스 장비의 USB 포트에 USB 메모리 장치를 삽입한 후 시스템에서 출되는 메시지입니다.
+위 메시지는 우리가 필요한 거의 모든 정보를 제공하고 있는데, 이는 <code>/var/log/syslog</code>에 기록되고
+어딘가로 지정된 콘솔에도 출력되게 됩니다.</p>
+<p>우리가 필요한 정보는 새로운 디스크(저장 매체)의 위치 정보입니다.<br />
+위 메시지에서 우리가 주목해야 할 부분은 <code>/dev/...</code>로 시작되는 곳입니다.
+<code>/dev</code>는 디바이스에 대한 정보가 있는 디렉토리이고, 여기에 디스크의 정보도 수록됩니다.
+위 예시에서는 <code>/dev/sda1</code>이라는 새로운 디스크의 파티션이 <code>/media/pi/256</code>로 마운트된 것까지 알 수 있습니다.</p>
+<p><code>/var/log/syslog</code> 를 <code>tail -f /var/log/syslog</code>로 실시간으로 관찰하거나 
+<code>more</code>, <code>cat</code>으로 들여다 보는 것 모두 좋은 방식입니다.
+하지만, 어떤 사람들은 <a href="https://en.wikipedia.org/wiki/Dmesg"><code>dmesg</code></a>라는 명령으로 시스템 혹은 운영체제의 변화를 찾기도 합니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>dmesg
+</code></pre></div>
+<p><code>dmesg</code>는 'print or control the kernel ring buffer'라고 man page에서 말하고 있습니다.
+여러 목적이 있지만, 대부분의 운영자들은 커널의 메시지를 확인하기 위해 사용는 것이 일반적입니다.
+스토리지 디스크의 감지와 하드웨어 주소를 부여하는 것은 커널의 몫이기 때문에 <code>dmesg</code>에 아주 확실한
+정보를 획득할 수 있습니다.</p>
+<div class="admonition note">
+<p class="admonition-title">알려두기</p>
+<p>위 syslog에 반영된 정보와 아래의 출력된 정보는 같은 시스템에서 가져온 것이라 대략적으로 같은 내용일 수 있지만
+이 문서의 작성 시점에 수 개월의 공백에 있는 탓에 같은 하드웨어 구성인지 확신은 없습니다. 따라서 위의
+syslog 출력문을 아래의 예제와 1:1로 견주어 생각하시지는 않기를 바랍니다.</p>
+</div>
+<p>장착한 새로운 디스크에 대한 정보를 얻는 방식으로 가장 흔하게 사용되는 것은, 다음의 명령을 수행하는 것입니다.</p>
+<h3 id="lsblk">lsblk 명령어 수행<a class="headerlink" href="#lsblk" title="Permanent link">&para;</a></h3>
+<p><code>sudo lsblk</code> 이 명령을 수행하면, 다음과 같은 결과가 화면에 출력됩니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>lsblk
+NAME<span class="w">        </span>MAJ:MIN<span class="w"> </span>RM<span class="w">  </span>SIZE<span class="w"> </span>RO<span class="w"> </span>TYPE<span class="w"> </span>MOUNTPOINT
+sda<span class="w">           </span><span class="m">8</span>:0<span class="w">    </span><span class="m">1</span><span class="w">  </span>239G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk<span class="w"> </span>
+<span class="sb">`</span>-sda1<span class="w">        </span><span class="m">8</span>:1<span class="w">    </span><span class="m">1</span><span class="w">  </span>239G<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w"> </span>/media/pi/256
+mmcblk0<span class="w">     </span><span class="m">179</span>:0<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">29</span>.8G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk<span class="w"> </span>
+<span class="p">|</span>-mmcblk0p1<span class="w"> </span><span class="m">179</span>:1<span class="w">    </span><span class="m">0</span><span class="w">  </span>256M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w"> </span>/boot
+<span class="sb">`</span>-mmcblk0p2<span class="w"> </span><span class="m">179</span>:2<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">29</span>.6G<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w"> </span>/
+$<span class="w"> </span>
+</code></pre></div>
+<p><code>lsblk</code>는 'list block devices'라는 의미로 해당 시스템에 논리적이든 물리적이든 연결된 block device(s)를
+화면에 출력해 주는 역할을 합니다. block device 블록 디바이스란, filesystem 파일 시스템을 작성해서 데이터를 직접 작성하거나 기록에 활용하는 저장 장치를 말합니다. 우리가 익히 알고 있는, HDD, SDD 같은 것이 여기에 해당됩니다.</p>
+<div class="admonition info inline">
+<p class="admonition-title">마운트란?</p>
+<p>마운트는 mount라는 명령 혹은 그 명령으로 꾀하는 행위를 말합니다. 영단어 mount가 지니고 있는
+의미가 가미되긴 했으리라 보지만, 아무튼, '마운트'는 저장 매체를 시스템에 인식시키고 
+파일 시스템을 작성했거나 이와 유사한 형태로 (프로그램을 포함하는)
+사용자가 '마운트 된 저장매체에' 파일을 생성하고 
+조작할 수 있는 상태라고 할 수 있습니다.</p>
+</div>
+<p><code>lsblk</code>로 현재 시스템에 연결된 디스크/저장장치를 살펴볼 수 있고, 이 때 획득한 정보 - 디스크의 주소 - 를 통해서
+다음의 과정으로 나아갈 수 있습니다. 위 출력 내용을 보면, <code>sda</code>라는 새로운 디바이스가 있고, <code>sda1</code>이라는
+파일 시스템이 <code>/media/pi/256</code>에 마운트 되어 있다는 걸 알 수 있습니다.</p>
+<p>현대의 사용자가 직접 (쉽게) 설치할 수 있는 리눅스 배포한들은 대체로 이동식 저장장치가 시스템에 연결되면
+자동 마운트를 해 줍니다. 위 예시에서 보이는 <code>/media/pi/256</code>로 그와 같은 경위로 우리가 조회할 수 있습니다.</p>
+<p>자동 마운트된 USB 메모리는 다음과 같은 정보를 가지고 있다는 것을 알 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mount<span class="w"> </span><span class="p">|</span>grep<span class="w"> </span>pi<span class="se">\/</span><span class="m">256</span>
+/dev/sda1<span class="w"> </span>on<span class="w"> </span>/media/pi/256<span class="w"> </span><span class="nb">type</span><span class="w"> </span>exfat<span class="w"> </span><span class="o">(</span>rw,nosuid,nodev,relatime,uid<span class="o">=</span><span class="m">1000</span>,gid<span class="o">=</span><span class="m">1000</span>,fmask<span class="o">=</span><span class="m">0022</span>,dmask<span class="o">=</span><span class="m">0022</span>,iocharset<span class="o">=</span>utf8,errors<span class="o">=</span>remount-ro,uhelper<span class="o">=</span>udisks2<span class="o">)</span>
+$<span class="w"> </span>
+</code></pre></div>
+<p>mount라는 명령은 후속 옵셥이 없으면, 시스템에 현재 마운트된 저장장치의 정보를 보여줍니다.
+위 출력값의 5번째 행을 보면, <code>exfat</code>이라고 나타나는데, 이는 Extended FAT입니다.
+이 파일 시스템이 좋다면 이대로 사용해도 되겠습니다. 그런데, 다른 파일 시스템으로 작성하고자 한다면
+이 또한 가능합니다.</p>
+<div class="admonition note">
+<p class="admonition-title">항상 그렇지 않다</p>
+<p>위에서 보여준 예제는 Raspberry Pi OS가 동작하는 곳에 USB 메모리를 연결한 결과입니다.
+해당 환경에서는 OS가 인식할 수 있는 파일 시스템을 가지고 있는 스토리지 디바이스를 감지하면
+자동으로 마운트하게 됩니다. 모든 Linux를 커널로 가지고 있는 배포판이 동일하게 동작하지는 않습니다.</p>
+</div>
+<h2 id="_4">파일 시스템 작성<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>새로운 디스크의 하드웨어 주소, 혹은, 디바이스 경로를 확인했다면
+사용자는 파티션을 나누고 나뉜 파티션에 파일 시스템을 작성하게 됩니다.
+이 작업을 하기 전에 해당 디바이스는 반드시 마운트 상태가 아니어야 합니다.
+만약 위 예제와 같이 새로운 디바이스가 자동 마운트 되었다면 반드시 마운트를 해제해야 합니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>umount<span class="w"> </span>/media/pi/256
+</code></pre></div>
+<p>만약 파일 시스템을 작성하기 전에 대상 디스크의 파티션을 나누어야 한다면,
+<code>fdisk</code> 명령으로 해당 작업을 진행할 수 있습니다.</p>
+<h3 id="_5">파티션 작성<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><code>fdisk</code>는 전통적인 디스크 관리 명령입니다.
+파티션을 삭제 및 작성할 수 있으며, 아주 오래된 프로그램답게 
+이제는 거의 잊혀진 (쓸모 없어진) 옵션들도 즐비합니다.</p>
+<p><code>fdisk</code> 대신 <code>parted</code>라는 명령어를 사용할 수도 있습니다.
+같은 목적을 가진 다른 명령어입니다. 여기에서는 <code>fdisk</code>를 설명합니다.
+현대적인 운영 환경에서는 <code>parted</code>가 더 적합할 수 있습니다.</p>
+<div class="admonition info">
+<p class="admonition-title">parted 사용자 안내서</p>
+<p><a href="https://www.gnu.org/software/parted/manual/parted.html">https://www.gnu.org/software/parted/manual/parted.html</a> </p>
+</div>
+<p>다음의 명령어와 같이 <code>fdisk</code>를 확인된 새 디스크 경로를 지정하여 실행합니다.</p>
+<p><div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>fdisk<span class="w"> </span>/dev/sda
+
+Welcome<span class="w"> </span>to<span class="w"> </span>fdisk<span class="w"> </span><span class="o">(</span>util-linux<span class="w"> </span><span class="m">2</span>.37.2<span class="o">)</span>.
+Changes<span class="w"> </span>will<span class="w"> </span>remain<span class="w"> </span><span class="k">in</span><span class="w"> </span>memory<span class="w"> </span>only,<span class="w"> </span><span class="k">until</span><span class="w"> </span>you<span class="w"> </span>decide<span class="w"> </span>to<span class="w"> </span>write<span class="w"> </span>them.
+Be<span class="w"> </span>careful<span class="w"> </span>before<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>write<span class="w"> </span>command.
+
+
+Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:
+</code></pre></div>
+<code>m</code>은 도움말을 보는 것인데, 매우 유용합니다.<br />
+모든 걸 기억하는 것보다 어디에 무엇이 있는지 잘 찾는 능력이 더 중요합니다.</p>
+<div class="admonition note">
+<p class="admonition-title">리눅스 배포판에서 디스크 경로</p>
+<p><code>/dev/sda</code>는 위 예시에서 나타는 디스크의 경로입니다.<br />
+s는 SCSI, d는 Disk, a는 디스크 순번입니다.
+<code>/dev/sda는</code> 해당 시스템에 장착된 첫 번째 SCSI Disk라는 뜻이 됩니다. 
+두 번째 디스크는 <code>/dev/sdb</code>가 됩니다.
+(과거의 IDE 형식의 디스크 이외에는 대체로 SCSI 디스크로 구분합니다)
+이 이후에 붙는 숫자는 파티션입니다. <code>/dev/sda1</code>은 첫 번째 SCSI Disk의 첫번째 파티션이라는
+의미가 됩니다. 파티션을 작성하는 작업은 그래서, <code>/dev/sda</code>를 <code>fdisk</code>에서 선택하게 됩니다.</p>
+</div>
+<p>앞서 자동 마운트 된 것에서 알 수 있듯이 해당 <code>/dev/sda</code>는 exfat 파티션 1개를 가지고 있습니다.
+이 파티션을 지우고, 두 개의 파티션을 만들어 보겠습니다.
+먼저 해당 디스크가 어떤 파티션 정보를 가지고 있는지 확인합니다.</p>
+<div class="highlight"><pre><span></span><code>Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:<span class="w"> </span>p
+Disk<span class="w"> </span>/dev/sda:<span class="w"> </span><span class="m">239</span>.02<span class="w"> </span>GiB,<span class="w"> </span><span class="m">256641603584</span><span class="w"> </span>bytes,<span class="w"> </span><span class="m">501253132</span><span class="w"> </span>sectors
+Disk<span class="w"> </span>model:<span class="w"> </span>Flash<span class="w"> </span>Drive<span class="w"> </span>FIT<span class="w"> </span>
+Units:<span class="w"> </span>sectors<span class="w"> </span>of<span class="w"> </span><span class="m">1</span><span class="w"> </span>*<span class="w"> </span><span class="nv">512</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+Sector<span class="w"> </span>size<span class="w"> </span><span class="o">(</span>logical/physical<span class="o">)</span>:<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes<span class="w"> </span>/<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+I/O<span class="w"> </span>size<span class="w"> </span><span class="o">(</span>minimum/optimal<span class="o">)</span>:<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes<span class="w"> </span>/<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+Disklabel<span class="w"> </span>type:<span class="w"> </span>dos
+Disk<span class="w"> </span>identifier:<span class="w"> </span>0x1fe23221
+
+Device<span class="w">     </span>Boot<span class="w"> </span>Start<span class="w">       </span>End<span class="w">   </span>Sectors<span class="w">  </span>Size<span class="w"> </span>Id<span class="w"> </span>Type
+/dev/sda1<span class="w">        </span><span class="m">2048</span><span class="w"> </span><span class="m">501252095</span><span class="w"> </span><span class="m">501250048</span><span class="w">  </span>239G<span class="w">  </span><span class="m">7</span><span class="w"> </span>HPFS/NTFS/exFAT
+
+Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:<span class="w"> </span>
+</code></pre></div>
+<p>우리의 기억과 다름없이 <code>/dev/sda1</code> 파티션 하나가 있습니다.<br />
+이 파티션을 지우겠습니다.</p>
+<div class="highlight"><pre><span></span><code>Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:<span class="w"> </span>d
+Selected<span class="w"> </span>partition<span class="w"> </span><span class="m">1</span>
+Partition<span class="w"> </span><span class="m">1</span><span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>deleted.
+
+Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:<span class="w"> </span>p
+Disk<span class="w"> </span>/dev/sda:<span class="w"> </span><span class="m">239</span>.02<span class="w"> </span>GiB,<span class="w"> </span><span class="m">256641603584</span><span class="w"> </span>bytes,<span class="w"> </span><span class="m">501253132</span><span class="w"> </span>sectors
+Disk<span class="w"> </span>model:<span class="w"> </span>External<span class="w"> </span>USB<span class="w"> </span><span class="m">3</span>.0<span class="w"> </span>
+Units:<span class="w"> </span>sectors<span class="w"> </span>of<span class="w"> </span><span class="m">1</span><span class="w"> </span>*<span class="w"> </span><span class="nv">512</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+Sector<span class="w"> </span>size<span class="w"> </span><span class="o">(</span>logical/physical<span class="o">)</span>:<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes<span class="w"> </span>/<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+I/O<span class="w"> </span>size<span class="w"> </span><span class="o">(</span>minimum/optimal<span class="o">)</span>:<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes<span class="w"> </span>/<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+Disklabel<span class="w"> </span>type:<span class="w"> </span>dos
+Disk<span class="w"> </span>identifier:<span class="w"> </span>0x1fe23221
+
+Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:<span class="w"> </span>
+</code></pre></div>
+<p><code>d</code> 입력으로 파티션이 단 하나이기 때문에 재질문 없이 바로 파티션을 지우게 됩니다.
+<code>p</code>를 입력하여 작업 결과를 확인했습니다. 의도한 것과 같이 조회되는 파티션이 없습니다.</p>
+<div class="highlight"><pre><span></span><code>Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:<span class="w"> </span>F
+Unpartitioned<span class="w"> </span>space<span class="w"> </span>/dev/sda:<span class="w"> </span><span class="m">239</span>.02<span class="w"> </span>GiB,<span class="w"> </span><span class="m">256640555008</span><span class="w"> </span>bytes,<span class="w"> </span><span class="m">501251084</span><span class="w"> </span>sectors
+Units:<span class="w"> </span>sectors<span class="w"> </span>of<span class="w"> </span><span class="m">1</span><span class="w"> </span>*<span class="w"> </span><span class="nv">512</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+Sector<span class="w"> </span>size<span class="w"> </span><span class="o">(</span>logical/physical<span class="o">)</span>:<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes<span class="w"> </span>/<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+
+Start<span class="w">       </span>End<span class="w">   </span>Sectors<span class="w">  </span>Size
+<span class="w"> </span><span class="m">2048</span><span class="w"> </span><span class="m">501253131</span><span class="w"> </span><span class="m">501251084</span><span class="w">  </span>239G
+</code></pre></div>
+<p><code>F</code>를 입력하여 전체 여유 공간을 확인했습니다.</p>
+<div class="highlight"><pre><span></span><code>Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:<span class="w"> </span>n
+Partition<span class="w"> </span><span class="nb">type</span>
+<span class="w">   </span>p<span class="w">   </span>primary<span class="w"> </span><span class="o">(</span><span class="m">0</span><span class="w"> </span>primary,<span class="w"> </span><span class="m">0</span><span class="w"> </span>extended,<span class="w"> </span><span class="m">4</span><span class="w"> </span>free<span class="o">)</span>
+<span class="w">   </span>e<span class="w">   </span>extended<span class="w"> </span><span class="o">(</span>container<span class="w"> </span><span class="k">for</span><span class="w"> </span>logical<span class="w"> </span>partitions<span class="o">)</span>
+Select<span class="w"> </span><span class="o">(</span>default<span class="w"> </span>p<span class="o">)</span>:<span class="w"> </span>p
+Partition<span class="w"> </span>number<span class="w"> </span><span class="o">(</span><span class="m">1</span>-4,<span class="w"> </span>default<span class="w"> </span><span class="m">1</span><span class="o">)</span>:<span class="w"> </span><span class="m">1</span>
+First<span class="w"> </span>sector<span class="w"> </span><span class="o">(</span><span class="m">2048</span>-501253131,<span class="w"> </span>default<span class="w"> </span><span class="m">2048</span><span class="o">)</span>:<span class="w"> </span>
+Last<span class="w"> </span>sector,<span class="w"> </span>+/-sectors<span class="w"> </span>or<span class="w"> </span>+/-size<span class="o">{</span>K,M,G,T,P<span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="m">2048</span>-501253131,<span class="w"> </span>default<span class="w"> </span><span class="m">501253131</span><span class="o">)</span>:<span class="w"> </span>+100G
+
+Created<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>partition<span class="w"> </span><span class="m">1</span><span class="w"> </span>of<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;Linux&#39;</span><span class="w"> </span>and<span class="w"> </span>of<span class="w"> </span>size<span class="w"> </span><span class="m">100</span><span class="w"> </span>GiB.
+Partition<span class="w"> </span><span class="c1">#1 contains a ntfs signature.</span>
+
+Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>remove<span class="w"> </span>the<span class="w"> </span>signature?<span class="w"> </span><span class="o">[</span>Y<span class="o">]</span>es/<span class="o">[</span>N<span class="o">]</span>o:<span class="w"> </span>Y
+
+The<span class="w"> </span>signature<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>removed<span class="w"> </span>by<span class="w"> </span>a<span class="w"> </span>write<span class="w"> </span>command.
+</code></pre></div>
+<p><code>n</code>을 입력하여 새로운 파티션 작성을 선언했고,<br />
+<code>p</code>를 통해 primary 파티션 유형을 선택했습니다,<br />
+<code>+100G</code>를 입력하여 새로운 파티션의 크기를 100GB로 선언했습니다.<br />
+이전 파티션에 남아 있는 기록을 지우겠느냐? 라는 질의가 있었고, Yes라고 답했습니다.</p>
+<p>아래는 새로 작성한 파티션을 확인하는 <code>p</code>의 입력과 결과입니다.</p>
+<div class="highlight"><pre><span></span><code>Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:<span class="w"> </span>p
+Disk<span class="w"> </span>/dev/sda:<span class="w"> </span><span class="m">239</span>.02<span class="w"> </span>GiB,<span class="w"> </span><span class="m">256641603584</span><span class="w"> </span>bytes,<span class="w"> </span><span class="m">501253132</span><span class="w"> </span>sectors
+Disk<span class="w"> </span>model:<span class="w"> </span>External<span class="w"> </span>USB<span class="w"> </span><span class="m">3</span>.0<span class="w"> </span>
+Units:<span class="w"> </span>sectors<span class="w"> </span>of<span class="w"> </span><span class="m">1</span><span class="w"> </span>*<span class="w"> </span><span class="nv">512</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+Sector<span class="w"> </span>size<span class="w"> </span><span class="o">(</span>logical/physical<span class="o">)</span>:<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes<span class="w"> </span>/<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+I/O<span class="w"> </span>size<span class="w"> </span><span class="o">(</span>minimum/optimal<span class="o">)</span>:<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes<span class="w"> </span>/<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+Disklabel<span class="w"> </span>type:<span class="w"> </span>dos
+Disk<span class="w"> </span>identifier:<span class="w"> </span>0x1fe23221
+
+Device<span class="w">     </span>Boot<span class="w"> </span>Start<span class="w">       </span>End<span class="w">   </span>Sectors<span class="w">  </span>Size<span class="w"> </span>Id<span class="w"> </span>Type
+/dev/sda1<span class="w">        </span><span class="m">2048</span><span class="w"> </span><span class="m">209717247</span><span class="w"> </span><span class="m">209715200</span><span class="w">  </span>100G<span class="w"> </span><span class="m">83</span><span class="w"> </span>Linux
+
+Filesystem/RAID<span class="w"> </span>signature<span class="w"> </span>on<span class="w"> </span>partition<span class="w"> </span><span class="m">1</span><span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>wiped.
+
+Command<span class="w"> </span><span class="o">(</span>m<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="o">)</span>:<span class="w"> </span>
+</code></pre></div>
+<p>나머지 공간에 파티션을 하나 더 만들어 봅니다.</p>
+<div class="highlight"><pre><span></span><code>Command (m for help): n
+Partition type
+   p   primary (1 primary, 0 extended, 3 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (2-4, default 2): 
+First sector (209717248-976773167, default 209717248): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (209717248-976773167, default 976773167): 
+
+Created a new partition 2 of type &#39;Linux&#39; and of size 365.8 GiB.
+
+Command (m for help): p
+Disk /dev/sda: 465.76 GiB, 500107862016 bytes, 976773168 sectors
+Disk model: External USB 3.0
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xcb9878ae
+
+Device     Boot     Start       End   Sectors   Size Id Type
+/dev/sda1            2048 209717247 209715200   100G 83 Linux
+/dev/sda2       209717248 976773167 767055920 365.8G 83 Linux
+
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+$ 
+</code></pre></div>
+<p>일반적인 PC 기반의 컴퓨터에 연결되는 단일 디스크에서 DOS 형식의 파티션을 만들면
+Primary와 Extended를 선택하게 됩니다. Primary 파티션은 단일 디스크 디바이스 당 
+4개를 생성할 수 있습니다. 무엇을 선택하든, 추가 디스크로서는 큰 차이가 없습니다.</p>
+<p>대부분의 입력값을 시스템에서 주는 값(디폴트 값)으로 선택하면 남아 있는 모든 공간을
+새로 만드는 파티션에 할당할 수 있게 됩니다.</p>
+<p><code>p</code>를 입력하여 작성한 파티션을 확인하고, <code>w</code>를 입력해서 디스크의 파티션 테이블을 저장합니다.</p>
+<h2 id="_6">파일 시스템 작성<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p><code>mkfs</code> 명령을 사용해서 일반적으로 파일 시스템을 작성합니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>mkfs<span class="w"> </span>-t<span class="w"> </span>ext4<span class="w"> </span>/dev/sda1
+mke2fs<span class="w"> </span><span class="m">1</span>.46.5<span class="w"> </span><span class="o">(</span><span class="m">30</span>-Dec-2021<span class="o">)</span>
+Creating<span class="w"> </span>filesystem<span class="w"> </span>with<span class="w"> </span><span class="m">26214400</span><span class="w"> </span>4k<span class="w"> </span>blocks<span class="w"> </span>and<span class="w"> </span><span class="m">6553600</span><span class="w"> </span>inodes
+Filesystem<span class="w"> </span>UUID:<span class="w"> </span>3a790adb-946e-41c8-b160-68bc9bb64ac8
+Superblock<span class="w"> </span>backups<span class="w"> </span>stored<span class="w"> </span>on<span class="w"> </span>blocks:<span class="w"> </span>
+<span class="w">    </span><span class="m">32768</span>,<span class="w"> </span><span class="m">98304</span>,<span class="w"> </span><span class="m">163840</span>,<span class="w"> </span><span class="m">229376</span>,<span class="w"> </span><span class="m">294912</span>,<span class="w"> </span><span class="m">819200</span>,<span class="w"> </span><span class="m">884736</span>,<span class="w"> </span><span class="m">1605632</span>,<span class="w"> </span><span class="m">2654208</span>,<span class="w"> </span>
+<span class="w">    </span><span class="m">4096000</span>,<span class="w"> </span><span class="m">7962624</span>,<span class="w"> </span><span class="m">11239424</span>,<span class="w"> </span><span class="m">20480000</span>,<span class="w"> </span><span class="m">23887872</span>
+
+Allocating<span class="w"> </span>group<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span><span class="w">                            </span>
+Writing<span class="w"> </span>inode<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span><span class="w">                            </span>
+Creating<span class="w"> </span>journal<span class="w"> </span><span class="o">(</span><span class="m">131072</span><span class="w"> </span>blocks<span class="o">)</span>:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>superblocks<span class="w"> </span>and<span class="w"> </span>filesystem<span class="w"> </span>accounting<span class="w"> </span>information:<span class="w"> </span><span class="k">done</span>
+
+$
+</code></pre></div>
+<p><code>mkfs</code> 명령에서 <code>-t ext4</code>는 <code>ext4</code>라는 유형의 파일 시스템을 선택한다는 옵션입니다.
+<code>ext4</code>는 'the fourth extended file system'라고 <code>$ man fs</code>라면 설명이 있습니다.
+아무런 선언이 없으면, <code>ext2</code>가 선택됩니다. </p>
+<p>이어오는 선언은, <code>/dev/sda1</code>으로 직전 작성한 파티션 정보까지 포함하는 디바이스 경로를
+입력한 것입니다. 파일 시스템은 파티션 단위로 작성됩니다. 같은 방식으로 두 번째 파티션도
+아래와 같이 작성합니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>mkfs<span class="w"> </span>-t<span class="w"> </span>ext4<span class="w"> </span>/dev/sda2
+mke2fs<span class="w"> </span><span class="m">1</span>.46.5<span class="w"> </span><span class="o">(</span><span class="m">30</span>-Dec-2021<span class="o">)</span>
+Found<span class="w"> </span>a<span class="w"> </span>dos<span class="w"> </span>partition<span class="w"> </span>table<span class="w"> </span><span class="k">in</span><span class="w"> </span>/dev/sda2
+Proceed<span class="w"> </span>anyway?<span class="w"> </span><span class="o">(</span>y,N<span class="o">)</span><span class="w"> </span>y
+Creating<span class="w"> </span>filesystem<span class="w"> </span>with<span class="w"> </span><span class="m">95881990</span><span class="w"> </span>4k<span class="w"> </span>blocks<span class="w"> </span>and<span class="w"> </span><span class="m">23977984</span><span class="w"> </span>inodes
+Filesystem<span class="w"> </span>UUID:<span class="w"> </span>c047e4fd-abd8-453c-aeb7-af484330e425
+Superblock<span class="w"> </span>backups<span class="w"> </span>stored<span class="w"> </span>on<span class="w"> </span>blocks:<span class="w"> </span>
+<span class="w">    </span><span class="m">32768</span>,<span class="w"> </span><span class="m">98304</span>,<span class="w"> </span><span class="m">163840</span>,<span class="w"> </span><span class="m">229376</span>,<span class="w"> </span><span class="m">294912</span>,<span class="w"> </span><span class="m">819200</span>,<span class="w"> </span><span class="m">884736</span>,<span class="w"> </span><span class="m">1605632</span>,<span class="w"> </span><span class="m">2654208</span>,<span class="w"> </span>
+<span class="w">    </span><span class="m">4096000</span>,<span class="w"> </span><span class="m">7962624</span>,<span class="w"> </span><span class="m">11239424</span>,<span class="w"> </span><span class="m">20480000</span>,<span class="w"> </span><span class="m">23887872</span>,<span class="w"> </span><span class="m">71663616</span>,<span class="w"> </span><span class="m">78675968</span>
+
+Allocating<span class="w"> </span>group<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span><span class="w">                            </span>
+Writing<span class="w"> </span>inode<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span><span class="w">                            </span>
+Creating<span class="w"> </span>journal<span class="w"> </span><span class="o">(</span><span class="m">262144</span><span class="w"> </span>blocks<span class="o">)</span>:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>superblocks<span class="w"> </span>and<span class="w"> </span>filesystem<span class="w"> </span>accounting<span class="w"> </span>information:<span class="w"> </span><span class="k">done</span><span class="w">     </span>
+
+$
+</code></pre></div>
+<h2 id="_7">마운트 디스크<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>디스크를 마운트하여 지금까지의 작업에 문제가 없었는지 확인합니다.<br />
+우선 마운트 포인트가 될 디렉토리를 만들어 줍니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/mnt/01
+$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/mnt/02
+</code></pre></div>
+<p>그리고, <code>mount</code> 명령으로 두 개의 파티션을 마운트해 봅니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>/dev/sda1<span class="w"> </span>/mnt/01
+$<span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>/dev/sda2<span class="w"> </span>/mnt/02
+$<span class="w"> </span>df<span class="w"> </span>-k
+Filesystem<span class="w">     </span>1K-blocks<span class="w">    </span>Used<span class="w"> </span>Available<span class="w"> </span>Use%<span class="w"> </span>Mounted<span class="w"> </span>on
+tmpfs<span class="w">             </span><span class="m">799544</span><span class="w">    </span><span class="m">3180</span><span class="w">    </span><span class="m">796364</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/run
+/dev/mmcblk0p2<span class="w">  </span><span class="m">30444092</span><span class="w"> </span><span class="m">8144112</span><span class="w">  </span><span class="m">21018316</span><span class="w">  </span><span class="m">28</span>%<span class="w"> </span>/
+tmpfs<span class="w">            </span><span class="m">3997704</span><span class="w">       </span><span class="m">0</span><span class="w">   </span><span class="m">3997704</span><span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/dev/shm
+tmpfs<span class="w">               </span><span class="m">5120</span><span class="w">       </span><span class="m">4</span><span class="w">      </span><span class="m">5116</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/run/lock
+/dev/mmcblk0p1<span class="w">    </span><span class="m">258095</span><span class="w">  </span><span class="m">124431</span><span class="w">    </span><span class="m">133664</span><span class="w">  </span><span class="m">49</span>%<span class="w"> </span>/boot/firmware
+tmpfs<span class="w">             </span><span class="m">799540</span><span class="w">      </span><span class="m">24</span><span class="w">    </span><span class="m">799516</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/run/user/1000
+/dev/sda1<span class="w">      </span><span class="m">102626232</span><span class="w">      </span><span class="m">24</span><span class="w">  </span><span class="m">97366944</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/mnt/01
+/dev/sda2<span class="w">      </span><span class="m">376388644</span><span class="w">      </span><span class="m">28</span><span class="w"> </span><span class="m">357195836</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/mnt/02
+$
+</code></pre></div>
+<p>문제가 있었다면, <code>mount</code> 명령시 에러를 확인할 수 있습니다.<br />
+<code>df</code> 명령으로 마운트된 상태까지 확인합니다.</p>
+<h3 id="_8">자동 마운트를 위한 설정<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>위 예시와 같이 <code>mount</code> 명령으로 마운트한 디스크 혹은 파티션은 시스템이 재시작하면 상태 유지가 되지 않고, <code>mount</code> 명령을 내린 직전의 상태로 돌아갑니다. 그래서 <code>/etc/fstab</code>에 정보를 기입하여 시스템이 재시작할 때에도 사용자 혹은 운영자가 원하는 디스크의 마운트 상태를 유지할 수 있도록 설정할 수 있습니다.</p>
+<p>이에 대한 상세한 정보를 진지하게 알고 싶다면, <code>$ man fstab</code>와 <code>$ man mount</code> 입력해서 man page를 
+읽어보길 권합니다.</p>
+<p>우선, 현재 시스템에 있는 <code>/etc/fstab</code>을 조회해 봅니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>cat<span class="w"> </span>/etc/fstab
+<span class="nv">LABEL</span><span class="o">=</span>writable<span class="w">  </span>/<span class="w">    </span>ext4<span class="w">   </span>defaults<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+<span class="nv">LABEL</span><span class="o">=</span>system-boot<span class="w">   </span>/boot/firmware<span class="w">  </span>vfat<span class="w">    </span>defaults<span class="w">        </span><span class="m">0</span><span class="w">       </span><span class="m">1</span>
+$<span class="w"> </span>
+</code></pre></div>
+<p>슬쩍 살펴보면, <code>대상 디스크 이름</code>, <code>마운트 포인트</code>, <code>파일 시스템 유형</code>, <code>마운트 옵셥</code>, <code>무엇</code>, <code>무엇</code> 순서로 되어 있다는 것을 알 수 있습니다. 
+이 문법을 따라 기입한다면 크게 문제 없이 잘 동작할 것만 같은 느낌은 옳은 느낌입니다.
+하지만, 약간은 더 알아 보도록 합시다.</p>
+<p>첫번째 컬럼은 여러가지 이름으로 지정할 수 있습니다. </p>
+<ul>
+<li>/dev/sda1 - 와 같이 디바이스 경로를 기입하는 전통적인 방식이 있습니다.</li>
+<li>UUID - Universally Unique Identifiers라는 이름의 UUID는 128bit로 형성되며 각 파티션 마다 고유하게 부여됩니다. SAN와 같은 복잡한 환경에서 이러한 UUID는 개별 디바이스를 구별하는 아주 중요한 역할을 하게 됩니다.</li>
+<li>LABEL - 위 <code>/etc/fstab</code>의 예시와 같이 사용자가 직접 부여한 개별 파티션의 레이블 정보를 기입하여 사용하는 것입니다. UUID가 복잡하고 대규모 스토리지 네트워크 상에서는 좋은 역할을 하지만, 소규모 그리고 단일 시스템 내에서는 귀찮은 존재이기도 합니다. (UUID는 사람이 읽어 내기엔 복잡하고 가독성도 좋지 못 합니다)
+그래서 사용자 혹은 관리자가 직접 개별 파티션이 '이름' 즉, 레이블을 부여하고 그것을 활용하여 직관적으로 사용하는 방식입니다.</li>
+</ul>
+<p>디스크 디바이스를 이름으로 구별하는 방식은 다양하게 마련되어 있습니다. 아래의 예시를 봅시다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls<span class="w"> </span>-al
+total<span class="w"> </span><span class="m">0</span>
+drwxr-xr-x<span class="w">  </span><span class="m">7</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">140</span><span class="w"> </span>Jan<span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">1970</span><span class="w"> </span>.
+drwxr-xr-x<span class="w"> </span><span class="m">17</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">14120</span><span class="w"> </span>Nov<span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="m">09</span>:57<span class="w"> </span>..
+drwxr-xr-x<span class="w">  </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">200</span><span class="w"> </span>Nov<span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="m">10</span>:04<span class="w"> </span>by-id
+drwxr-xr-x<span class="w">  </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">100</span><span class="w"> </span>Nov<span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="m">09</span>:51<span class="w"> </span>by-label
+drwxr-xr-x<span class="w">  </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">140</span><span class="w"> </span>Nov<span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="m">10</span>:04<span class="w"> </span>by-partuuid
+drwxr-xr-x<span class="w">  </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">200</span><span class="w"> </span>Nov<span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="m">10</span>:04<span class="w"> </span>by-path
+drwxr-xr-x<span class="w">  </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">140</span><span class="w"> </span>Nov<span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="m">10</span>:04<span class="w"> </span>by-uuid
+$<span class="w"> </span><span class="nb">pwd</span>
+/dev/disk
+$<span class="w"> </span>
+</code></pre></div>
+<p><code>/dev/disk/</code> 디렉토리에 접근하면, <code>by-...</code> 라는 하위 디렉토리들이 있습니다.
+그 속을 조회해 보면, 여러가지 방식의 해당 디스크 디바이스를 지정하는 이름들이 있습니다.
+하지만, 그 모든 방식이 항상 가르키는 곳에 있습니다. 그건, 위 <code>mkfs</code>에서 사용하고
+<code>fdisk</code>에서도 사용한 고유한 디바이스 경로입니다.</p>
+<p>그래서 저는 <code>/dev/sda1</code>과 같은 디바이스 경로를 <code>/etc/fstab</code>에 넣는 걸 선호합니다만,
+이 선호는 UNIX System V 계열과 작별을 할 수 밖에 없었던 그 순간 (시기적으로나 상황적으로나) 이후, 
+UUID를 사용하기로 마음 먹었습니다.</p>
+<p>하지만, SAN이나 기타 로칼 시스템에 종속되는 (그래서 변경이 없다고 가정할 수 있는) 다비이스가 아닌 경우, 
+이 경로가 변경될 확률이 존재합니다. 사실 로칼 시스템에 종속되더라도 디스크 교체와 같은 행위 중에 
+시스템의 재시작이라는 이벤트 혹은 그와 동등한 의미의 커널의 재인식이 행하여지면 디바이스 경로가 변경될
+수 있습니다. 그래서 UUID를 사용하는 것이 매우 이성적인 선택입니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>blkid<span class="w"> </span>/dev/sda1
+/dev/sda1:<span class="w"> </span><span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;1b81984a-9e01-488b-bd6c-ecda17d66080&quot;</span><span class="w"> </span><span class="nv">BLOCK_SIZE</span><span class="o">=</span><span class="s2">&quot;4096&quot;</span><span class="w"> </span><span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;ext4&quot;</span><span class="w"> </span><span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">&quot;cb9878ae-01&quot;</span>
+$<span class="w"> </span>blkid<span class="w"> </span>/dev/sda2
+/dev/sda2:<span class="w"> </span><span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;c047e4fd-abd8-453c-aeb7-af484330e425&quot;</span><span class="w"> </span><span class="nv">BLOCK_SIZE</span><span class="o">=</span><span class="s2">&quot;4096&quot;</span><span class="w"> </span><span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;ext4&quot;</span><span class="w"> </span><span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">&quot;cb9878ae-02&quot;</span>
+$<span class="w"> </span>
+</code></pre></div>
+<p><code>blkid</code> 블록 디바이스의 ID를 조회하는 명령으로, 디바이스 경로를 뒤이어 입력하면 개별 파티션의 UUID를 확인할 수 있습니다. 이 값을 <code>/etc/fstab</code>에 첫번째 컬럼에 기입합니다.</p>
+<p>그렇게 기입하게 되는 <code>/etc/fstab</code>은 다음과 같습니다.</p>
+<div class="highlight"><pre><span></span><code>...
+<span class="nv">UUID</span><span class="o">=</span>1b81984a-9e01-488b-bd6c-ecda17d66080<span class="w">       </span>/mnt/01<span class="w"> </span>ext4<span class="w">    </span>defaults<span class="w">        </span><span class="m">0</span><span class="w">       </span><span class="m">2</span>
+<span class="nv">UUID</span><span class="o">=</span>c047e4fd-abd8-453c-aeb7-af484330e425<span class="w">       </span>/mnt/02<span class="w"> </span>ext4<span class="w">    </span>defaults<span class="w">        </span><span class="m">0</span><span class="w">       </span><span class="m">2</span>
+</code></pre></div>
+<ul>
+<li>각 컬럼 사이의 공백은 TAB으로 띄우는 것이 일반적입니다.   </li>
+<li>두 번째 컬럼의 마운트 포인트는 본 예제에서 위와 같이 <code>mkdir</code>로 미리 만들어 놓았습니다.</li>
+<li>세 번째 컬럼은 <code>mkfs</code> 명령을 내리면서 정해졌습니다. 본 에시에서는 <code>ext4</code>이었습니다.</li>
+<li>네 번째 컬럼의 <code>defaults</code>는 옵션을 기본 옵션을 사용하겠다는 뜻이며, 다양한 선택을 알고 싶으시면, <code>fstab</code>의 man page를 참조하면 좋겠습니다.</li>
+<li>다섯 번째 컬럼은, <code>0</code>이 기입되어 있는데, 이건 지금부터 영원히 <code>0</code>이외의 값은 의미가 없을 것입니다.<br />
+고전적 의미에서의 백업을 담당하던 <code>dump</code>와 같은 유틸리티가 특정한 작동을 '자동'으로 행할 때 <code>/etc/fstab</code>을 조회하여 
+백업의 대상이 되는 파티션을 선택할 수 있도록 하던 표식입니다.<br />
+<code>0</code>은 대상이 아님, <code>1</code>은 대상임 - 을 의미합니다.<br />
+이제는 그 '고전적 의미의 백업'을 행하지 않습니다.</li>
+<li>여섯 번재 컬럼은, <code>0</code>이면 시스템이 부팅할 때 파일 시스템을 점검하지 않는 것을 의미합니다.<br />
+<code>0</code>이 아닌 수가 기입되면 <code>fsck</code> 명령을 수행하면서 파일 시스템을 점검합니다.<br />
+일반적으로 root/booting 파티션이면 <code>1</code>을 부여하고
+기타 파티션이면 1보다 높은 수를 부여합니다.<br />
+수가 낮을 수록 먼저 <code>fsck</code>를 수행합니다.<br />
+곰곰히 생각해 보면, 왜 순서가 필요한지 이해할 수 있습니다.
+시스템이 기동할 때, <code>fast</code>를 통하여 파일 시스템을 점검할 필요가 없다고 판단한다면, 이 컬럼의 값을 <code>0</code>으로 
+지정하시면 됩니다.</li>
+</ul>
+<p>이제 기입한 <code>/etc/fstab</code>이 제대로 작동하는지 다음의 명령을 통하여 확인합니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/01
+$<span class="w"> </span>sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/02
+</code></pre></div>
+<p>위에서 마운트 해 두었던 각 파일 시스템을 <code>umount</code>합니다.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>/mnt/01
+$<span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>/mnt/02
+$<span class="w"> </span>df<span class="w"> </span>/mnt/01
+Filesystem<span class="w">     </span>1K-blocks<span class="w">  </span>Used<span class="w"> </span>Available<span class="w"> </span>Use%<span class="w"> </span>Mounted<span class="w"> </span>on
+/dev/sda1<span class="w">      </span><span class="m">102626232</span><span class="w">    </span><span class="m">24</span><span class="w">  </span><span class="m">97366944</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/mnt/01
+$<span class="w"> </span>df<span class="w"> </span>/mnt/02
+Filesystem<span class="w">     </span>1K-blocks<span class="w">  </span>Used<span class="w"> </span>Available<span class="w"> </span>Use%<span class="w"> </span>Mounted<span class="w"> </span>on
+/dev/sda2<span class="w">      </span><span class="m">376388644</span><span class="w">    </span><span class="m">28</span><span class="w"> </span><span class="m">357195836</span><span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/mnt/02
+$
+</code></pre></div>
+<p><code>/etc/fstab</code>에 제대로 기입되었다면, <code>mount</code> 명령 뒤에 마운트 포인트만 지정하면
+미리 선언해 둔 조건에 맞춰 마운트를 하게 됩니다.
+그리고 <code>df</code> 명령으로 마운트 상태를 확인합니다.</p>
+<p>이렇게 하면 모든 것이 제대로 끝났습니다. <br />
+혹시 여유가 되면 시스템을 재시작하게 하여 모든 것이 의도대로 동작하는지 확인하는 것도 
+나쁘지 않은 판단입니다 - 서비스를 책임지는 프러덕션 시스템이 아니라면 말이죠. </p>
+<h2 id="_9">과정 정리<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>위의 설명을 다이어그램으로 나타내면 아래와 같은 그림이 됩니다.</p>
+<pre class="mermaid"><code>graph TD;
+    A[새 디스크 장착] --&gt; B['/var/log/syslog' 참조];
+    A --&gt; C[lsblk 명령 실행];
+    A --&gt; D[dmesg 명령 실행];
+    B --&gt; E[새 디스크 경로 확인];
+    C --&gt; E;
+    D --&gt; E;
+    E --&gt; F{새 디스크에 파티션&lt;br /&gt; 조정이 필요한가?};
+    F --&gt;|네| G[fdisk 명령어로 파티션 작업];
+    F --&gt;|아니요| H[mkfs로 파일 시스템 작성];
+    G --&gt; H
+    H --&gt; I[mount로 정상 동작 확인]
+    I --&gt; J['/etc/fstab' 작성]</code></pre>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-11-04T04:36:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-04</span>
+      
+    
+  </small>
+</div>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2017 - 2023 Kwanghoon Jhin
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/electronicnomad" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.jhin.com" target="_blank" rel="noopener" title="www.jhin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M162.4 196c4.8-4.9 6.2-5.1 36.4-5.1 27.2 0 28.1.1 32.1 2.1 5.8 2.9 8.3 7 8.3 13.6 0 5.9-2.4 10-7.6 13.4-2.8 1.8-4.5 1.9-31.1 2.1-16.4.1-29.5-.2-31.5-.8-10.3-2.9-14.1-17.7-6.6-25.3zm61.4 94.5c-53.9 0-55.8.2-60.2 4.1-3.5 3.1-5.7 9.4-5.1 13.9.7 4.7 4.8 10.1 9.2 12 2.2 1 14.1 1.7 56.3 1.2l47.9-.6 9.2-1.5c9-5.1 10.5-17.4 3.1-24.4-5.3-4.7-5-4.7-60.4-4.7zm223.4 130.1c-3.5 28.4-23 50.4-51.1 57.5-7.2 1.8-9.7 1.9-172.9 1.8-157.8 0-165.9-.1-172-1.8-8.4-2.2-15.6-5.5-22.3-10-5.6-3.8-13.9-11.8-17-16.4-3.8-5.6-8.2-15.3-10-22C.1 423 0 420.3 0 256.3 0 93.2 0 89.7 1.8 82.6 8.1 57.9 27.7 39 53 33.4c7.3-1.6 332.1-1.9 340-.3 21.2 4.3 37.9 17.1 47.6 36.4 7.7 15.3 7-1.5 7.3 180.6.2 115.8 0 164.5-.7 170.5zm-85.4-185.2c-1.1-5-4.2-9.6-7.7-11.5-1.1-.6-8-1.3-15.5-1.7-12.4-.6-13.8-.8-17.8-3.1-6.2-3.6-7.9-7.6-8-18.3 0-20.4-8.5-39.4-25.3-56.5-12-12.2-25.3-20.5-40.6-25.1-3.6-1.1-11.8-1.5-39.2-1.8-42.9-.5-52.5.4-67.1 6.2-27 10.7-46.3 33.4-53.4 62.4-1.3 5.4-1.6 14.2-1.9 64.3-.4 62.8 0 72.1 4 84.5 9.7 30.7 37.1 53.4 64.6 58.4 9.2 1.7 122.2 2.1 133.7.5 20.1-2.7 35.9-10.8 50.7-25.9 10.7-10.9 17.4-22.8 21.8-38.5 3.2-10.9 2.9-88.4 1.7-93.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  </body>
+</html>
