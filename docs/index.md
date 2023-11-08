@@ -12,7 +12,7 @@ AWS Forecast와 AWS Networking에 관한 이야기를 시작으로,
 
 Amazon Web Services
 
-- [AWS Forecast](.aws/forecast/)      
+- [AWS Forecast](./aws/forecast/)      
 - [AWS Networking](./aws/networking/)
   * [Privatelink](./aws/networking/privatelink/)
   * [VPC peering](./aws/networking/vpc-peering/)
