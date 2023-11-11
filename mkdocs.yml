@@ -81,6 +81,8 @@ markdown_extensions:
 #
 extra:
   social:
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/electronicnomad
     - icon: fontawesome/brands/github-alt
       link: https://github.com/electronicnomad
     - icon: fontawesome/brands/blogger
