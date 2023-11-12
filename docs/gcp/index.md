@@ -1,14 +1,14 @@
 # Google Cloud
 
-Amazon Web Services(이하 AWS)와  Microsoft Azure(이하 Azure)가 
-점령하고 있는 세상에 일찍이 모습을 나타냈지만 
-아직 이렇다할 두각을 보여주지는 못 하고 있는 제 3 하이퍼스케일러입니다.
+Google Cloud에 대하여 알아 봅니다.
+Google Cloud Platform, GCP라고 이름 달고 있을 때가 
+조금 더 힙해 보이기는 하지만, 현재 Google Cloud는 GCP로 
+한정 지어서 이야기하기에는 덩치가 커졌습니다.
+Google Workspace - Gmail, Calendar, Docs, Sheets, Slides... - 도 
+품고 있으니까요.
 
-GCP, Google Cloud Platform이라는 이름으로 App Engine을 끌어 안으며
-시작했습니다. 이후 Workspace - Gmail, Docs ... 등등 - 를 하나의
-사업부로 편성하면서 Google Cloud라는 이름으로 둥지를 틀었습니다.
-
-현재는 AWS나 Azure와 당당히 어깨를 나란히 하고 있다고 스스로 주장하며
-미래가 더 창대할 사업자로서의 포부를 밝히고 있습니다.
-
-
+여기에서는 
+GCE 중심으로 이야기를 하게 됩니다.
+GCE는 Google Compute Engine입니다.
+그리고 이야기를 넓혀도 인프라를 넘어서는 
+계층의 이야기는 없을 듯 합니다, 아마도.
