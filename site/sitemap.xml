@@ -1,178 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://electronicnomad.net/pf/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/assessment/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/assessment/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/references/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/references/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/handson-labs/create-target-time-series-dataset/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/handson-labs/create-target-time-series-dataset/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/handson-labs/dataset-groups/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/handson-labs/dataset-groups/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/handson-labs/forecast-lookup/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/handson-labs/forecast-lookup/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/handson-labs/generate-forecast/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/handson-labs/generate-forecast/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/handson-labs/import-target-time-series-data/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/handson-labs/import-target-time-series-data/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/handson-labs/preparation/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/handson-labs/preparation/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/handson-labs/prepare-training-data/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/handson-labs/prepare-training-data/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/forecast/handson-labs/train-a-predictor/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/forecast/handson-labs/train-a-predictor/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/cleanup/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/cleanup/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/objectives/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/objectives/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/preparations/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/preparations/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/privatelink/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/privatelink/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/privatelink/lab/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/privatelink/lab/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/transit-gateway/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/transit-gateway/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/transit-gateway/lab/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/transit-gateway/lab/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/transit-gateway/network-manager/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/transit-gateway/network-manager/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/transit-gateway/objectives/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/transit-gateway/objectives/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/transit-gateway/testing/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/transit-gateway/testing/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/vpc-peering/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/vpc-peering/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/aws/networking/vpc-peering/lab/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/aws/networking/vpc-peering/lab/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/gcp/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/directories/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/file-and-permissions/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/directories/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/login-and-logout/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/file-and-permissions/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/package-management/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/login-and-logout/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/shell/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/package-management/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/things-you-should-know-first/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/shell/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/users-and-groups/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/things-you-should-know-first/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/tutorials/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/users-and-groups/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://electronicnomad.net/pf/linux/tutorials/disk/</loc>
-         <lastmod>2023-11-08</lastmod>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/tutorials/</loc>
+         <lastmod>2023-12-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://electronicnomad.net/plumbers-friday/linux/tutorials/disk/</loc>
+         <lastmod>2023-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

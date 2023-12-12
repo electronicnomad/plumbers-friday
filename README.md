@@ -1,3 +1,3 @@
 # plumbers-friday
 
-Static web contents for https://electronicnomad.net/pf 
+Static web contents for https://electronicnomad.net/plumbers-friday
