@@ -1,6 +1,6 @@
 # plumbers-friday
 
-This repository was prepared as part of the document creation project. It is produced based on mkdocs <https://www.mkdocs.org/> and material <https://squidfunk.github.io/mkdocs-material/>, the theme of mkdocs, and is serviced as <https://electronicnomad.net/pf/>
+This repository was prepared as part of the document creation project. It is produced based on mkdocs <https://www.mkdocs.org/> and material <https://squidfunk.github.io/mkdocs-material/>, the theme of mkdocs, and is serviced as <https://electronicnomad.net/plumbers-friday/>
 
 ## 제작 목적
 
@@ -21,4 +21,4 @@ GitHub에서는 GitHub Pages라는 신의 축복과 같은 서비스를 하고 �
 그것을 기본으로 하고, 위 설명과 같이 mkdocs를 통하여 그럴싸한 외형을 갖춘
 웹 페이지를 제작하고 있습니다.
 
-본 repository의 결과 물은 <https://electronicnomad.net/pf>로 서비스가 됩니다.
+본 repository의 결과 물은 <https://electronicnomad.net/plumbers-friday/>로 서비스가 됩니다.
