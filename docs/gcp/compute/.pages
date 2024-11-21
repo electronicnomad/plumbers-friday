@@ -1,0 +1,4 @@
+title: Compute
+arrange:
+- virtual-machines.md
+- instance-groups.md

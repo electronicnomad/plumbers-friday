@@ -1,6 +1,1 @@
 title: Google Cloud
-arrange:
-    - index.md
-    - instance-groups.md
-    - storage-is.md
-    - shared-storage-services.md
