@@ -1,6 +1,6 @@
 title: Compute
 arrange:
 - virtual-machines.md
-- custom-vm.md
+- custom-machine-type.md
 - gpu-vm.md
 - instance-groups.md
